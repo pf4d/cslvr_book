@@ -1,0 +1,180 @@
+
+\chapter{Derivation of adjoint equations}
+
+The distributional solution is formed by taking the inner product of the adjoint variable $\lambda$ with $\mathscr{R}$ and integrating the diffusive term by parts,
+\begin{align*}
+  \left( \lambda, \mathscr{R}(\theta, \alpha) \right) = 
+  &+ \int_{\Omega} \rho \rankone{u} \cdot \nabla \theta \lambda \d{\Omega} - \int_{\Omega} Q \lambda \d{\Omega} \\
+  &- \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \theta \lambda \d{\Omega} - \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \cdot \nabla \theta \lambda \d{\Omega} \\
+  \left( \lambda, \mathscr{R}(\theta, \alpha) \right) = 
+  &+ \int_{\Omega} \rho \rankone{u} \cdot \nabla \theta \lambda \d{\Omega} - \int_{\Omega} Q \lambda \d{\Omega} \\
+  &- \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \theta \lambda \d{\Omega} + \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \theta \cdot \nabla \lambda \d{\Omega} \\
+  &- \int_{\Gamma_G} \left( q_{geo} + q_{fric} - \alpha m \right) \lambda \d{\Gamma_G}.
+\end{align*}
+The Hamiltonian (\ref{ham}) is therefore
+\begin{align*}
+  \mathscr{H}(\theta, \alpha, \lambda) =
+  &+ \frac{1}{2} \int_{\Gamma_G} \left( \theta - \left(\theta_m + W_c L_f\right) \right)^2 \d{\Gamma_G} \\ 
+  %&+ \int_{\Gamma_G} \left| \theta - \left(\theta_m + W_c L_f\right) \right| \d{\Gamma_G} 
+  %+ \pi \frac{1}{2} \int_{\Gamma_G} \nabla F_b \cdot \nabla F_b \d{\Gamma_G} \\
+  &+ \pi \int_{\Gamma_G} \big( \nabla F_b \cdot \nabla F_b \big)^{\frac{1}{2}} \d{\Gamma_G} \\
+  &+ \int_{\Omega} \rho \rankone{u} \cdot \nabla \theta \lambda \d{\Omega} - \int_{\Omega} Q \lambda \d{\Omega} \\
+  &- \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \theta \lambda \d{\Omega} + \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \theta \cdot \nabla \lambda \d{\Omega} \\
+  &- \int_{\Gamma_G} \left( q_{geo} + q_{fric} - \alpha m \right) \lambda \d{\Gamma_G}.
+\end{align*}
+
+\section{G\^{a}teaux derivatives}
+
+The G\^{a}teaux derivative of a functional $\mathscr{F}$ with respect to variable $u$ in some direction $\phi$ is defined as 
+\begin{align*}
+ \frac{\delta}{\delta u} \mathscr{F}\left( u \right) = \totder{}{\epsilon} \mathscr{F} \left(u + \epsilon \phi \right) \Big|_{\epsilon = 0}.
+\end{align*} 
+
+The first variation of (\ref{var_form}) with respect to $\theta$ in the direction $\tilde{\theta} \in \mathcal{H}^1(\Omega)$ is
+\begin{align}
+  \frac{\delta \mathcal{R}}{\delta \theta} = &\totder{}{\epsilon} \mathcal{R} \left(\theta + \epsilon \tilde{\theta} \right) \Big|_{\epsilon = 0} \notag \\
+  = &+ \totder{}{\epsilon} \int_{\Omega} \rho \rankone{u} \cdot \nabla \left( \theta + \epsilon \tilde{\theta} \right) \hat{\psi} \d{\Omega} \Big|_{\epsilon = 0} \notag \\
+    &- \totder{}{\epsilon} \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \left( \theta + \epsilon \tilde{\theta} \right) \psi \d{\Omega} \Big|_{\epsilon = 0} \notag \\
+    &+ \totder{}{\epsilon} \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \left( \theta + \epsilon \tilde{\theta} \right) \cdot \nabla \psi \d{\Omega} \Big|_{\epsilon = 0} \notag \\
+  = &+ \int_{\Omega} \rho \rankone{u} \cdot \nabla \tilde{\theta} \hat{\psi} \d{\Omega} - \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \tilde{\theta} \psi \d{\Omega} \notag \\
+    &+ \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \tilde{\theta} \cdot \nabla \psi \d{\Omega}. \notag
+\end{align}
+
+The first variation of $\mathscr{H}$ with respect to $\theta$ in the direction $\psi$ is therefore
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \theta} = &\totder{}{\epsilon} \mathscr{H} \left(\theta + \epsilon \psi, \alpha, \lambda \right) \Bigg|_{\epsilon = 0} \\
+ %= &+ \totder{}{\epsilon} \int_{\Gamma_G} \left| \theta + \epsilon \psi - \left(\theta_m + W_c L_f\right) \right| \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+ = &+ \totder{}{\epsilon} \frac{1}{2} \int_{\Gamma_G} \left( \theta + \epsilon \psi - \left(\theta_m + W_c L_f\right) \right)^2 \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  %&+ \totder{}{\epsilon} \Bigg[ \pi \frac{1}{2} \int_{\Gamma_G} \nabla F_b \cdot \nabla F_b \d{\Gamma_G} - \int_{\Omega} Q \lambda \d{\Omega} \Bigg]_{\epsilon = 0} \\
+  &+ \totder{}{\epsilon} \Bigg[ \pi \int_{\Gamma_G} \big( \nabla F_b \cdot \nabla F_b\big)^{\frac{1}{2}} \d{\Gamma_G} - \int_{\Omega} Q \lambda \d{\Omega} \Bigg]_{\epsilon = 0} \\
+  &+ \totder{}{\epsilon} \int_{\Omega} \rho \rankone{u} \cdot \nabla \big( \theta + \epsilon \psi \big) \lambda \d{\Omega} \Bigg|_{\epsilon = 0} \\
+  &- \totder{}{\epsilon} \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \big( \theta + \epsilon \psi \big) \lambda \d{\Omega} \Bigg|_{\epsilon = 0} \\
+  &+ \totder{}{\epsilon} \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \big( \theta + \epsilon \psi \big) \cdot \nabla \lambda \d{\Omega} \Bigg|_{\epsilon = 0} \\
+  &-\totder{}{\epsilon} \int_{\Gamma_G} \left( q_{geo} + q_{fric} - \alpha m \right) \lambda \d{\Gamma_G} \Bigg|_{\epsilon = 0}
+\end{align*}
+so
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \theta} = 
+ &+ \int_{\Gamma_G} \left( \theta + \epsilon \psi - \left(\theta_m + W_c L_f\right) \right) \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+ %&+ \int_{\Gamma_G} \frac{\theta + \epsilon \psi - \left(\theta_m + W_c L_f\right)}{\left| \theta + \epsilon \psi - \left(\theta_m + W_c L_f\right) \right|} \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  &+ \int_{\Omega} \rho \rankone{u} \cdot \nabla \psi \lambda \d{\Omega} \Bigg|_{\epsilon = 0} \\
+  &- \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \psi \lambda \d{\Omega} \Bigg|_{\epsilon = 0} \\
+  &+ \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \psi \cdot \nabla \lambda \d{\Omega} \Bigg|_{\epsilon = 0},
+\end{align*}
+and finally
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \theta} = 
+ &+ \int_{\Gamma_G} \left( \theta - \left(\theta_m + W_c L_f\right) \right) \psi \d{\Gamma_G} \\
+ %&+ \int_{\Gamma_G} \frac{\theta - \left(\theta_m + W_c L_f\right)}{\left| \theta - \left(\theta_m + W_c L_f\right) \right|} \psi \d{\Gamma_G} 
+  &+ \int_{\Omega} \rho \rankone{u} \cdot \nabla \psi \lambda \d{\Omega} \\
+  &- \int_{\Omega} \nabla \left( \frac{\kappa}{c} \right) \cdot \nabla \psi \lambda \d{\Omega} 
+  + \int_{\Omega} \left( \frac{\kappa}{c} \right) \nabla \psi \cdot \nabla \lambda \d{\Omega}.
+\end{align*}
+
+The second variation of $\mathscr{H}$ with respect to $\theta$ in the direction $\psi$ is
+\begin{align*}
+ \frac{\delta^2 \mathscr{H}}{\delta \theta \delta \theta} = 
+ & \totder{}{\epsilon} \int_{\Gamma_G} \left( \theta + \epsilon \psi - \left(\theta_m + W_c L_f\right) \right) \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} 
+ = \int_{\Gamma_G} \psi^2 \d{\Gamma_G}.
+\end{align*}
+
+The first variation of $\mathscr{H}$ with respect to $\alpha$ in the direction $\psi$ is similarly determined:
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \alpha} = &\totder{}{\epsilon} \mathscr{H} \left(\theta, \alpha + \epsilon \psi, \lambda \right) \Bigg|_{\epsilon = 0} \\
+  = &+ \totder{}{\epsilon} \pi \int_{\Gamma_G} \left( \nabla \big( \alpha + \epsilon \psi \big) \cdot \nabla \big( \alpha + \epsilon \psi \big) \right)^{\frac{1}{2}} \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  &-\totder{}{\epsilon} \int_{\Gamma_G} \left( q_{geo} + q_{fric} - (\alpha + \epsilon \psi) m \right) \lambda \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  =&+ \frac{\pi}{2} \int_{\Gamma_G} \left( \nabla \big( \alpha + \epsilon \psi \big) \cdot \nabla \big( \alpha + \epsilon \psi \big) \right)^{-\frac{1}{2}} \totder{}{\epsilon} \left( \nabla \big( \alpha + \epsilon \psi \big) \right)^2 \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+   &+ \int_{\Gamma_G} \psi m \lambda \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  =&+ \pi \int_{\Gamma_G} \left( \nabla \big( \alpha + \epsilon \psi \big) \cdot \nabla \big( \alpha + \epsilon \psi \big) \right)^{-\frac{1}{2}} \nabla \big( \alpha + \epsilon \psi \big) \cdot \nabla \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+   &+ \int_{\Gamma_G} \psi m \lambda \d{\Gamma_G} \Bigg|_{\epsilon = 0},
+\end{align*}
+then evaluated at $\epsilon = 0$,
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \alpha}
+  =& \pi \int_{\Gamma_G} \big( \nabla F_b \cdot \nabla F_b \big)^{-\frac{1}{2}} \nabla F_b \cdot \nabla \psi \d{\Gamma_G}
+   + \int_{\Gamma_G} \psi m \lambda \d{\Gamma_G},
+\end{align*}
+and is equivalent to
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \alpha}
+  =& \pi \int_{\Gamma_G} \frac{\nabla F_b \cdot \nabla \psi}{\left\Vert \nabla F_b \right\Vert_{2}} \d{\Gamma_G} + \int_{\Gamma_G} \psi m \lambda \d{\Gamma_G}.
+\end{align*}
+
+The second variation of $\mathscr{H}$ with respect to $\alpha$ in the direction $\psi$ is
+\small
+\begin{align*}
+ \frac{\delta^2 \mathscr{H}}{\delta \alpha \delta \alpha}
+  = \totder{}{\epsilon} \pi \int_{\Gamma_G} &\big( \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \left( \alpha + \epsilon \psi \right) \big)^{-\frac{1}{2}} \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  =- \frac{\pi}{2} \int_{\Gamma_G} &\Bigg[ \big( \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \left( \alpha + \epsilon \psi \right) \big)^{-\frac{3}{2}} \totder{}{\epsilon} \left( \nabla \left( \alpha + \epsilon \psi \right) \right)^2 \Bigg]\\
+   &\nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  + \pi \int_{\Gamma_G} &\big( \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \left( \alpha + \epsilon \psi \right) \big)^{-\frac{1}{2}} \nabla \psi \cdot \nabla \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  =- \pi \int_{\Gamma_G} &\Bigg[ \big( \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \left( \alpha + \epsilon \psi \right) \big)^{-\frac{3}{2}} \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \psi \Bigg]\\
+   &\nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0} \\
+  + \pi \int_{\Gamma_G} &\big( \nabla \left( \alpha + \epsilon \psi \right) \cdot \nabla \left( \alpha + \epsilon \psi \right) \big)^{-\frac{1}{2}} \nabla \psi \cdot \nabla \psi \d{\Gamma_G} \Bigg|_{\epsilon = 0},
+\end{align*}
+\normalsize
+and
+\begin{align*}
+ \frac{\delta^2 \mathscr{H}}{\delta \alpha \delta \alpha}
+  =- \pi \int_{\Gamma_G} &\Bigg[ \big( \nabla F_b \cdot \nabla F_b \big)^{-\frac{3}{2}} \nabla F_b \cdot \nabla \psi \Bigg] \nabla F_b \cdot \nabla \psi \d{\Gamma_G} \\
+  + \pi \int_{\Gamma_G} &\big( \nabla F_b \cdot \nabla F_b \big)^{-\frac{1}{2}} \nabla \psi \cdot \nabla \psi \d{\Gamma_G},
+\end{align*}
+finally,
+\begin{align*}
+ \frac{\delta^2 \mathscr{H}}{\delta \alpha \delta \alpha}
+  =- \pi \int_{\Gamma_G} \frac{\big( \nabla F_b \cdot \nabla \psi \big)^2}{\left\Vert \nabla F_b \right\Vert_2^3} \d{\Gamma_G} 
+  + \pi \int_{\Gamma_G} \frac{\nabla \psi \cdot \nabla \psi}{\left\Vert \nabla F_b \right\Vert_2} \d{\Gamma_G}.
+\end{align*}
+
+\subsection{Other G\^{a}teaux derivatives}
+
+The first variations of the Hamiltonian functional $\mathscr{H}$ with respect to the model state $\rankone{u}$ and control variable $\beta$ is defined as the G\^{a}teaux derivative of $\mathscr{H}$ with respect to $v \in \{\rankone{u}, \beta\}$ in the direction $\phi \in \{\rankone{\Phi}, \phi\}$: 
+\begin{align*}
+ \frac{\delta}{\delta v} \mathscr{H}\left( v \right) = \totder{}{\epsilon} \mathscr{H} \left(v + \epsilon \phi \right) \Bigg|_{\epsilon = 0}.
+\end{align*} 
+Using $\gamma_2 = 0$, we calculate the first variation of $\mathscr{H}$ with respect to $\rankone{u}$ in the direction $\rankone{\Phi} = [\phi\ \psi]\T$,
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \rankone{u}} =& \totder{}{\epsilon} \mathscr{H} \left(\rankone{u} + \epsilon \rankone{\Phi}, \beta, \rankone{\lambda} \right) \Bigg|_{\epsilon = 0} \\
+  = &+ \totder{}{\epsilon} \left[ \gamma_1 \frac{1}{2} \int_{\Gamma_S} \left[ (u + \epsilon \phi - u_{ob})^2 + (v + \epsilon \psi - v_{ob})^2 \right] \d{\Gamma_S} \right]_{\epsilon = 0} \\ 
+  &- \totder{}{\epsilon} \left[ \int_{\Omega} \left( 2\eta\left(\rankone{u} + \epsilon \rankone{\Phi} \right) \dot{\rankone{\epsilon}}_1\left(\rankone{u} + \epsilon\rankone{\Phi} \right) \right) \cdot \nabla \lambda_x \d{\Omega} \right]_{\epsilon = 0} \\
+  &- \totder{}{\epsilon} \left[ \int_{\Omega} \left( 2\eta \left(\rankone{u} + \epsilon \rankone{\Phi} \right) \dot{\rankone{\epsilon}}_2\left(\rankone{u} + \epsilon \rankone{\Phi} \right) \right) \cdot \nabla \lambda_y \d{\Omega} \right]_{\epsilon = 0} \\
+  &- \totder{}{\epsilon} \left[ \int_{\Gamma_B} \beta \left(\rankone{u} + \epsilon \rankone{\Phi} \right) \cdot \rankone{\lambda} \d{\Gamma_B} \right]_{\epsilon = 0},
+\end{align*}
+resulting in
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \rankone{u}} =
+  &+ \gamma_1 \int_{\Gamma_S} \left[ (u - u_{ob})\phi + (v - v_{ob})\psi \right] \d{\Gamma_S} \\ 
+  &- \int_{\Omega} \totder{}{\epsilon} \Bigg[ 2\eta\left(\rankone{u} + \epsilon \rankone{\Phi} \right) \dot{\rankone{\epsilon}}_1\left(\rankone{u} + \epsilon\rankone{\Phi} \right) \Bigg]_{\epsilon = 0} \cdot \nabla \lambda_x \d{\Omega} \\
+  &- \int_{\Omega} \totder{}{\epsilon} \Bigg[ 2\eta \left(\rankone{u} + \epsilon \rankone{\Phi} \right) \dot{\rankone{\epsilon}}_2\left(\rankone{u} + \epsilon \rankone{\Phi} \right) \Bigg]_{\epsilon = 0} \cdot \nabla \lambda_y \d{\Omega} \\
+  &- \int_{\Gamma_B} \beta \rankone{\Phi} \cdot \rankone{\lambda} \d{\Gamma_B},
+\end{align*}
+and the first variation of $\mathscr{H}$ with respect to $\beta$ in the direction $\phi$
+\begin{align*}
+ \frac{\delta \mathscr{H}}{\delta \beta} =& \totder{}{\epsilon} \mathscr{H} \left(\rankone{u}, \beta + \epsilon \phi, \rankone{\lambda} \right) \Bigg|_{\epsilon = 0} \\
+  =&+ \totder{}{\epsilon} \left[ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \nabla \left(\beta + \epsilon \phi \right) \cdot \nabla \left(\beta + \epsilon \phi \right) \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  &- \totder{}{\epsilon} \left[ \int_{\Gamma_B} \left(\beta + \epsilon \phi\right)^2 \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  =&+ \totder{}{\epsilon} \left[ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(\parder{\beta}{x} + \epsilon \parder{\phi}{x} \right) \left(\parder{\beta}{x} + \epsilon \parder{\phi}{x} \right) \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  &+ \totder{}{\epsilon} \left[ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(\parder{\beta}{y} + \epsilon \parder{\phi}{y} \right) \left(\parder{\beta}{y} + \epsilon \parder{\phi}{y} \right) \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  &- \int_{\Gamma_B} 2\left(\beta + \epsilon \phi\right)\phi \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \Bigg|_{\epsilon = 0} \\
+  =&+ \totder{}{\epsilon} \left[ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(\left(\parder{\beta}{x}\right)^2 + 2\epsilon \parder{\beta}{x}\parder{\phi}{x} + \epsilon^2 \left(\parder{\phi}{x}\right)^2 \right) \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  &+ \totder{}{\epsilon} \left[ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(\left(\parder{\beta}{y}\right)^2 + 2\epsilon \parder{\beta}{y}\parder{\phi}{y} + \epsilon^2 \left(\parder{\phi}{y}\right)^2 \right) \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  &- 2 \int_{\Gamma_B} \beta \phi \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \\
+  =&+ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(2\parder{\beta}{x}\parder{\phi}{x} + 2\epsilon \left(\parder{\phi}{x}\right)^2 \right) \d{\Gamma_B} \Bigg|_{\epsilon = 0} \\
+  &+ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(2\parder{\beta}{y}\parder{\phi}{y} + 2\epsilon \left(\parder{\phi}{y}\right)^2 \right) \d{\Gamma_B} \Bigg|_{\epsilon = 0} \\
+  &- 2 \int_{\Gamma_B} \beta \phi \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \\
+  =&+ \gamma_3 \int_{\Gamma_B} \parder{\beta}{x}\parder{\phi}{x} \d{\Gamma_B} + \gamma_3 \int_{\Gamma_B} \parder{\beta}{y}\parder{\phi}{y} \d{\Gamma_B} \\
+  &- 2 \int_{\Gamma_B} \beta \phi \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \\
+  =&+ \gamma_3 \int_{\Gamma_B} \nabla \beta \cdot \nabla \phi \d{\Gamma_B} - 2 \int_{\Gamma_B} \beta \phi \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B}.
+\end{align*}
+We also need the second variation of $\mathscr{H}$ with respect to $\beta$ in the direction $\phi$ for the Quasi-Newton solution process described in \S3.4,
+\begin{align*}
+ \frac{\delta^2 \mathscr{H}}{\delta \beta} =& \totder[2]{}{\epsilon} \mathscr{H} \left(\rankone{u}, \beta + \epsilon \phi, \rankone{\lambda} \right) \Bigg|_{\epsilon = 0} \\
+  =&+ \totder[2]{}{\epsilon} \left[ \gamma_3 \frac{1}{2} \int_{\Gamma_B} \nabla \left(\beta + \epsilon \phi \right) \cdot \nabla \left(\beta + \epsilon \phi \right) \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  &- \totder[2]{}{\epsilon} \left[ \int_{\Gamma_B} \left(\beta + \epsilon \phi\right)^2 \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \right]_{\epsilon = 0} \\
+  =&+ \totder{}{\epsilon} \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(2\parder{\beta}{x}\parder{\phi}{x} + 2\epsilon \left(\parder{\phi}{x}\right)^2 \right) \d{\Gamma_B} \Bigg|_{\epsilon = 0} \\
+  &+ \totder{}{\epsilon} \gamma_3 \frac{1}{2} \int_{\Gamma_B} \left(2\parder{\beta}{y}\parder{\phi}{y} + 2\epsilon \left(\parder{\phi}{y}\right)^2 \right) \d{\Gamma_B} \Bigg|_{\epsilon = 0} \\
+  &- \totder{}{\epsilon} \int_{\Gamma_B} 2\left(\beta + \epsilon \phi\right)\phi \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \Bigg|_{\epsilon = 0} \\
+  =&+ \gamma_3 \int_{\Gamma_B} \left(\parder{\phi}{x}\right)^2 \d{\Gamma_B} + \gamma_3 \int_{\Gamma_B} \left(\parder{\phi}{y}\right)^2 \d{\Gamma_B} \\
+  &- 2 \int_{\Gamma_B} \phi^2 \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B} \\
+  =&+ \gamma_3 \int_{\Gamma_B} \nabla \phi \cdot \nabla \phi \d{\Gamma_B} - 2 \int_{\Gamma_B} \phi^2 \rankone{u} \cdot \rankone{\lambda} \d{\Gamma_B}.
+\end{align*}

@@ -1,0 +1,34 @@
+
+\chapter{Mass balance} \label{ssn_mass_balance}
+
+\index{Balance equations!Mass}
+\index{Impenetrability}
+\index{Incompressibility|seealso{Balance equations!Mass}}
+
+In order to better understand the balance of mass for an ice-sheet, it is instructive to begin from the integral form of the continuity equation (\ref{integral_continuity_equation}) for a domain $\Omega(\rankone{x},t)$ with boundary $\partial \Omega = \Gamma(\rankone{x},t)$ using density $\phi = \rho$, mass flux $\rankone{j} = \rho \rankone{u}$, and zero production or supply $f = 0$:
+\begin{align*}
+  \totder{}{t} \int_{\Omega} \rho \d{\Omega} = - \int_{\Gamma} \rho \rankone{u} \cdot \normal \d{\Gamma},
+\end{align*}
+with and outward-pointing unit-normal-vector $\normal$.
+Using the fact that the ice is incompressible, meaning that density is constant and thus $\dot{\rho} = 0$, the left-hand side of this relation zero.
+Applying divergence theorem (\ref{divergence_theorem}) \index{Divergence theorem!Regarding continuity equations} to the remaining surface integral results in
+\begin{align*}
+  \int_{\Omega} \nabla \cdot \rankone{u} \d{\Omega} = 0,
+\end{align*}
+and by arbitrarity of the integration domain $\Omega$ produces a mass-conservation relation invariant with mass or density,
+\begin{align}
+  \nabla \cdot \rankone{u} &= 0 &&\text{ in } \Omega.
+\end{align}
+The mass-balance boundary conditions must therefore be stated in the form of a velocity,
+\begin{align}
+  \label{impenetrability}
+  \rankone{u} \cdot \normal &= \rankone{w} \cdot \normal - \mathring{\rho}_A &&\text{ on } \Gamma_A &&\leftarrow \text{ ac'mul'ion / ablation} \\
+  \rankone{u} \cdot \normal &=  \rankone{w} \cdot \normal - \mathring{\rho}_W &&\text{ on } \Gamma_W &&\leftarrow \text{ calving / melting} \\
+  \rankone{u} \cdot \normal &=  \rankone{w} \cdot \normal - \mathring{\rho}_B &&\text{ on } \Gamma_B &&\leftarrow \text{ basal water flux},
+\end{align}
+where $\rankone{w}$ is the velocity of the surface $\Gamma$ and satisfies the \index{Kinematic relation} \emph{kinematic} relation
+\begin{align}
+  \label{kinematic_boundary_balance}
+  \totder{\rankone{\Gamma}}{t} = \parder{\rankone{\Gamma}}{t} + \rankone{w} \cdot \nabla \Gamma = 0,
+\end{align}
+and is specified to be in balance with the outward-directed ice velocity and the mass flux $\mathring{\rho}_i$ for $i=a,w,b$ with units of meters ice equivalent per second.

@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'newton_raphson.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{235.26363102bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.54832341)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1,draft=false]{images/fenics_intro/svg/newton_raphson.pdf}}%
+    \put(0.09794499,0.51201744){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathscr{R}$}}}%
+    \put(0.00265379,0.29902666){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathscr{R}(u_k)$}}}%
+    \put(0.11494719,0.03726745){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.93544462,0.01867959){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u$}}}%
+    \put(0.84146428,0.4407164){\color[rgb]{0.45882353,0.45882353,0.45882353}\makebox(0,0)[lb]{\smash{$\mathscr{R}$}}}%
+    \put(0.7066938,0.01943107){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.50599786,0.02026525){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u_{k+1}$}}}%
+    \put(0.56311464,0.47074891){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$\frac{\partial \mathscr{R}}{\partial u} \Big|_{u_k}$}}}%
+    \put(0.62501328,0.02019053){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u_k$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2,draft=false]{images/fenics_intro/svg/newton_raphson.pdf}}%
+    \put(0.00257492,0.21915366){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathscr{R}(u_{k+1})$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3,draft=false]{images/fenics_intro/svg/newton_raphson.pdf}}%
+  \end{picture}%
+\endgroup%

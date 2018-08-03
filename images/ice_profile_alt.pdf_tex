@@ -1,0 +1,93 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ice_profile_alt.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{232.8bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.53608247)%
+    \Large
+    \put(0,0){\includegraphics[width=\unitlength,page=1,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.56726751,0.1758844){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{CTS}}}%
+    \put(0.21718157,0.36488805){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z=S$}}}%
+    \put(0.21718157,0.11999549){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z=B$}}}%
+    \put(0.63002906,3.1788557){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.64607034,0.42550896){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$W_S$}}}%
+    \put(0.48690644,0.15249514){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\nabla B$}}}%
+    \put(0.71311746,0.29789955){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{n}$}}}%
+    \put(0.60984383,0.31485935){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\nabla S$}}}%
+    \put(0.46927887,0.34007694){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\Gamma_A$}}}%
+    \put(0.48253812,0.22141726){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{{\Huge $\Omega$}}}}%
+    \put(0.33376932,0.23560197){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{u}_2$}}}%
+    \put(0.17162234,0.26684516){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{u}_1$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.25023203,0.32560825){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_S$}}}%
+    \put(0.19681484,0.14484414){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$Q_1$}}}%
+    \put(0.38783707,0.08248803){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$Q_2$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.0543813,0.40683304){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\Gamma_D$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.19448817,0.05566779){\color[rgb]{1,0.4745098,0}\makebox(0,0)[lb]{\smash{$q_{geo}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.53136232,0.08273426){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{n}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.68441351,0.20268839){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{u}_3$}}}%
+    \put(0.72805472,0.0654997){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$Q_3$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.88255263,0.01331317){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\Gamma_W$}}}%
+    \put(0.57495201,0.11978995){\color[rgb]{0.56862745,0.47058824,0}\makebox(0,0)[lb]{\smash{$q_{fric}$}}}%
+    \put(0.16128992,0.09841883){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\Gamma_C$}}}%
+    \put(0.63094034,0.05322052){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\Gamma_T$}}}%
+    \put(0.08591065,0.31582899){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$-f_c \mathbf{n}$}}}%
+    \put(0.94275332,0.13763381){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$f_c \mathbf{n}$}}}%
+    \put(0.79730702,0.1202583){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$-f_w \mathbf{n}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.88338625,0.25119843){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z=D$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9,draft=false]{images/ice_profile_alt.pdf}}%
+    \put(0.00271633,0.31582899){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$f_c \mathbf{n}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10,draft=false]{images/ice_profile_alt.pdf}}%
+  \end{picture}%
+\endgroup%

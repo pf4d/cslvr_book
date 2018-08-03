@@ -1,0 +1,142 @@
+
+\chapter{Optimization with constraints} \label{ssn_optimization_with_constraints}
+
+When the solution space for a problem is restricted by equality or inequality constraints, new theory is required to derive solutions.  These problems can be stated in the form \citep{nocedal_2000}
+\begin{align}
+  \label{canonical_opt}
+  \min_{\vartheta \in \R^n}\ \mathscr{F}(\vartheta) \hspace{10mm} \text{subject to  }
+  \begin{cases}
+    \mathscr{R}(\vartheta) = 0, \\
+    c(x) \geq 0,
+  \end{cases}
+\end{align}
+with parameter vector $\vartheta = [u\ x]^\intercal$.  The real-valued functions $\mathscr{F}(\vartheta)$, $\mathscr{R}(\vartheta)$, and $c(x)$ are all smooth and defined on a subset of $\mathbb{R}^n$ created from a finite-element discretization in one, two, or three dimensions.  The function to be minimized, $\mathscr{F}(\vartheta)$, is referred to as the \index{Constrained optimization!Objective function} \emph{objective} function with dependent \index{Constrained optimization!State parameter} \emph{state} parameter $u \in \R^n$ and dependent \emph{control} parameter $x \in \R^n$.
+
+One method of solving problems of form (\ref{canonical_opt}) is through the use of a bounded version of Algorithm \ref{BFGS_alg} referred to as L\_BFGS\_B \citep{byrd_1995}; however, a more modern and efficient class of constrained optimization algorithms known as \index{Constrained optimization!Interior point methods} \emph{interior point} (IP) methods have been shown to perform quite well for problems of this type \citep{nocedal_2000}.  Because \CSLVR utilizes an IP method implemented by the FEniCS optimization software Dolfin-Adjoint \citep{farrell_2013}, this is the method described here.
+
+For the applications presented in Part II of this manuscript, objective $\mathscr{F}(\vartheta)$ and constraint $\mathscr{R}(\vartheta)$ are \index{Functionals} \emph{functionals}: the mapping from the space of functions to the space of real numbers, and so the following theory will be presented in this context. For examples of functionals, examine Chapters \ref{ssn_subgrid_scale_effects} and \ref{ssn_nonlinear_solution_process}.
+
+%===============================================================================
+
+\section{The control method}
+
+\index{Control theory}
+A stationary point for $\vartheta$-optimization problem (\ref{canonical_opt}) is defined as one where an arbitrary change $\delta \mathscr{F}$ of objective $\mathscr{F}$ caused by perturbations $\delta u$ or $\delta x$ in state and control parameter, respectively, lead to an increase in $\mathscr{F}$ \citep{bryson_1975}.  Thus it is necessary that 
+\begin{align}
+  \label{objective_perturbations}
+  \frac{\delta \mathscr{F}}{\delta u} = 0, \hspace{5mm} \text{and} \hspace{5mm}
+  \frac{\delta \mathscr{F}}{\delta x} = 0.
+\end{align}
+
+Using the chain rule of variations, the perturbations of $\mathscr{F}$ and $\mathscr{R}$ are
+\begin{align}
+  \label{delta_F}
+  \delta \mathscr{F} &= \parder{\mathscr{F}}{u} \delta u + \parder{\mathscr{F}}{x} \delta x, \\
+  \label{delta_R}
+  \delta \mathscr{R} &= \parder{\mathscr{R}}{u} \delta u + \parder{\mathscr{R}}{x} \delta x.
+\end{align}
+Because it is desired that $\delta \mathscr{R} = 0$, and with non-singular $\partial_{u} \mathscr{R}$, we can solve for $\delta u$ in (\ref{delta_R}),
+\begin{align}
+  \label{delta_u}
+  \delta u = - \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} \delta x.
+\end{align}
+We then insert (\ref{delta_u}) into (\ref{delta_F}),
+\begin{align}
+  \delta \mathscr{F} &= - \parder{\mathscr{F}}{u} \left( \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} \delta x \right) + \parder{\mathscr{F}}{x} \delta x \notag \\
+  &= \left(\parder{\mathscr{F}}{x}  - \parder{\mathscr{F}}{u} \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} \right) \delta x,
+\end{align}
+and thus because we require $\delta \mathscr{F} = 0$ for any non-zero $\delta x$,
+\begin{align}
+  \parder{\mathscr{F}}{x} - \parder{\mathscr{F}}{u} \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} &=0 \notag \\
+  \label{condition_two}
+  \parder{\mathscr{F}}{x} + \lambda \parder{\mathscr{R}}{x} &=0,
+\end{align}
+where \index{Lagrange multiplier} \emph{Lagrange multiplier} or \index{Constrained optimization!Adjoint variable} \emph{adjoint variable} $\lambda$ \index{Adjoint method|seealso{Control theory}} adjoins constraint functional $\mathscr{R}$ to objective functional $\mathscr{F}$, and is given by
+\begin{align}
+  -\lambda &= \parder{\mathscr{F}}{u} \parder{u}{\mathscr{R}} = \parder{\mathscr{F}}{\mathscr{R}} \Bigg|_{u}.
+\end{align}
+Therefore, $\lambda$ is the direction of decent of objective $\mathscr{F}$ with respect to constraint $\mathscr{R}$ at a given state $u$.
+
+It is now convenient to define the \index{Constrained optimization!Lagrangian} \emph{Lagrangian}
+\begin{align}
+  \label{lagrangian}
+  \mathscr{L}(u, x, \lambda) &= \mathscr{F}(u, x) + \big( \lambda, \mathscr{R}(u, x) \big),
+\end{align}
+where the notation $(f,g) = \int_{\Omega} f g \d{\Omega}$ is the inner product.  Using Lagrangian (\ref{lagrangian}), the first necessary condition in (\ref{objective_perturbations}) is satisfied when $\lambda$ is chosen -- say $\lambda = \lambda^*$ -- such that for a given state $u$ and control parameter $x$, 
+\begin{align}
+  \label{adjoint}
+  \lambda^* = \argminl_{\lambda} \left\Vert \delder{}{u} \mathscr{L} \left( u, x; \lambda \right) \right\Vert.
+\end{align}
+This $\lambda^*$ may then be used in condition (\ref{condition_two}) to calculate the direction of decent of Lagrangian (\ref{lagrangian}) with respect to the control variable $x$ for a given state $u$ and adjoint variable $\lambda^*$,
+\begin{align}
+  G = \delder{}{x} \mathscr{L} (u, x, \lambda^*).
+\end{align}
+This \emph{G\^{a}teaux derivative}, or first variation of Lagrangian $\mathscr{L}$ with respect to $x$ (see \S \ref{ssn_gateaux}), provides a direction which control parameter $x$ may follow in order to satisfy the second condition in (\ref{objective_perturbations}) and thus minimize objective functional $\mathscr{F}$.
+
+%===============================================================================
+
+\section{Log-barrier solution process} \label{ssn_log_barrier}
+
+\index{Log-barrier method}
+To determine a locally optimal value of $u$, a variation of a primal-dual-interior-point algorithm with a filter-line-search method may be used, as implemented by the IPOPT framework \citep{waechter_2006}.  Briefly, the algorithm implemented by IPOPT computes approximate solutions to a sequence of barrier problems
+\begin{align}
+\begin{aligned}
+  &\min_{x \in \R^n}\ \left\{ \varphi_{\mu}(u, x) = \mathscr{F}(u,x) - \mu \sum_{i=1}^n \ln \left( c^i\left( x \right) \right) \right\}
+  %&\text{subject to }\  \rankone{r}(\vartheta) = 0
+\end{aligned}
+\label{barrier}
+\end{align}
+for a decreasing sequence of barrier parameters $\mu$ converging to zero, and $n$ is the number of degrees of freedom of the mesh.  Neglecting equality constraints on the control variables, the first-order \index{Constrained optimization!Necessary conditions} \emph{necessary} conditions -- known as the Karush-Kuhn-Tucker (KKT) conditions --  for barrier problem (\ref{barrier}) are
+\begin{align}
+\begin{aligned}
+  G(\vartheta,\lambda) - \lambda_b &= 0, \\
+  %\rankone{r}(\vartheta) &= 0, \\
+  \varTheta Z e - \mu e &= 0, \\
+  \left\{c(\vartheta),\ \lambda_b \right\} & \geq 0,
+\end{aligned}
+\label{barrier_kkt}
+\end{align}
+where $G(\vartheta,\lambda) = \delta_x \mathscr{L}$, $\lambda_b$ is the Lagrange multiplier for the bound constraint $c(\vartheta) \geq 0$ in (\ref{canonical_opt}), $\varTheta = \mathrm{diag}(c(\vartheta))$, $Z = \mathrm{diag}(\lambda_b)$, and $e = \mathrm{ones}(n)$.  The so-called `optimality error' for barrier problem (\ref{barrier}) is
+\begin{align*}
+  E_{\mu}(\vartheta, \lambda_b) = \max
+  \left\{
+     \frac{\left\Vert G(\vartheta,\lambda) - \lambda_b \right\Vert_{\infty}}{s_d}, 
+     \frac{\left\Vert \varTheta Z e - \mu e \right\Vert_{\infty}}{s_c}
+  \right\},
+\end{align*}
+with scaling parameters $s_d,s_c \geq 1$.  This error defines the algorithm termination criteria with $\mu=0$,
+\begin{align}
+  \label{term_criteria}
+  E_{0}(\vartheta^*, \lambda_b^*) \leq \epsilon_{\mathrm{tol}},
+\end{align}
+for approximate solution $(\vartheta^*, \lambda_b^*)$ and user-provided error tolerance $\epsilon_{\mathrm{tol}}$.
+
+The solution to (\ref{barrier_kkt}) for a given $\mu$ is attained by applying a damped version of \index{Newton-Raphson method} Newton's method, whereby the sequence of iterates $(\vartheta^k, \lambda_b^k)$ for iterate $k \leq k_{max}$ solves the system
+\begin{align}
+  \begin{bmatrix}
+   W^k   & - I \\
+   Z^k   &   \varTheta^k
+  \end{bmatrix}
+  \begin{bmatrix}
+    d_{x}^k \\
+    d_{\lambda_b}^k
+  \end{bmatrix} = - 
+  \begin{bmatrix}
+    G(\vartheta^k,\lambda) - \lambda_b^k \\
+    \varTheta^k Z^k e - \mu e
+  \end{bmatrix},
+\end{align}
+with Hessian matrix 
+\begin{align}
+  W^k = \frac{\delta^2}{\delta x^k \delta x^k} \mathscr{L}(u^k, x^k, \lambda) = \frac{\delta}{\delta x^k} G(\vartheta^k,\lambda).
+\end{align}
+Once search directions $(d_{x}^k, d_{\lambda_b}^k)$ have been found, the subsequent iterate is computed from
+\begin{align}
+  \label{subsequent_LB_iterate}
+  x^{k+1} &= x^k + \ell^k d_{x}^k \\
+  \lambda_b^{k+1} &= \lambda_b^k + \ell_z^k d_{\lambda_b}^k,
+\end{align}
+with step sizes $\ell$ determined by a backtracking-line-search procedure similar to Algorithm \ref{qn_bls_alg} to enforce an analogous set of Wolfe conditions as (\ref{armijo_condition}, \ref{curvature_condition}), while also requiring that a sufficient decrease in $\varphi_{\mu}$ in (\ref{barrier}) be attained.
+
+Finally, because $\varphi_{\mu}$ is dependent on objective $\mathscr{F}$, objective $\mathscr{F}(u^{k+1},x^{k+1})$ must be evaluated for a series of potential control parameter $x^{k+1}$ values in (\ref{subsequent_LB_iterate}).  Hence multiple solutions of constraint relation $\mathscr{R}(u^{k+1},x^{k+1}) = 0$ in (\ref{canonical_opt}) are required, one for each potential state parameter $u^{k+1}$ for a given $x^{k+1}$.  Finally, at the end of each iteration, adjoint variable $\lambda$ is determined by solving (\ref{adjoint}) and used to compute the next iteration's G\^{a}teaux derivative $G(x^{k+1}, \lambda)$.  For further details, examine \citet{waechter_2006}.
+

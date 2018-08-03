@@ -1,0 +1,170 @@
+
+\chapter{Jump condition at the basal surface}
+
+In order to clearly illustrate the derivation of latent energy flux (\ref{latent_flux}), the process described in \S~9.3 of \citet{greve_2009} is rewritten using the differing notation and energy definition (\ref{temperate_energy}) used here.
+
+First, the general jump condition of a singular surface $\Sigma$ located within the material volume $\Omega$ is given by the following definition:
+
+\begin{definition}[Jump discontinuity]
+\label{def_jump}
+Consider a volume $\Omega^- = \Omega^-(\rankone{x}) \in \R^3$ with boundary $\Gamma^- = \partial \Omega^-(\rankone{x})$ and outward-pointing unit-normal vector $\normal^-$ in contact with another volume $\Omega^+ = \Omega^+(\rankone{x}) \in \R^3$ with boundary $\Gamma^+ = \partial \Omega^+(\rankone{x})$ and outward-pointing unit-normal vector $\normal^+$. 
+The jump of a scalar quantity $\phi = \phi(\rankone{x})$ and vector quantity $\rankone{\phi} = \rankone{\phi}(\rankone{x})$ across the shared boundary $\Sigma = \Gamma^+ \cap \Gamma^-$ are respectively
+\begin{align*}
+  \jump{\phi} = \phi^- \normal^- + \phi^+ \normal^+
+  \hspace{5mm}
+  \text{and}
+  \hspace{5mm}
+  \jump{\rankone{\phi}} = \rankone{\phi}^- \cdot \normal^- + \rankone{\phi}^+ \cdot \normal^+,
+\end{align*}
+where the normal vectors satisfy $\normal^+ = -\normal^-$ for all $\rankone{x} \in \Sigma$.
+\end{definition}
+
+\begin{remark}
+By convention, the positive side of the ice base is identified with the lithosphere and negative side with the ice.
+\end{remark}
+
+The following theorem is used to define the boundary conditions for any quantity from either interior or exterior domain at the material interface $\Sigma$:
+
+\begin{theorem}[Discontinuity equation]
+\label{thm_discontinuity_equation}
+A field $\phi = \phi(\rankone{x},t)$ defined within an arbitrarily-fixed volume $\Omega^{\e}(\rankone{x}) \subset \Omega(\rankone{x}, t)$ with boundary $\Gamma^{\e} = \partial \Omega^{\e}(\rankone{x})$ which is differentiable everywhere except possibly across $\Sigma^{\e} \in \Omega^{\e}$ will satisfy the \emph{discontinuity equation}
+\begin{align*}
+  \jump{\phi \left( \rankone{u} - \rankone{w} \right) + \rankone{j}} = - \mathring{f}_{\Sigma} && \text{on } \Sigma^{\e},
+\end{align*}
+with material velocity $\rankone{u}$, $\Sigma^{\e}$-surface velocity $\rankone{w}$, non-advective flux $\rankone{j}$, source of $\phi$ on $\Sigma^{\e}$ denoted $\mathring{f}_{\Sigma}$ which is positive for increasing $\phi$ and negative for decreasing $\phi$, and jump operator $\jump{\cdot}$ given by \ref{def_jump}.
+\end{theorem}
+
+\begin{proof}
+Consult \citet{cummings_2018}.
+\end{proof}
+
+Substitution of mass density $\phi = \rho_k$, non-advective flux $\rankone{j} = \rankone{0}$, and source term $\mathring{f}_{\Sigma} = \mathring{q}_k$ in discontinuity equation \ref{thm_discontinuity_equation} produces\footnote{Relations \ref{component_mass_jump} evaluated at the lower surface are identical to Equations (9.121) and (9.124) of \cite{greve_2009}.}
+\begin{align}
+  \label{component_mass_jump}
+  \jump{ \rho_k (\rankone{u}_k - \rankone{w}) } = - \mathring{q}_{k},
+\end{align}
+where $\rankone{u}_k$ is the substance velocity, $\rankone{w}$ is the velocity of the singular surface, and $\mathring{q}_k$ is the rate of production of the substance on the singular surface and are positive for increasing mass and negative for decreasing mass of phase $k$.
+For the mixture here, we have some component of solid ($\solid$) and liquid ($\liquid$), respectively, with \emph{barycentric velocity} \citep{moebius_1827}
+\begin{align}
+  \label{barycentre}
+  \rankone{u} = \frac{1}{\rho} \left( \rho_{\solid} \rankone{u}_{\solid} + \rho_{\liquid} \rankone{u}_{\liquid} \right).
+\end{align}
+with partial densities $\rho_{\solid}$ and $\rho_{\liquid}$ defined as the mass of ice and water per unit volume of the mixture and $\rho = \rho_{\solid} + \rho_{\liquid}$.
+Thus, the water content of the mixture is defined as
+\begin{align}
+  \label{mass_fraction_water_content}
+  \omega_{\liquid} = \frac{\rho_{\liquid}}{\rho}, \hspace{10mm} (1-\omega_{\liquid}) = \frac{\rho_{\solid}}{\rho}.
+\end{align}
+In addition, a non-advective water mass flux $\rankone{j}$ describes the water motion relative to the motion of barycentre (\ref{barycentre}),
+\begin{align}
+  \label{diffusive_latent_flux}
+  \rankone{j} = \rho_{\liquid} (\rankone{u}_{\liquid} - \rankone{u}) = \rho \omega_{\liquid} (\rankone{u}_{\liquid} - \rankone{u}).
+\end{align}
+
+Next, the \emph{mass jump relation for the component water} is defined using (\ref{component_mass_jump}),
+\begin{align*}
+  \jump{ \rho_{\liquid} (\rankone{u}_{\liquid} - \rankone{w}) } = - \mathring{q}_{\liquid}.
+\end{align*}
+%where the water-production term $\mathring{q}_{\liquid} = \rho M_b$ in (\ref{component_mass_jump}) has been defined using basal melting rate (\ref{basal_melt_rate}).
+Using jump Definition \ref{def_jump}, we have
+\begin{align*}
+  \rho_{\liquid}^- (\rankone{u}_{\liquid}^- - \rankone{w}^-) \cdot \normal^- + \rho_{\liquid}^+ (\rankone{u}_{\liquid}^+ - \rankone{w}^+) \cdot \normal^+ = - \mathring{q}_{\liquid},
+\end{align*}
+and with \emph{phase surface-mass balance} 
+\begin{align}
+  \label{liquid_smb}
+  \fs_{\liquid}^- = (\rankone{w}^- - \rankone{u}_{\liquid}^-) \cdot \normal^-
+\end{align}
+and applying water content (\ref{mass_fraction_water_content}),
+\begin{align*}
+  - \rho^- \omega_{\liquid}^- \fs_{\liquid}^- + \rho^+ \omega_{\liquid}^+ (\rankone{u}_{\liquid}^+ - \rankone{w}^+) \cdot \normal^+ = - \mathring{q}_{\liquid}.
+\end{align*}
+Assuming the water content on the exterior ($+$) side is composed entirely of water, $\omega_{\liquid}^+ = 1 \iff \rho^+ = \rho_{\water}$,
+\begin{align}
+  \label{component_water_jump}
+  \rho^+ \omega_{\liquid}^+ (\rankone{u}_{\liquid}^+ - \rankone{w}^+) \cdot \normal^+ = \rho_{\water} \fs_{\liquid}^+ - \mathring{q}_{\liquid}.
+\end{align}
+
+Next, the \emph{mass jump relation for the component ice} is similarly defined as
+\begin{align*}
+  \jump{ \rho_{\solid} (\rankone{u}_{\solid} - \rankone{w}) } = \mathring{q}_{\liquid}.
+\end{align*}
+Because the lithosphere is impermeable to ice, as evident by impenetrability condition (\ref{impenetrability}), this simplifies to
+\begin{align}
+  \label{component_ice_jump}
+  \rho_{\solid}^- (\rankone{u}_{\solid}^- - \rankone{w}^-) \cdot \normal^- = \rho^- (1-\omega_{\liquid}^-) (\rankone{u}_{\solid}^- - \rankone{w}^-) \cdot \normal^- = \mathring{q}_{\liquid}.
+\end{align}
+
+Next, using barycentric velocity (\ref{barycentre}) and water content (\ref{mass_fraction_water_content}), it follows that
+\begin{align*}
+  \rankone{u}^- - \rankone{w}^- = \omega_{\liquid}^- (\rankone{u}_{\liquid}^- - \rankone{w}^-) + (1-\omega_{\liquid}^-) (\rankone{u}_{\solid}^- - \rankone{w}^-),
+\end{align*}
+which upon scalar multiplication by $\normal^-$, use of phase surface-mass balance (\ref{liquid_smb}), and application of ice jump (\ref{component_ice_jump}) yields
+\begin{align*}
+  (\rankone{u}^- - \rankone{w}^-) \cdot \normal^- &= - \omega_{\liquid}^- \fs_{\liquid}^- + \frac{\mathring{q}_{\liquid}}{\rho^-} \\
+  &= - \frac{\rho_{\water}}{\rho^-} \fs_{\liquid}^-. 
+\end{align*}
+Using non-advective water mass flux (\ref{diffusive_latent_flux}), component water jump (\ref{component_water_jump}), and component ice jump (\ref{component_ice_jump}), we have the flux of water normal to the basal boundary
+\begin{align*}
+  \rankone{j}^- \cdot \normal^- &= \rho^- \omega_{\liquid}^- (\rankone{u}_{\liquid}^- - \rankone{u}^-) \cdot \normal^- \notag \\
+  &= \rho^- \omega_{\liquid}^- (\rankone{u}_{\liquid}^- - \rankone{w}^-) \cdot \normal^- - \rho^- \omega_{\liquid}^- (\rankone{u}^- - \rankone{w}^-) \cdot \normal^- \notag \\
+  &= - \rho_{\water} \fs_{\liquid}^+ - \mathring{q}_{\liquid}^+ + \rho_{\water} \omega_{\liquid}^- \fs_{\liquid}^- \notag \\
+  &= (\omega_{\liquid}^- - 1) \rho_{\water} \fs_{\liquid}^- - \mathring{q}_{\liquid} \notag \\
+  &\approx - \rho_{\water} \fs_{\liquid}^- - \mathring{q}_{\liquid}.
+\end{align*}
+Finally, from water-flux constitutive relation (\ref{water_fick_law}) we have 
+\begin{align*}
+  \left( \nu \nabla \omega_{\liquid} \right) \cdot \normal &= \left( L_f \tilde{\nu} \nabla \omega_{\liquid} \right) \cdot \normal = - L_f \rankone{j} \cdot \normal  \notag \\
+  &= - L_f (\omega_{\liquid}^- - 1) \rho_{\water} \fs_{\liquid}^- + L_f \mathring{q}_{\liquid} \notag \\
+  &\approx \rho_{\water} L_f \fs_{\liquid}^- + L_f \mathring{q}_{\liquid},
+\end{align*}
+Hence water flux boundary condition (\ref{latent_flux}) has been derived. $\qed$
+
+%%==============================================================================
+\section{Internal rate of water generation}
+
+The \emph{mass balance for the component water} is defined as
+\begin{align*}
+  \parder{\rho_{\liquid}}{t} + \nabla \cdot \left( \rho_{\liquid} \rankone{u}_{\liquid} \right) = \mathring{\rho}_{\liquid},
+\end{align*}
+where $\mathring{\rho}_{\liquid}$ is the rate of water mass produced per unit mixture volume.  Applying water content definition (\ref{mass_fraction_water_content}) and non-advective water mass flux (\ref{diffusive_latent_flux}), this is equivalent to
+\begin{align}
+  \label{water_mass_balance}
+  \rho \dot{\omega}_{\liquid} = - \nabla \cdot \rankone{j} + \mathring{\rho}_{\liquid},
+\end{align}
+where the Newton-overdot notation ($\dot{\ }$) denotes time differentiation.  The constitutive relations used to close the system are
+\begin{align}
+  \label{energy_time_deriavative}
+  \dot{\theta} &= a \dot{T}_m + b T_m \dot{T}_m + L_f \dot{\omega}_{\liquid} \\
+  \label{water_fick_law}
+  \rankone{j} &= - \tilde{\nu} \nabla \omega_{\liquid} \\
+  \label{temperate_sensible_energy}
+  \rankone{q}_s &= - k(T_m) \nabla T_m,
+\end{align}
+where $\tilde{\nu} = \nu / L_f$ is the `water diffusivity' as presented in \citet{greve_1997}, and energy definition (\ref{temperate_energy}) was used to derive energy time derivative (\ref{energy_time_deriavative}).  The second relation is \emph{Fick's diffusion law} for the motion of water, and the last term is the sensible energy flux using \emph{Fourier's law of heat conduction}.  Using this notation, the total heat flux is
+\begin{align*}
+  \rankone{q} = \rankone{q}_s + \rankone{q}_l = \rankone{q}_s + L_f \rankone{j},
+\end{align*}
+and using the stress and strain constitutive relation expressed through shear viscosity (\ref{viscosity}) in strain-heat definition (\ref{strain_heat}), the \emph{mixture energy balance} is thus \citep{greve_2009}
+\begin{align}
+  \label{mixture_energy_balance}
+  \rho \dot{\theta} = - \nabla \cdot \left( \rankone{q}_s + L_f \rankone{j} \right) + Q.
+\end{align}
+Introducing constitutive relations (\ref{energy_time_deriavative} -- \ref{temperate_sensible_energy}, \ref{strain_heat}) into water mass balance (\ref{water_mass_balance}) and mixture energy balance (\ref{mixture_energy_balance}) yield respectively
+\begin{align}
+  \label{water_mass_balance_revised}
+  \rho \dot{\omega}_{\liquid} = \tilde{\nu} \nabla \cdot \nabla \omega_{\liquid} + \mathring{\rho}_{\liquid}
+\end{align}
+and
+\begin{align}
+  \label{revised_mixture_energy_balance}
+  \rho \left( a \dot{T}_m + b T_m \dot{T}_m + L_f \dot{\omega}_{\liquid} \right) = \nabla \cdot \left( k \nabla T_m \right) + L_f \tilde{\nu} \nabla \cdot \nabla \omega_{\liquid} + Q.
+\end{align}
+Solving for the water content time derivative term, 
+\begin{align*}
+  L_f \rho \dot{\omega}_{\liquid} = \nabla \cdot \left( k \nabla T_m \right) + L_f \tilde{\nu} \nabla \cdot \nabla \omega_{\liquid} + Q - \rho a \dot{T}_m - \rho b T_m \dot{T}_m,
+\end{align*}
+and inserting (\ref{water_mass_balance_revised}), the expression for the water production rate is therefore
+\begin{align*}
+  L_f \mathring{\rho}_{\liquid} = \nabla \cdot \left( k \nabla T_m \right) + Q - \rho a \dot{T}_m - \rho b T_m \dot{T}_m.
+\end{align*}

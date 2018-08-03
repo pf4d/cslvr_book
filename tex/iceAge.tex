@@ -1,0 +1,47 @@
+
+\chapter{Ice age} \label{ssn_ice_age}
+
+\index{Ice age}
+The total change in age with time is always equal to unity; for every step forward in time, the age of ice will age by an equivalent step.  In order to quantify this change in the Eulerian coordinate system, the dependence of age on both time \emph{and} space requires the evaluation of the material derivative of age $a_{\text{ge}}$ with the \index{Chain rule} \index{Material derivative} \emph{chain rule} : 
+\begin{align}
+  \label{age_equation}
+  \totder{a_{\text{ge}}}{t} &= 1 \notag \\
+  \parder{a_{\text{ge}}}{t} \totder{t}{t} + \parder{a_{\text{ge}}}{x} \totder{x}{t} + \parder{a_{\text{ge}}}{y} \totder{y}{t} + \parder{a_{\text{ge}}}{z} \totder{z}{t} &= 1 \notag \\
+  \parder{a_{\text{ge}}}{t} + u \parder{a_{\text{ge}}}{x} + v \parder{a_{\text{ge}}}{y} + w \parder{a_{\text{ge}}}{z} &= 1 \notag \\
+  \parder{a_{\text{ge}}}{t} + \rankone{u} \cdot \nabla a_{\text{ge}} &= 1,
+\end{align}
+where velocity $\rankone{u} = [u\ v\ w]\T$ is the solution to one of the momentum-balance models described in Chapter \ref{ssn_momentum_and_mass_balance}.
+
+In areas where the accumulation/ablation rate $\dot{a}$ is positive, the ice-age on the surface will be new at the current time step.  Hence a homogeneous, essential boundary condition is present there.  Due to the fact that age equation (\ref{age_equation}) is hyperbolic, we cannot specify any other boundary conditions on the other `outflow' surfaces \citep{hughes_1987, logan_2006}.  Therefore, the only boundary condition is the essential condition
+\begin{align}
+  \label{age_boundary_condition}
+  a_{\text{ge}} &= 0 &&\text{ on } \Gamma_{S} \big|_{\dot{a} > 0} &&\leftarrow \text{new snow}.
+\end{align}
+Note that in steady-state this equation becomes
+\begin{align}
+  \label{ss_age_equation}
+  \rankone{u} \cdot \nabla a_{\text{ge}} &= 1.
+\end{align}
+
+\section{Variational form}
+
+Both equations (\ref{age_equation}, \ref{ss_age_equation}) are hyperbolic, and as such the weak solutions to these problems using standard Galerkin methods is numerically unstable (read to \S \ref{ssn_stabilized_methods}).  To solve this issue, streamline upwind/Petrov-Galerkin (SUPG) stabilization \citep{brooks_1982} is applied, which has the effect of adding artificial diffusion to the variational form in areas of high velocity.
+
+First, note that the intrinsic-time parameter for this problem is identical to (\ref{tau_supg}) with $\xi = 1$ due to the fact that no diffusion is present.  Making the appropriate substitutions in (\ref{tau_supg}) results in the intrinsic time parameter \index{Intrinsic-time parameter!Age equation}
+\begin{align}
+  \label{tau_age}
+  \tau_{\text{age}} = \frac{h}{2 \Vert \rankone{u} \Vert},
+\end{align}
+where $h$ is the element size.
+
+Therefore, using general stabilized form (\ref{generalized_form}) with the operator $\Lu v = \rankone{u} \cdot \nabla v$, SUPG operator (\ref{bubble_supg_operator}), and intrinsic-time parameter (\ref{tau_age}), the stabilized variational form corresponding to steady-state age equation (\ref{ss_age_equation}) consists of finding $a_{\text{ge}} \in \trialspace$ (se trial space (\ref{trial_space})) such that
+\begin{align}
+  \label{age_variational_form_intermediate}
+  \int_{\Omega} \rankone{u} \cdot \nabla a_{\text{ge}}\ \phi \d{\Omega} + \int_{\Omega} \tau_{\text{age}} \rankone{u} \cdot \nabla \phi \d{\Omega} &= \int_{\Omega} \phi \d{\Omega}
+\end{align}
+for all $\phi \in \testspace$ (see test space (\ref{test_space})), subject to essential boundary condition (\ref{ss_age_equation}).
+
+The implementation of this problem by \CSLVR is shown in Code Listing \ref{cslvr_age}.
+
+\pythonexternal[label=cslvr_age, caption={\CSLVR source code for the \texttt{Age} class.}, firstline=1, lastline=148]{cslvr_src/age.py}
+

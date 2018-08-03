@@ -1,0 +1,174 @@
+
+\chapter{Elements of mathematics} \label{continuum}
+
+%%==============================================================================
+\section{Mean value theorem}
+
+\index{Mean value theorem!Definition}
+If the function $f(x)$ is continuous on the \emph{closed interval} $[a,b]$ and is differentiable on the \emph{open interval} $(a,b)$ there exists a $c \in (a,b)$ such that 
+\begin{align}
+  \label{mean_value_theorem}
+  \totder{}{x} f(x) = \frac{f(b) - f(a)}{b - a}.
+\end{align}
+
+%%==============================================================================
+\section{Fundamental theorem of algebra}
+
+\index{Fundamental theorem of algebra}
+Every polynomial equation of degree one or greater has at least one complex root. 
+
+%%==============================================================================
+\section{Fundamental theorems of calculus}
+
+\index{Fundamental theorems of calculus!First theorem}
+First, if a given function $f(x)$ is continuous on a \emph{closed interval} $[a,b]$ and $F(x)$ is the indefinite integral of $f(x)$ on $[a,b]$, then
+\begin{align}
+  \label{first_fundamental_theorem_of_calculus}
+  \int_a^b f(x) \d{x} = F(b) - F(a).
+\end{align}
+
+\index{Fundamental theorems of calculus!Second theorem}
+Second, if $f(x)$ is a continuous function on an \emph{open interval} $(a,b)$ with $c \in (a,b)$, the anti-derivative or integral $F(x)$ is defined as
+\begin{align}
+  F(x) = \int_a^x f(t) \d{t} \hspace{5mm} \text{and} \hspace{5mm} 
+  \totder{F(x)}{x} = f(x)
+\end{align}
+at each point in $(a,b)$.
+
+%%==============================================================================
+\section{Fundamental lemma of calculus of variations}
+
+%%==============================================================================
+\section{Divergence theorem} \label{ssn_divergence_theorem}
+
+\index{Divergence theorem!Definition}
+As first discovered by \citet{lagrange_1762}, the \emph{Divergence theorem} relates integral of the divergence of a continuously-differentiable vector field $\mathbf{j}$ inside a open, bounded volume $\Omega$ to the integral of the outward flux of the vector field across the surface of the volume $\Gamma$,
+\begin{align}
+  \label{divergence_theorem}
+  \int_{\Gamma} \mathbf{j} \cdot \mathbf{n} \d{\Gamma} = \int_{\Omega} \nabla \cdot \mathbf{j} \d{\Omega}.
+\end{align}
+The proof of this may be found in any multi-dimensional calculus textbook.
+
+%%==============================================================================
+\section{Leibniz's rule} \label{ssn_liebniz_rule}
+
+\index{Leibniz's rule!Definition}
+Leibniz formula, referred to as \emph{Leibniz's rule for differentiating an integral with respect to a parameter that appears in the integrand and in the limits of integration}, states that
+\begin{align}
+  \label{leibniz_rule}
+  \totder{}{x} \int_{a(x)}^{b(x)} f(x,y) \d{y} = &+ \int_{a(x)}^{b(x)} f_x(x,y) \d{y} \notag \\
+  &+ f(x,b(x)) \totder{b}{x} - f(x,a(x))\totder{a}{x},
+\end{align}
+where $f(x,y)$ and $f_x(x,y)$ are both continuous over the finite domain $y \in [a(x),b(x)]$.
+
+\vspace{2mm}
+\noindent \textbf{Proof:}
+
+Let
+$$I(x,a,b) = \totder{}{x} \int_{a(x)}^{b(x)} f(x,y) \d{y}.$$
+Using the chain rule,
+$$\frac{\mathrm{d}I}{\mathrm{d}x} = \parder{I}{x} \totder{x}{x} + \parder{I}{a} \totder{a}{x} + \parder{I}{b} \totder{b}{x},$$
+Due to the fact that the integration is performed over the coordinate $y$, the linear operations of partial $x$-differentiation and integration over $y$ may be safely exchanged,
+\begin{align*}
+  \parder{I}{x} &= \parder{}{x} \int_{a(x)}^{b(x)} f(x,y) \d{y} = \int_{a(x)}^{b(x)} f_x(x,y) \d{y}.
+\end{align*}
+Next, using first fundamental theorem of calculus definition (\ref{first_fundamental_theorem_of_calculus}), if $F(x,y)$ is the indefinite integral of $f(x,y)$ with respect to $y$ on $y \in [a,b]$,
+\begin{align*}
+  \parder{I}{a} &= \parder{}{a} \int_{a(x)}^{b(x)} f(x,y) \d{y} \\
+                &= \parder{}{a} \Big[ F(x,b(x)) - F(x,a(x)) \Big] = - f(x,a(x)).
+\end{align*}
+Likewise,
+\begin{align*}
+  \parder{I}{b} &= \parder{}{b} \int_{a(x)}^{b(x)} f(x,y) \d{y} \\
+                &= \parder{}{b} \Big[ F(x,b(x)) - F(x,a(x)) \Big] = f(x,b(x)).
+\end{align*}
+Therefore, combining the above relations results in
+$$\totder{I}{x} = \int_{a(x)}^{b(x)} f_x(x,y) \d{y} + f(x,b(x))\totder{b}{x} - f(x,a(x))\totder{a}{x}. \qed$$
+
+%%==============================================================================
+\section{Reynolds transport theorem} \label{ssn_reynolds_transport_theorem}
+
+Within an arbitrary time-evolving volume $\Omega(t) \in \R^3$ with boundary $\Gamma(t)$ moving with the flow of a fluid, \emph{Leibniz's rule in three dimensions} -- better known in continuum mechanics as \index{Reynolds transport theorem} \emph{Reynolds transport theorem} \citep{reynolds_1903} -- states that for a given quantity $\phi$,
+\begin{align}
+  \label{reynolds_transport_theorem}
+  \totder{}{t} \int_{\Omega(t)} \phi \d{\Omega}(t) = \int_{\Omega(t)} \parder{\phi}{t} \d{\Omega(t)} + \int_{\Gamma(t)} \phi \mathbf{u}_b \cdot \mathbf{n} \d{\Gamma(t)},
+\end{align}
+where $\mathbf{u}_b$ is the velocity of surface $\Gamma(t)$ due to changes in $\Omega(t)$ and $\mathbf{n}$ is the outward-facing unit-normal vector for $\Gamma(t)$.
+Note that if the volume remains constant, \ie, $\Omega \neq \Omega(t), \Gamma \neq \Gamma(t)$, $\mathbf{u}_b = 0$, and this relation reduces to
+\begin{align}
+  \label{constant_volume_reynolds}
+  \totder{}{t} \int_{\Omega} \phi \d{\Omega} = \int_{\Omega} \parder{\phi}{t} \d{\Omega}.
+\end{align}
+
+%%==============================================================================
+\section{Continuity equations} \label{ssn_continuity_equations}
+
+Within a arbitrary fixed volume $\Omega$ with boundary $\Gamma$, 
+\begin{align*}
+  \begin{matrix}
+    \text{the total} \\
+    \text{rate of change} \\
+    \text{of quantity $\phi$} \\
+    \text{in $\Omega$}
+  \end{matrix} \hspace{2.5mm} = \hspace{2.5mm} 
+  \begin{matrix}
+    \text{the inward flux} \\
+    \text{of $\phi$ across the} \\
+    \text{boundary $\Gamma$} \\
+  \end{matrix} \hspace{2.5mm} + \hspace{2.5mm} 
+  \begin{matrix}
+    \text{the generation} \\
+    \text{of quantity $\phi$} \\
+    \text{within $\Omega$}
+  \end{matrix}, 
+\end{align*}
+or mathematically, the integral form of the \emph{continuity equation}
+\begin{align}
+  \label{integral_continuity_equation}
+  \totder{}{t} \int_{\Omega} \phi \d{\Omega} \hspace{2.5mm} = \hspace{2.5mm} - \int_{\Gamma} \mathbf{j} \cdot \mathbf{n} \d{\Gamma} \hspace{2.5mm} + \hspace{2.5mm} \int_{\Omega} f \d{\Omega},
+\end{align}
+with source term $f$, material velocity $\mathbf{u}$, and outward-pointing unit-normal-vector $\mathbf{n}$.  Applying Reynolds tranport theorem corollary (\ref{constant_volume_reynolds}) to the total time derivative and divergence theorem (\ref{divergence_theorem}) \index{Divergence theorem!Regarding continuity equations} to the surface integral,
+\begin{align*}
+  \int_{\Omega} \parder{\phi}{t} \d{\Omega} + \int_{\Omega} \nabla \cdot \mathbf{j} \d{\Omega} &= \int_{\Omega} f \d{\Omega}.
+\end{align*}
+Therefore, because the integral was taken arbitrarily, the \emph{differential form} of the continuity equation is
+\begin{align}
+  \label{differential_continuity_equation}
+  \parder{\phi}{t} + \nabla \cdot \mathbf{j} = f.
+\end{align}
+
+In the case that the flux is composed of advective $\phi \mathbf{u}$ and non-advective $\bm{\psi}$ terms, \ie $\mathbf{j} = \phi \mathbf{u} + \bm{\psi}$, 
+\begin{align}
+  \label{conservative_continuity_equation}
+  \parder{\phi}{t} + \nabla \cdot \left( \phi \mathbf{u} \right) + \nabla \cdot \bm{\psi} = f,
+\end{align}
+Next, the advection flux divergence term is expanded so that
+\begin{align*}
+  \parder{\phi}{t} + \mathbf{u} \cdot \nabla \phi + \phi \nabla \cdot \mathbf{u} + \nabla \cdot \bm{\psi} = f,
+\end{align*}
+which after using the material derivative becomes
+\begin{align}
+  \label{nonconservative_continuity_equation}
+  \totder{\phi}{t} + \phi \nabla \cdot \mathbf{u} + \nabla \cdot \bm{\psi} = f.
+\end{align}
+In context of continuum mechanics, Equations (\ref{conservative_continuity_equation}) and (\ref{nonconservative_continuity_equation}) are referred to as the \emph{conservative} and \emph{non-conservative} forms of the continuity equation, respectively \citep{anderson_1995}.
+
+%%==============================================================================
+\section{Conservation equations} \label{ssn_conservation_equations}
+
+The conservation of mass equation i
+
+%%==============================================================================
+\section{Finite-volume method} \label{ssn_finite_volume_method}
+
+\index{Finite-volume method}
+Let $V$ be the volume of the domain $\Omega$ and $\bar{g} = V^{-1} \int_{\Omega} g \d{\Omega}$ be the volume average of a measureable quantity $g(x,t)$.  Integral continuity equation (\ref{integral_continuity_equation}) may be represented exactly as
+\begin{align}
+  \label{finite_volume_continuity}
+  V \totder{\bar{\phi}}{t} + \int_{\Gamma} \mathbf{j} \cdot \mathbf{n} \d{\Gamma} &= V \bar{f}.
+\end{align}
+This is the fundamental equation from which the class of numerical approximation methods termed \emph{finite-volume methods} emerged.  These methods produce a local approximation of the average of a quantity over finite cells, and require a specification of the cell flux $\mathbf{j}$.  Note that similar to the derivation of continuity equation (\ref{differential_continuity_equation}), the surface integral may be converted to a volume integral using divergence theorem (\ref{divergence_theorem}),
+\begin{align}
+  \label{finite_volume_continuity}
+  V \totder{\bar{\phi}}{t} + \int_{\Omega} \nabla \cdot \mathbf{j} \d{\Omega} &= V \bar{f}.
+\end{align}

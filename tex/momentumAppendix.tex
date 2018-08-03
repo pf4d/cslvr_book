@@ -1,0 +1,278 @@
+
+\chapter{Variations of momentum actions}
+
+The Euler-Lagrange momentum-balance equations are derived from the G\^{a}teaux derivatives (see \S \ref{ssn_gateaux}) of the action principles of Chapter \ref{ssn_momentum_and_mass_balance}.
+
+%% =============================================================================
+\section{Full-Stokes action}
+
+The variational problem associated with full-Stokes action integral extremum (\ref{extremum}) consists of finding (see trial space (\ref{trial_space})) $\mathbf{U} = [u\ v\ w\ p]\T \in \mathbf{S_E^h} \subset \left( \mathscr{H}^1(\Omega) \right)^4$ such that
+\begin{align}
+  \label{full_stokes_var_form_2}
+  \delder{}{\mathbf{U}} \mathscr{A}(\mathbf{U}; \bm{\Phi}) = \lim_{\epsilon \rightarrow 0} \left\{ \totder{}{\epsilon} \mathscr{A}(\mathbf{U} + \epsilon \bm{\Phi}) \right\} = 0 
+\end{align}
+for all test functions (see test space (\ref{test_space})) $\bm{\Phi} \in \mathbf{S_0^h} \subset \left( \mathscr{H}^1(\Omega) \right)^4$.
+This section will prove that this relation is equivalent to the original full-Stokes Euler-Lagrange equations and boundary conditions.
+
+Similar to the work of \citet{dukowicz_2010}, each term of action (\ref{action_Fb}) are decomposed into
+\begin{align}
+  \label{action_Fb_parts}
+  \pazocal{A} \left(\mathbf{u}, p\right) = &
+  + \pazocal{A}_1 \left(\mathbf{u} \right)
+  + \pazocal{A}_2 \left(\mathbf{u} \right)
+  + \pazocal{A}_3 \left(\mathbf{u}, p \right) \\ &
+  + \pazocal{A}_4 \left(\mathbf{u}, p \right) 
+  + \pazocal{A}_5 \left(\mathbf{u} \right) 
+  + \pazocal{A}_6 \left(\mathbf{u} \right) 
+\end{align}
+where
+\begin{align}
+  \label{action_Fb_1}
+  \pazocal{A}_1 \left(\mathbf{u} \right) = &+ \int_{\Omega} V\left( \dot{\varepsilon}_e^2 \right) \d{\Omega} \\ 
+  \label{action_Fb_2}
+  \pazocal{A}_2 \left(\mathbf{u} \right) = &- \int_{\Omega} \rho \mathbf{g} \cdot \mathbf{u} \d{\Omega} \\
+  \label{action_Fb_3}
+  \pazocal{A}_3 \left(\mathbf{u}, p \right) = &- \int_{\Omega} p \nabla \cdot \mathbf{u} \d{\Omega} \\
+  \label{action_Fb_4}
+  \pazocal{A}_4 \left(\mathbf{u}, \Lambda \right) = &+ \int_{\Gamma_B} \Lambda \left( \mathbf{u} \cdot \mathbf{n} - F_b \right) \d{\Gamma_B} \\
+  \label{action_Fb_5}
+  \pazocal{A}_5 \left(\mathbf{u} \right) = &+ \int_{\Gamma_B} \frac{1}{2} \beta \mathbf{u}_{\Vert} \cdot \mathbf{u}_{\Vert} \d{\Gamma_B} \\
+  \label{action_Fb_6}
+  \pazocal{A}_6 \left(\mathbf{u} \right) = &+ \int_{\Gamma_W} f_w \mathbf{n} \cdot \mathbf{u} \d{\Gamma_W},
+\end{align}
+where $\mathbf{u}_{\Vert} = \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n}$.
+First, exactly like \citet{dukowicz_2010}, the variation of viscous-dissipation term (\ref{action_Fb_1}) is
+\begin{align}
+  \label{intermediate_action_variation_Fb_1}
+  \delta \pazocal{A}_1 \left( \dot{\varepsilon}_e^2 \right) = & \int_{\Omega} \left( \parder{V}{\dot{\varepsilon}_e^2} \delta \dot{\varepsilon}_e^2 \right) \d{\Omega}.
+\end{align}
+Using viscosity definition (\ref{viscosity}) with $\dot{\varepsilon}_0 = 0$ and viscous-dissipation function (\ref{viscous_dissipation}),
+\begin{align*}
+  \parder{V}{\dot{\varepsilon}_e^2} =& \parder{}{\dot{\varepsilon}_e^2} \left[ \frac{4n}{n+1} \eta\left(\theta, \dot{\varepsilon}_e^2 \right) \dot{\varepsilon}_e^2 \right] \\
+  =& \parder{}{\dot{\varepsilon}_e^2} \left[ \frac{4n}{n+1} \left( \frac{1}{2} A^{-\nicefrac{1}{n}} \left( \dot{\varepsilon}_e^2 \right)^{\frac{1-n}{2n}} \right) \dot{\varepsilon}_e^2 \right] \\
+  =& \parder{}{\dot{\varepsilon}_e^2} \left[ \frac{2n}{n+1} \left( A^{-\nicefrac{1}{n}} \left( \dot{\varepsilon}_e^2 \right)^{\frac{1+n}{2n}} \right) \right] \\
+  =& A^{-\nicefrac{1}{n}} \left( \dot{\varepsilon}_e^2 \right)^{\frac{1-n}{2n}} \\
+  =& 2 \eta \left( \theta, \dot{\varepsilon}_e^2 \right)
+\end{align*}
+The perturbation in effective-strain rate with respect to strain-rate tensor $\dot{\epsilon}$ is found using strain-rate tensor (\ref{strain_rate_tensor}) and the fact that the gradient operator $\nabla$ is linear,
+\begin{align*}
+  \delta \dot{\varepsilon}_e^2 &= \parder{\dot{\varepsilon}_e^2}{\dot{\epsilon}} \parder{\dot{\epsilon}}{\nabla \mathbf{u}} \delta \left( \nabla \mathbf{u} \right) \\
+   &= \left( \frac{1}{2} \parder{ \left( \dot{\epsilon} : \dot{\epsilon} \right) }{\dot{\epsilon}} \right) \left( \frac{1}{2} \big( I + I \big) \right) \nabla \left( \delta \mathbf{u} \right) \\
+   &= \dot{\epsilon} : \nabla \left( \delta \mathbf{u} \right)
+\end{align*}
+Therefore, combining the above with deviatoric-stress tensor definition (\ref{stress_tensor}), the variation of (\ref{intermediate_action_variation_Fb_1}) is
+\begin{align}
+  \delta \pazocal{A}_1 \left( \dot{\varepsilon}_e^2 \right) = &+ \int_{\Omega} \left( 2 \eta \left( \theta, \dot{\varepsilon}_e^2 \right) \dot{\epsilon} \right) : \nabla \left( \delta \mathbf{u} \right) \d{\Omega} \notag \\
+  = &+ \int_{\Omega} \tau : \nabla \left( \delta \mathbf{u} \right) \d{\Omega} \notag \\
+  \label{action_variation_Fb_1}
+  = &- \int_{\Omega} \left( \nabla \cdot \tau \right) \delta \mathbf{u} \d{\Omega} + \int_{\Gamma} \tau \cdot \left( \delta \mathbf{u} \right) \cdot \mathbf{n} \d{\Gamma}.
+\end{align}
+The variation of volumetric-force term (\ref{action_Fb_2}) is simply
+\begin{align}
+  \label{action_variation_Fb_2}
+  \delta \pazocal{A}_2 \left(\mathbf{u} \right) = &- \int_{\Omega} \rho \mathbf{g} \cdot \delta \mathbf{u} \d{\Omega}.
+\end{align}
+Next, let $F_3\left( \mathbf{u}, p \right) = p \nabla \cdot \mathbf{u}$ be the integrand of (\ref{action_Fb_3}).
+Then
+\begin{align*}
+  \delta F_3 =& \parder{F_3}{\left( \nabla \cdot \mathbf{u} \right)} \delta \left( \nabla \cdot \mathbf{u} \right) + \parder{F_3}{p} \delta p \\ 
+  =& p \nabla \cdot \left( \delta \mathbf{u} \right) + \left( \nabla \cdot \mathbf{u} \right) \delta p,
+\end{align*}
+where the linearity of the divergence operator $\nabla \cdot$ has been applied.
+After integration by parts, the variation of (\ref{action_Fb_3}) is 
+\begin{align}
+  \delta \pazocal{A}_3 \left(\mathbf{u}, p \right) = &- \int_{\Omega} \big( p \nabla \cdot \left( \delta \mathbf{u} \right) + \delta p \nabla \cdot \mathbf{u} \big) \d{\Omega} \notag \\
+  \label{action_variation_Fb_3}
+  = & + \int_{\Omega} \big( \nabla p \cdot \delta \mathbf{u} - \delta p \nabla \cdot \mathbf{u} \big) \d{\Omega} - \int_{\Gamma} p \delta \mathbf{u} \cdot \mathbf{n} \d{\Gamma}.
+\end{align}
+Next, let $F_4 (\mathbf{u}, \Lambda) = \Lambda \left( \mathbf{u} \cdot \mathbf{n} - F_b \right)$ be the integrand of (\ref{action_Fb_4}).
+Then
+\begin{align*}
+  \delta F_4 &= \parder{F_4}{\mathbf{u}} \delta \mathbf{u} + \parder{F_4}{\Lambda} \delta \Lambda \\
+  &= \Lambda \mathbf{n} \cdot \delta \mathbf{u} + \left( \mathbf{u} \cdot \mathbf{n} - F_b \right) \delta \Lambda,
+\end{align*}
+and so the variation of (\ref{action_Fb_4}) is
+\begin{align}
+  \label{action_variation_Fb_4}
+  \delta \pazocal{A}_4 \left(\mathbf{u}, \Lambda \right) = &+ \int_{\Gamma_B} \big( \Lambda \left( \delta \mathbf{u} \right) \cdot \mathbf{n} + \left( \mathbf{u} \cdot \mathbf{n} - F_b \right) \delta \Lambda \big) \d{\Gamma_B}.
+\end{align}
+Next, noting first that
+\begin{align*}
+  \mathbf{u}_{\Vert} \cdot \mathbf{u}_{\Vert} = & \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \cdot \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \\
+  = & \mathbf{u} \cdot \mathbf{u} - 2 \mathbf{u} \cdot \left( \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) + \left( \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \cdot \left( \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \\
+  = & \mathbf{u} \cdot \mathbf{u} - 2 \left( \mathbf{u} \cdot \mathbf{n} \right) \left( \mathbf{u} \cdot \mathbf{n} \right) + \left( \mathbf{u} \cdot \mathbf{n} \right) \left( \mathbf{u} \cdot \mathbf{n} \right) \left( \mathbf{n} \cdot \mathbf{n} \right) \\
+  = & \mathbf{u} \cdot \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right)^2
+\end{align*}
+and thus
+\begin{align*}
+  \delta \left( \mathbf{u}_{\Vert} \cdot \mathbf{u}_{\Vert} \right) = & 2 \mathbf{u} \cdot \delta \mathbf{u} - 2 \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \cdot \delta \mathbf{u},
+\end{align*}
+the variation of (\ref{action_Fb_5}) is
+\begin{align}
+  \label{action_variation_Fb_5}
+  \delta \pazocal{A}_5 \left(\mathbf{u} \right) = &+ \int_{\Gamma_B} \beta \big( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \big) \cdot \delta \mathbf{u} \d{\Gamma_B}.
+\end{align}
+Finally, the variation of (\ref{action_Fb_6}) is simply
+\begin{align}
+  \label{action_variation_Fb_6}
+  \delta \pazocal{A}_6 \left(\mathbf{u} \right) = &+ \int_{\Gamma_W} f_w \mathbf{n} \cdot \delta \mathbf{u} \d{\Gamma_W},
+\end{align}
+ 
+Now that all the parts have been assembled, the variation of (\ref{action_Fb_parts}) is
+\begin{align*}
+  \delta \pazocal{A} \left(\mathbf{u}, p\right) =
+  &- \int_{\Omega} \left( \nabla \cdot \tau \right) \cdot \delta \mathbf{u} \d{\Omega} + \int_{\Gamma} \tau \cdot \mathbf{n} \cdot \delta \mathbf{u} \d{\Gamma} \\
+  &- \int_{\Omega} \rho \mathbf{g} \cdot \delta \mathbf{u} \d{\Omega} \\
+  &+ \int_{\Omega} \big( \nabla p \cdot \delta \mathbf{u} - \left( \nabla \cdot \mathbf{u} \right) \delta p  \big) \d{\Omega} - \int_{\Gamma} p \mathbf{n} \cdot \delta \mathbf{u} \d{\Gamma} \\
+  &+ \int_{\Gamma_B} \big( \Lambda \mathbf{n} \cdot \delta \mathbf{u} + \left( \mathbf{u} \cdot \mathbf{n} - F_b \right) \delta \Lambda \big) \d{\Gamma_B} \\
+  &+ \int_{\Gamma_B} \beta \big( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \big) \cdot \delta \mathbf{u} \d{\Gamma_B} \\
+  &+ \int_{\Gamma_W} f_w \mathbf{n} \cdot \delta \mathbf{u} \d{\Gamma_W},
+\end{align*}
+which can also be written
+\begin{align}
+  \label{action_variation_Fb}
+  \delta \pazocal{A} =
+    \delta \pazocal{A}_{\Omega} 
+  + \delta \pazocal{A}_{\Gamma} 
+  + \delta \pazocal{A}_{\Gamma}^B 
+  + \delta \pazocal{A}_{\Gamma}^W 
+\end{align}
+with
+\begin{align*}
+  \delta \pazocal{A}_{\Omega}   = &- \int_{\Omega} \left( \nabla \cdot \tau - \nabla p + \rho \mathbf{g} \right) \cdot \delta \mathbf{u} \d{\Omega} - \int_{\Omega} \left( \nabla \cdot \mathbf{u} \right) \delta p \d{\Omega} \\ 
+  \delta \pazocal{A}_{\Gamma}   = &+ \int_{\Gamma} \left( \tau \cdot \mathbf{n} - p \mathbf{n} \right) \cdot \delta \mathbf{u} \d{\Gamma} \\
+  \delta \pazocal{A}_{\Gamma}^B = &+ \int_{\Gamma_B} \big( \Lambda \mathbf{n} + \beta \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \big) \cdot \delta \mathbf{u} \d{\Gamma_B} \\
+  &+ \int_{\Gamma_B} \big( \mathbf{u} \cdot \mathbf{n} - F_b \big) \delta \Lambda \d{\Gamma_B} \\
+  \delta \pazocal{A}_{\Gamma}^W = &+ \int_{\Gamma_W} f_w \mathbf{n} \cdot \delta \mathbf{u} \d{\Gamma_W}.
+\end{align*}
+Using stress-tensor definition (\ref{stress_tensor}), $\nabla \cdot \sigma = \nabla \cdot \left( \tau - p I \right) = \nabla \cdot \tau - \nabla p$ and $\sigma \cdot \mathbf{n} = \tau \cdot \mathbf{n} - p \mathbf{n}$.  Hence the variation of (\ref{action_variation_Fb}) with respect to perturbation $\delta \mathbf{u}$ is
+\begin{align}
+  \label{delta_A_u}
+  \delder{\pazocal{A}}{\mathbf{u}} = 
+  &- \int_{\Omega} \left( \nabla \cdot \sigma + \rho \mathbf{g} \right) \d{\Omega}
+   + \int_{\Gamma} \sigma \cdot \mathbf{n} \d{\Gamma} \notag \\
+  &+ \int_{\Gamma_B} \big( \Lambda \mathbf{n} + \beta \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \big) \d{\Gamma_B} \notag \\
+  &+ \int_{\Gamma_W} f_w \mathbf{n} \d{\Gamma_W},
+\end{align}
+The variations of (\ref{action_variation_Fb}) with respect to perturbations $\delta p$ and $\delta \Lambda$ are
+\begin{align}
+  \label{delta_A_p}
+  \delder{\pazocal{A}}{p} =
+  &- \int_{\Omega} \nabla \cdot \mathbf{u} \d{\Omega}
+\end{align}
+and
+\begin{align}
+  \label{delta_A_Lambda}
+  \delder{\pazocal{A}}{\Lambda} =
+  & \int_{\Gamma_B} \big( \mathbf{u} \cdot \mathbf{n} - F_b \big) \d{\Gamma_B}.
+\end{align}
+
+The extremums of each variation above satisfy $\delta_i \pazocal{A} = 0$ for $i = \mathbf{u}, p, \Lambda$ and are integral equations of the same form as continutity equation (\ref{integral_continuity_equation}).
+Additionally, because $\Gamma$ was chosen to be the union of disjoint surfaces $\Gamma_A$, $\Gamma_B$, and $\Gamma_W$, by definition
+\begin{align}
+  \label{surface_stress_balance}
+  \int_{\Gamma} \sigma \cdot \mathbf{n} \d{\Gamma} = \int_{\Gamma_A} \sigma \cdot \mathbf{n} \d{\Gamma_A} + \int_{\Gamma_B} \sigma \cdot \mathbf{n} \d{\Gamma_B} + \int_{\Gamma_W} \sigma \cdot \mathbf{n} \d{\Gamma_W}.
+\end{align}
+By decomposing the surface integral of (\ref{delta_A_u}) into parts in contact with air $\Gamma_A$, water $\Gamma_W$, and bedrock $\Gamma_B$, the boundary conditions for the associated momentum-balance Euler-Lagrange equations may be derived.
+
+First, over the bedrock boundary
+\begin{align*}
+  \int_{\Gamma_B} \left( \sigma \cdot \mathbf{n}
+  + \Lambda \mathbf{n} + \beta \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) \right) \d{\Gamma_B} = 0.
+\end{align*}
+By the arbitrarity of integration area $\Gamma_B$,
+\begin{align}
+  \label{bedrock_traction}
+  \sigma \cdot \mathbf{n} =
+  &- \Lambda \mathbf{n} - \beta \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right).
+\end{align}
+The normal component of surface stress is found by taking the dot product of both sides with $\mathbf{n}$,
+\begin{align}
+  \mathbf{n} \cdot \sigma \cdot \mathbf{n}
+  =&- \Lambda \left( \mathbf{n} \cdot \mathbf{n} \right) - \beta \mathbf{u} \cdot \mathbf{n} + \beta \left( \mathbf{u} \cdot \mathbf{n} \right) \left( \mathbf{n} \cdot \mathbf{n} \right), \notag \\
+  =&- \Lambda - \beta \mathbf{u} \cdot \mathbf{n} + \beta \mathbf{u} \cdot \mathbf{n}, \notag \\
+  \label{bedrock_normal_stress}
+  \implies \Lambda = &- \mathbf{n} \cdot \sigma \cdot \mathbf{n}.
+\end{align}
+Therefore, bedrock-normal stress (\ref{bedrock_normal_stress}) paired with
+\begin{align*}
+  \sigma \cdot \mathbf{n}
+  =& \big( \mathbf{n} \cdot \sigma \cdot \mathbf{n} \big) \mathbf{n} + \big( \sigma \cdot \mathbf{n} \big)_{\Vert}
+\end{align*}
+implies that over bedrock surface $\Gamma_B$,
+\begin{align*}
+  \big( \sigma \cdot \mathbf{n} \big)_{\Vert} = & - \Lambda \mathbf{n} - \beta \left( \mathbf{u} - \left( \mathbf{u} \cdot \mathbf{n} \right) \mathbf{n} \right) - \big( \mathbf{n} \cdot \sigma \cdot \mathbf{n} \big) \mathbf{n}
+  = - \beta \mathbf{u}_{\Vert},
+\end{align*}
+as required.
+
+Lagrange-multiplier $\Lambda$ relation (\ref{bedrock_normal_stress}) yields an interesting observation.
+The explicit adjoining of a tangential flow constraint to the momentum balance has the effect of implicitly applying a perpendicular force boundary condition from the lithosphere on the ice-sheet in the form of a Lagrange multiplier.
+Specifically, constraining the ice velocity to be tangent to the basal topography is equivalent to applying a reflective boundary to the perpendicular component of normal stress.
+
+In a similar way, the surface integral over the water boundary
+\begin{align*}
+  \int_{\Gamma_W} \left( \tau \cdot \mathbf{n} - p \mathbf{n} + f_w \mathbf{n} \right) \d{\Gamma_W} = 0,
+\end{align*}
+implying that over $\Gamma_W$
+\begin{align*}
+  \big( \sigma \cdot \mathbf{n} \big)_{\perp} = 
+  & - f_w \mathbf{n}, \hspace{10mm} \big( \sigma \cdot \mathbf{n} \big)_{\Vert} = \mathbf{0}.
+\end{align*}
+
+Finally, the surface integral over the atmosphere boundary
+\begin{align*}
+  \int_{\Gamma_A} \left( \tau \cdot \mathbf{n} - p \mathbf{n} \right) \d{\Gamma_A} = 0,
+\end{align*}
+implying that over $\Gamma_A$,
+\begin{align*}
+  \big( \sigma \cdot \mathbf{n} \big)_{\perp} = \big( \sigma \cdot \mathbf{n} \big)_{\Vert} = \mathbf{0}.
+\end{align*}
+
+Finally, after applying surface-stress balance definition (\ref{surface_stress_balance}), the final stationarity requirement of the action perturbation with respect to $\delta \mathbf{u}$ is
+\begin{align*}
+  \delder{\pazocal{A}}{\mathbf{u}} = 
+  &- \int_{\Omega} \left( \nabla \cdot \sigma + \rho \mathbf{g} \right) \d{\Omega} = 0,
+\end{align*}
+which by arbitraity of integration implies that within $\Omega$,
+\begin{align*}
+  \nabla \cdot \sigma = -\rho \mathbf{g}.
+\end{align*}
+
+Following an identical line of reasoning, remaining variations (\ref{delta_A_p}, \ref{delta_A_Lambda}) produce the incompressiblity and impenetrability constraints
+\begin{align*}
+  \nabla \cdot \mathbf{u} &= 0 && \text{ in } \Omega \\
+  \mathbf{u} \cdot \mathbf{n} &= Fb && \text{ on } \Gamma_B.
+\end{align*}
+This completes the proof. $\qed$
+
+%% =============================================================================
+\section{First-order-approximate action}
+
+The variational problem associated with first-order action integral extremum (\ref{bp_extremum}) consists of finding (see trial space (\ref{trial_space})), $\mathbf{U}_h = [u\ v]\T \in \mathbf{S_E^h} \subset \left( \mathscr{H}^1(\Omega) \right)^2$ such that
+\begin{align}
+  \label{first_order_var_form_2}
+  \delder{}{\mathbf{U}_h} \mathscr{A}_{\text{BP}}(\mathbf{U}_h; \bm{\Phi}_h) = \lim_{\epsilon \rightarrow 0} \left\{ \totder{}{\epsilon} \mathscr{A}_{\text{BP}}(\mathbf{U}_h + \epsilon \bm{\Phi}_h) \right\} = 0
+\end{align}
+for all test functions (see test space (\ref{test_space})) $\bm{\Phi}_h \in \mathbf{S_0^h} \subset \left( \mathscr{H}^1(\Omega) \right)^2$.
+
+%% =============================================================================
+\section{Reformulated-Stokes action}
+
+The variational problem associated with reformulated-Stokes action integral extremum (\ref{rs_extremum}) consists of finding (see trial space (\ref{trial_space})), $\mathbf{U}_h = [u\ v]\T \in \mathbf{S_E^h} \subset \left( \mathscr{H}^1(\Omega) \right)^2$ such that
+\begin{align}
+  \label{reformulated_var_form_2}
+  \delder{}{\mathbf{U}_h} \mathscr{A}_{\text{RS}} (\mathbf{U}_h; \bm{\Phi}_h) = \lim_{\epsilon \rightarrow 0} \left\{ \totder{}{\epsilon} \mathscr{A}_{\text{RS}}(\mathbf{U}_h + \epsilon \bm{\Phi}_h) \right\} = 0
+\end{align}
+for all test functions (see test space (\ref{test_space})) $\bm{\Phi}_h \in \mathbf{S_0^h} \subset \left( \mathscr{H}^1(\Omega) \right)^2$.
+
+%% =============================================================================
+\section{Plane-strain action}
+
+The variational problem associated with plane-strain action integral extremum (\ref{ps_extremum}) consists of finding (see trial space (\ref{trial_space})) $\mathbf{U}_p = [u\ w\ p]\T \in \mathbf{S_E^h} \subset \left( \mathscr{H}^1(\Omega) \right)^3$ such that
+\begin{align}
+  \label{plane_strain_var_form_2}
+  \delder{}{\mathbf{U}_p} \mathscr{A}_{\text{PS}}(\mathbf{U}_p; \bm{\Phi}_p) = \lim_{\epsilon \rightarrow 0} \left\{ \totder{}{\epsilon} \mathscr{A}_{\text{PS}}(\mathbf{U}_p + \epsilon \bm{\Phi}_p) \right\} = 0
+\end{align}
+for all test functions (see test space (\ref{test_space})) $\bm{\Phi}_p \in \mathbf{S_0^h} \subset \left( \mathscr{H}^1(\Omega) \right)^3$.
+
