@@ -1,24 +1,26 @@
 
 \chapter{Nonlinear solution process} \label{ssn_nonlinear_solution_process}
 
-All of the examples presented thus far have been linear equations.  For non-linear systems, the solution method described in \S \ref{ssn_galerkin_solve} no longer apply.  For these problems the $n$ unknown degrees of freedom of $u$ -- with vector representation $\rankone{u}$ --  may be uniquely determined by solving for the down gradient direction of a quadratic model of the functional \index{Residual} \emph{residual}
+All of the examples presented thus far have been linear equations.  For non-linear systems, the solution method described in \cref{ssn_galerkin_solve} no longer apply.  For these problems the $n$ unknown degrees of freedom of $u$---with vector representation $\rankone{u}$---may be uniquely determined by solving for the down gradient direction of a quadratic model of the functional \index{Residual} \emph{residual}
 \begin{align}
   \label{nonlin_resid}
   \mathscr{R}(u) = 0,
 \end{align}
 formed by moving all terms of a variational form to one side of the equation.  The following sections explain two ways of solving problems of this nature.
 
-%===============================================================================
 
+
+
+%===============================================================================
 \section{Newton-Raphson method} \label{ssn_newton_raphson}
 
-One way to solve system (\ref{nonlin_resid}) is the \index{Newton-Raphson method} \emph{Newton-Raphson} method \citep{nocedal_2000}.  This method effectively linearizes the problem by first assuming an initial guess of the minimizer, $\rankone{u}_k$, and the functional desired to be minimized, $\mathscr{R}(\rankone{u}_k) = \mathscr{R}_k$, then uses the $\mathscr{R}$-intercept of the tangent line to this guess as a subsequent guess, $\rankone{u}_{k+1}$.  This procedure is repeated until either the absolute value of $\mathscr{R}$ is below a desired \emph{absolute tolerance} or the relative change of $\mathscr{R}$ between guesses $\rankone{u}_k$ and $\rankone{u}_{k+1}$ is below a desired \emph{relative tolerance} (Figure \ref{nr_image}).
+One way to solve system \cref{nonlin_resid} is the \index{Newton-Raphson method} \emph{Newton-Raphson} method \citep{nocedal_2000}.  This method effectively linearizes the problem by first assuming an initial guess of the minimizer, $\rankone{u}_k$, and the functional desired to be minimized, $\mathscr{R}(\rankone{u}_k) = \mathscr{R}_k$, then uses the $\mathscr{R}$-intercept of the tangent line to this guess as a subsequent guess, $\rankone{u}_{k+1}$.  This procedure is repeated until either the absolute value of $\mathscr{R}$ is below a desired \emph{absolute tolerance} or the relative change of $\mathscr{R}$ between guesses $\rankone{u}_k$ and $\rankone{u}_{k+1}$ is below a desired \emph{relative tolerance} (\cref{nr_image}).
 
 \begin{figure}
   \centering
     \def\svgwidth{\linewidth}
     \input{images/fenics_intro/svg/newton_raphson.pdf_tex}
-  \caption[Newton-Raphson diagram]{Illustration of the Newton-Raphson method for solving (\ref{nonlin_resid}) for $u$.}
+  \caption[Newton-Raphson diagram]{Illustration of the Newton-Raphson method for solving \cref{nonlin_resid} for $u$.}
   \label{nr_image}
 \end{figure}
 
@@ -42,25 +44,25 @@ giving us the \emph{Newton direction}
   \rankone{p}_k &= -\left( \nabla^2 \mathscr{R}_k \right)^{-1} \nabla \mathscr{R}_k.
 \end{align}
 
-Quadratic model (\ref{newton_quadradic_model}) is simplified to a linear model if the second derivative is eliminated.  Integrating (\ref{newton_zero_grad_condition}) over $\rankone{u}_k$ produces
+Quadratic model \cref{newton_quadradic_model} is simplified to a linear model if the second derivative is eliminated.  Integrating \cref{newton_zero_grad_condition} over $\rankone{u}_k$ produces
 \begin{align}
   \label{search_direction_equation}
   \nabla^2 \mathscr{R}_k \rankone{p}_k &= - \nabla \mathscr{R}_k \notag \\
   \int_{\rankone{u}_k} \nabla^2 \mathscr{R}_k(\rankone{u}_k) \rankone{p}_k \d{\rankone}{u}_k &= - \int_{\rankone{u}_k} \nabla \mathscr{R}_k(\rankone{u}_k) \d{\rankone}{u}_k \notag \\
   \nabla \mathscr{R}_k \rankone{p}_k &= - \mathscr{R}_k,
 \end{align}
-a discrete system of equations representing a first-order differential equation for Newton direction $\rankone{p}_k$.  To complete system (\ref{search_direction_equation}), one boundary condition may be specified.  For all Dirichlet boundaries, $u$ is known and can therefore not be improved.  Hence search direction $p = 0$ over essential boundaries.  Boundaries corresponding to natural conditions of $u$ require no specific treatment.
+a discrete system of equations representing a first-order differential equation for Newton direction $\rankone{p}_k$.  To complete system \cref{search_direction_equation}, one boundary condition may be specified.  For all Dirichlet boundaries, $u$ is known and can therefore not be improved.  Hence search direction $p = 0$ over essential boundaries.  Boundaries corresponding to natural conditions of $u$ require no specific treatment.
 
 The iteration with \emph{step length} or \emph{relaxation parameter} $\alpha \in (0,1]$ is defined as
 \begin{align}
   \label{newton_iteration}
   \rankone{u}_{k+1} &= \rankone{u}_k + \alpha \rankone{p}_k.
 \end{align}
-Provided that the curve $\mathscr{R}$ is relatively smooth and that the Hessian matrix $\nabla^2 \mathscr{R}(\rankone{u}_k)$ in (\ref{newton_direction}) is positive definite, (\ref{newton_iteration}) describes an iterative procedure for calculating the minimum of $\mathscr{R}$ and corresponding optimal value of $\rankone{u}$.  See Algorithm \ref{newton_raphson_alg} and \CSLVR source code \ref{home_rolled_method} for details.
+Provided that the curve $\mathscr{R}$ is relatively smooth and that the Hessian matrix $\nabla^2 \mathscr{R}(\rankone{u}_k)$ in \cref{newton_direction} is positive definite, \cref{newton_iteration} describes an iterative procedure for calculating the minimum of $\mathscr{R}$ and corresponding optimal value of $\rankone{u}$.  See Algorithm \cref{newton_raphson_alg} and \CSLVR source code \cref{home_rolled_method} for details.
 
 \subsection{G\^{a}teaux derivatives} \label{ssn_gateaux}
 
-Because residual (\ref{nonlin_resid}) is a functional, \index{G\^{a}teaux derivative} \index{Directional derivative} \emph{G\^{a}teaux derivatives} are used to calculate the directional derivatives in (\ref{search_direction_equation}).  To illustrate this derivative, consider the second-order boundary-value problem
+Because residual \cref{nonlin_resid} is a functional, \index{G\^{a}teaux derivative} \index{Directional derivative} \emph{G\^{a}teaux derivatives} are used to calculate the directional derivatives in \cref{search_direction_equation}.  To illustrate this derivative, consider the second-order boundary-value problem
 \begin{align*}
   \nabla^2 u - u &= 0 &&\text{ in } \Omega \\
   \nabla u \cdot \rankone{n} &= g &&\text{ on } \Gamma.
@@ -71,7 +73,7 @@ where $\Omega$ is the interior domain with boundary $\Gamma$, and $\rankone{n}$ 
   \mathscr{R}(u) &= - \int_{\Omega} \nabla u \cdot \nabla \phi \d{\Omega} - \int_{\Omega} \phi u \d{\Omega} + \int_{\Gamma} \phi g \d{\Gamma} = 0,
 \end{align}
 
-The G\^{a}teaux derivative or first variation of $\mathscr{R}$ with respect to $u$ in the direction $p$ -- with vector notation $\delta_{\rankone{u}}^{\rankone{p}} \mathscr{R} (\rankone{u})$ -- is defined as
+The G\^{a}teaux derivative or first variation of $\mathscr{R}$ with respect to $u$ in the direction $p$---with vector notation $\delta_{\rankone{u}}^{\rankone{p}} \mathscr{R} (\rankone{u})$---is defined as
 \begin{align*}
  \delta_{u}^{p}\mathscr{R}\left( u \right) = \frac{\delta}{\delta u} \mathscr{R}\left( u,p \right) = &\lim_{\epsilon \rightarrow 0} \totder{}{\epsilon} \mathscr{R} \left(u + \epsilon p \right) \\
   = &- \totder{}{\epsilon} \left[ \int_{\Omega} \nabla (u + \epsilon p) \cdot \nabla \phi \d{\Omega} \right]_{\epsilon = 0} \\
@@ -79,9 +81,9 @@ The G\^{a}teaux derivative or first variation of $\mathscr{R}$ with respect to $
   &+ \totder{}{\epsilon} \left[ \int_{\Gamma} \phi g \d{\Gamma} \right]_{\epsilon = 0} \\
   = &- \int_{\Omega} \nabla p \cdot \nabla \phi \d{\Omega} - \int_{\Omega} \phi p \d{\Omega}.
 \end{align*}
-It is important to recognize that if $p$ is a function with known values, \ie data interpolated onto a finite-element mesh, the finite-element assembly -- described in \S \ref{ssn_global_galerkin_assembly} -- will result in a vector of length $n$.  However, if $p$ is an unknown quantity and thus a member of the trial space associated with the finite-element approximation of $\rankone{u}$, as is the case with the Newton-Raphson method here, the assembly process will result in a matrix with properties identical to the associated stiffness matrix of (\ref{gateaux_example_form}).  In order to clearly differentiate between these circumstances, the G\^{a}teaux derivative operator notation $\delta_{\rankone{u}}^{\rankone{p}}$ is used when $\rankone{p}$ is a member of the trial space, and $\delta_{\rankone{u}}$ otherwise.
+It is important to recognize that if $p$ is a function with known values, \ie data interpolated onto a finite-element mesh, the finite-element assembly---described in \cref{ssn_global_galerkin_assembly}---will result in a vector of length $n$.  However, if $p$ is an unknown quantity and thus a member of the trial space associated with the finite-element approximation of $\rankone{u}$, as is the case with the Newton-Raphson method here, the assembly process will result in a matrix with properties identical to the associated stiffness matrix of \cref{gateaux_example_form}.  In order to clearly differentiate between these circumstances, the G\^{a}teaux derivative operator notation $\delta_{\rankone{u}}^{\rankone{p}}$ is used when $\rankone{p}$ is a member of the trial space, and $\delta_{\rankone{u}}$ otherwise.
 
-These derivatives may be calculated with FEniCS using the process of \index{Automatic differentiation} \emph{automatic differentiation} \citep{nocedal_2000}, as illustrated by the nonlinear problem example in Code Listing \ref{river_cross_code}.
+These derivatives may be calculated with FEniCS using the process of \index{Automatic differentiation} \emph{automatic differentiation} \citep{nocedal_2000}, as illustrated by the nonlinear problem example in \cref{river_cross_code}.
 
 \begin{algorithm}
   \normalsize
@@ -122,8 +124,10 @@ These derivatives may be calculated with FEniCS using the process of \index{Auto
 
 \pythonexternal[caption={Newton-Raphson method as implemented in \CSLVR's \texttt{model} class}, label = home_rolled_method, firstline=2073, lastline=2145]{cslvr_src/model.py}
 
-%===============================================================================
 
+
+
+%===============================================================================
 \section{Nonlinear problem example}
 
 \index{Non-linear differential equations!1D}
@@ -133,7 +137,7 @@ Suppose we would like to minimize the time for a boat to cross a river.  The tim
   T(y) &= \int_0^{\ell} \frac{\sqrt{1 + (y')^2}}{\Vert \rankone{u} \Vert} \d{x} \\
   T(y) &= \int_0^{\ell} \frac{\sqrt{1 + (y')^2}}{\sqrt{v^2 + u^2}} \d{x} = \int_0^{\ell} L(x,y') \d{x},
 \end{align*}
-where $S$ is the length of the boat's path; $\rankone{u}$ is the velocity of the boat with components river current speed $v(x)$ and boat speed $u$ in the $x$ direction as a result of its motor; and $\ell$ is the width of the river.  For \emph{Lagrangian} $L$, the first variation of $T$ in the direction of the test function $\phi \in \testspace$ (see test space (\ref{test_space})) is
+where $S$ is the length of the boat's path; $\rankone{u}$ is the velocity of the boat with components river current speed $v(x)$ and boat speed $u$ in the $x$ direction as a result of its motor; and $\ell$ is the width of the river.  For \emph{Lagrangian} $L$, the first variation of $T$ in the direction of the test function $\phi \in \testspace$ (see test space \cref{test_space}) is
 {\footnotesize
 \begin{align*}
   \delta T(y,\phi) &= \totder{}{\epsilon} \int_0^{\ell} L(x, y + \epsilon \phi, y' + \epsilon \phi') \d{x} \Bigg|_{\epsilon = 0} \\
@@ -158,7 +162,7 @@ In order to find the minimal time for the boat to cross, this first variation of
 \begin{align*}
   M &= \frac{L_{y'x}}{y''},
 \end{align*}
-relation (\ref{boat_T_fv}) can be rewritten followed by integrating by parts of the the second-derivative term once again,
+relation \cref{boat_T_fv} can be rewritten followed by integrating by parts of the the second-derivative term once again,
 {\footnotesize
 \begin{align*}
   0 &= - \int_0^{\ell} \left( M y'' + L_{y'y'} y'' \right) \phi \d{x} + L_{y'} \phi \Big|_{x=0}^{x=\ell} \\
@@ -167,14 +171,14 @@ relation (\ref{boat_T_fv}) can be rewritten followed by integrating by parts of 
 \end{align*}}
 If the left essential boundary condition is set to $y(0) = 0$, and the right natural boundary condition is set to be equal to the trajectory of the boat at the opposite bank given by
 $$y'(\ell) = g = \frac{v(\ell)}{u},$$
-the final variational problem therefore consists of finding $y \in \trialspace$ (see trial space (\ref{trial_space})) such that
+the final variational problem therefore consists of finding $y \in \trialspace$ (see trial space \cref{trial_space}) such that
 {\tiny
 \begin{align*}
   0 &= \int_0^{\ell} \left( M(y') + L_{y'y'}(y') \right) y' \phi' \d{x} - \left[ M(g) + L_{y'y'}(g) \right] g \phi \Big|_{x=\ell} + L_{y'}(g) \phi \Big|_{x=\ell}.
 \end{align*}}
 for all $\phi \in \testspace$.
 
-The weak solution to this equation using linear-Lagrange shape functions (\ref{linear_lagrange_functions}) using the built-in FEniCS Newton solver is shown in Figure \ref{river_cross_image} and generated from Code Listing \ref{river_cross_code}.
+The weak solution to this equation using linear-Lagrange shape functions \cref{linear_lagrange_functions} using the built-in FEniCS Newton solver is shown in \cref{river_cross_image} and generated from \cref{river_cross_code}.
 
 \pythonexternal[label=river_cross_code, caption={FEniCS source code for the river crossing example.}]{scripts/fenics_intro/river_cross.py}
 
@@ -185,28 +189,29 @@ The weak solution to this equation using linear-Lagrange shape functions (\ref{l
   \label{river_cross_image}
 \end{figure}
 
-%===============================================================================
-%===============================================================================
 
+
+
+%===============================================================================
 \section{Quasi-Newton solution process}
 
 \index{Quasi-Newton methods}
-In some situations, full quadratic model (\ref{newton_quadradic_model}) may be preferred over linear model (\ref{search_direction_equation}) for solving a non-linear system.  When the inverse of Hessian matrix $\nabla^2 \mathscr{R}_k$ is difficult to calculate by hand, it may be approximated by using curvature information at a current guess $\rankone{u}_k$.  Algorithms utilizing the Hessian approximation are referred to as \emph{quasi-Newton} methods.
+In some situations, full quadratic model \cref{newton_quadradic_model} may be preferred over linear model \cref{search_direction_equation} for solving a non-linear system.  When the inverse of Hessian matrix $\nabla^2 \mathscr{R}_k$ is difficult to calculate by hand, it may be approximated by using curvature information at a current guess $\rankone{u}_k$.  Algorithms utilizing the Hessian approximation are referred to as \emph{quasi-Newton} methods.
 
 \index{BFGS Algorithm}
-As described by \citet{nocedal_2000}, the most modern and efficient of such Hessian approximation techniques is that proposed by Broyden, Fletcher, Goldfarb, and Shanno, aptly referred to as the BFGS method (Algorithm \ref{BFGS_alg}).  This method uses the iteration
+As described by \citet{nocedal_2000}, the most modern and efficient of such Hessian approximation techniques is that proposed by Broyden, Fletcher, Goldfarb, and Shanno, aptly referred to as the BFGS method (Algorithm \cref{BFGS_alg}).  This method uses the iteration
 \begin{align}
   \label{qn_iteration}
   \rankone{u}_{k+1} = \rankone{u}_k + \alpha_k \rankone{p}_k
 \end{align}
-and a quadratic model similar to (\ref{newton_quadradic_model}) with the addition of a subsequent iteration $k+1$ quadratic model:
+and a quadratic model similar to \cref{newton_quadradic_model} with the addition of a subsequent iteration $k+1$ quadratic model:
 \begin{align}
   \label{qn_k_quadradic_model}
   m_{k}(\rankone{p}) &= \mathscr{R}_{k+1} + \rankone{p}\T \nabla \mathscr{R}_{k} + \frac{1}{2} \rankone{p}\T B_{k} \rankone{p} \\
   \label{qn_k+1_quadradic_model}
   m_{k+1}(\rankone{p}) &= \mathscr{R}_{k+1} + \rankone{p}\T \nabla \mathscr{R}_{k+1} + \frac{1}{2} \rankone{p}\T B_{k+1} \rankone{p}.
 \end{align}
-The minimizer of (\ref{qn_k_quadradic_model}), search direction $\rankone{p}_k$, is found identically to Newton direction (\ref{newton_direction}):
+The minimizer of \cref{qn_k_quadradic_model}, search direction $\rankone{p}_k$, is found identically to Newton direction \cref{newton_direction}:
 \begin{align*}
   \rankone{p}_k &= - B_k^{-1} \nabla \mathscr{R}_k,
 \end{align*}
@@ -214,7 +219,7 @@ where the approximate Hessian matrix $B_k \approx \nabla_{\rankone{u} \rankone{u
 \begin{align*}
   \nabla m_{k+1}(\rankone{0}) &= \nabla \mathscr{R}_{k+1},
 \end{align*}
-implying that the second condition is satisfied automatically.  Using the same reasoning and iteration (\ref{qn_iteration}), to evaluate $m_{k+1}$ at $\rankone{u}_{k}$ the gradient of $m_{k+1}$ at $\rankone{p} = -\alpha_k \rankone{p}_k$ is evaluated,
+implying that the second condition is satisfied automatically.  Using the same reasoning and iteration \cref{qn_iteration}, to evaluate $m_{k+1}$ at $\rankone{u}_{k}$ the gradient of $m_{k+1}$ at $\rankone{p} = -\alpha_k \rankone{p}_k$ is evaluated,
 \begin{align*}
   \nabla m_{k+1}(-\alpha_k \rankone{p}_{k}) &= \nabla \mathscr{R}_{k+1} - \alpha_k \rankone{p}_{k} B_{k+1} = \nabla \mathscr{R}_k,
 \end{align*}
@@ -222,7 +227,7 @@ thus requiring that
 \begin{align*}
   \alpha_k \rankone{p}_k B_{k+1} &= \nabla \mathscr{R}_{k+1} - \nabla \mathscr{R}_k.
 \end{align*}
-Using iteration (\ref{qn_iteration}), the \index{Secant equation} \emph{secant equation} is
+Using iteration \cref{qn_iteration}, the \index{Secant equation} \emph{secant equation} is
 \begin{align}
   \label{secant_equation}
   B_{k+1} \rankone{s}_k &= \rankone{y}_k,
@@ -238,11 +243,11 @@ Equivalently, the \emph{inverse secant equation} is
 \end{align}
 where $H_{k+1} = B_{k+1}^{-1}$.
 
-As described by \citet{nocedal_2000}, inverse secant equation (\ref{inverse_secant_equation}) will be satisfied if the \emph{curvature condition}
+As described by \citet{nocedal_2000}, inverse secant equation \cref{inverse_secant_equation} will be satisfied if the \emph{curvature condition}
 \begin{align*}
   \rankone{s}_k\T \rankone{y}_k > 0
 \end{align*} 
-holds.  This is explicitly enforced by choosing step length $\alpha_k$ in (\ref{qn_iteration}) such that the \index{Armijo condition} \emph{Armijo condition}
+holds.  This is explicitly enforced by choosing step length $\alpha_k$ in \cref{qn_iteration} such that the \index{Armijo condition} \emph{Armijo condition}
 \begin{align}
   \label{armijo_condition}
   \mathscr{R}(\rankone{u}_k + \alpha_k \rankone{p}_k ) \leq \mathscr{R}_k + c_1 \alpha_k \rankone{p}\T \nabla \mathscr{R}_k
@@ -252,7 +257,8 @@ and the curvature condition
   \label{curvature_condition}
   \rankone{p}\T \nabla \mathscr{R}(\rankone{u}_k + \alpha_k \rankone{p}_k ) \geq c_2 \rankone{p}\T \nabla \mathscr{R}_k,
 \end{align}
-collectively referred to as the \index{Wolfe conditions} \emph{Wolfe conditions}, hold for some pair of constants $c_1,c_2 \in (0,1)$.  One way of enforcing (\ref{armijo_condition}) and (\ref{curvature_condition}) is described by the \index{Backtracking line search} \emph{backtracking line search}, Algorithm \ref{qn_bls_alg} \citep{nocedal_2000}.
+collectively referred to as the \index{Wolfe conditions} \emph{Wolfe conditions}, hold for some pair of constants $c_1,c_2 \in (0,1)$.
+One way of enforcing \cref{armijo_condition,curvature_condition} is described by the \index{Backtracking line search} \emph{backtracking line search}, Algorithm \cref{qn_bls_alg} \citep{nocedal_2000}.
 
 In order to derive a unique $H_{k+1}$, the additional constraint that $H_{k+1}$ be close to the current matrix $H_k$ is imposed.  Thus $H_{k+1}$ is the solution to the problem
 \begin{align}
@@ -271,13 +277,13 @@ with average Hessian inverse
 \begin{align*}
   W = \left[ \int_0^1 \nabla^2 \mathscr{R}(\rankone{u} + \tau \alpha_k \rankone{p}_k ) \d{\tau} \right]^{-1}
 \end{align*}
-satisfying $W\rankone{y}_k = \rankone{s}_k$ in (\ref{qn_H_problem}) gives the unique solution to (\ref{qn_H_problem}) and (\ref{qn_H_problem_constraints})
+satisfying $W\rankone{y}_k = \rankone{s}_k$ in \cref{qn_H_problem} gives the unique solution to \cref{qn_H_problem,qn_H_problem_constraints}
 {\footnotesize
 \begin{align*}
   H_{k+1} &= \left( I - \rankone{\rho}_k \rankone{s}_k \rankone{y}_k\T \right) H_k \left( I - \rho_k \rankone{y}_k \rankone{s}_k\T \right) + \rho_k \rankone{s}_k \rankone{s}_k\T, \hspace{5mm} \rho = \left( \rankone{y}\T \rankone{s} \right)^{-1}.
 \end{align*}}
 
-The iterative process for this method is described by Algorithm \ref{BFGS_alg}.
+The iterative process for this method is described by Algorithm \cref{BFGS_alg}.
 
 \begin{algorithm}
   \normalsize

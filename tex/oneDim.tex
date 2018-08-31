@@ -82,22 +82,22 @@ To develop an understanding of finite elements further, we investigate several c
 
   \subsection{Finite element solution} \label{ssn_intro_sing_perp_one}
   
-  We arrive at the weak form by taking the inner product of Equation (\ref{1d_example_1_ode}) with the test function $\phi$, integrating over the domain of the problem $\Omega$ and integrating the second derivative term by parts,
+  We arrive at the weak form by taking the inner product of Equation \cref{1d_example_1_ode} with the test function $\phi$, integrating over the domain of the problem $\Omega$ and integrating the second derivative term by parts,
   \begin{align*}
     0 = &\int_{\Omega} \left[ \epsilon \ddot{u} - (2t + 1)\dot{u} + 2u \right] \phi \d{\Omega} \\
     0 = &\epsilon \int_{\Omega} \totder[2]{u}{t} \phi \d{\Omega} - \int_{\Omega} (2t + 1) \totder{u}{t} \phi \d{\Omega} + 2\int_{\Omega} u \phi \d{\Omega} \\
     0 = &+\epsilon \int_{\Gamma} \left( \totder{u}{t} \phi \right) n \d{\Gamma} - \epsilon \int_{\Omega} \totder{u}{t} \totder{\phi}{t} \d{\Omega} \\
     &- \int_{\Omega} (2t + 1) \totder{u}{t} \phi \d{\Omega} + 2\int_{\Omega} u \phi \d{\Omega},
   \end{align*}
-  where $n$ is the outward-pointing normal to the boundary $\Gamma$.  Because the boundary conditions are both Dirichlet, the integral over the boundary are all zero (see test space \ref{test_space}).  Therefore, the variational problem reads: find $u \in \trialspace$ such that 
+  where $n$ is the outward-pointing normal to the boundary $\Gamma$.  Because the boundary conditions are both Dirichlet, the integral over the boundary are all zero (see test space \cref{test_space}).  Therefore, the variational problem reads: find $u \in \trialspace$ such that 
   \begin{align*}
     0 = - \epsilon \int_{\Omega} \totder{u}{t} \totder{\phi}{t} \d{\Omega} - \int_{\Omega} (2t + 1) \totder{u}{t} \phi \d{\Omega} + 2\int_{\Omega} u \phi \d{\Omega}.
   \end{align*}
   for all $\phi \in \testspace$.
     
-  A weak solution to this weak problem using linear Lagrange interpolation functions (\ref{linear_lagrange_functions}) is shown in Figure \ref{1d_bvp_1_image}, and was generated from Code Listing \ref{1d_bvp_1_code}.
+  A weak solution to this weak problem using linear Lagrange interpolation functions \cref{linear_lagrange_functions} is shown in \cref{1d_bvp_1_image}, and was generated from \cref{1d_bvp_1_code}.
 
-\pythonexternal[label=1d_bvp_1_code, caption={FEniCS solution to BVP (\ref{1d_example_1_ode}, \ref{1d_example_1_bcs}).}]{scripts/fenics_intro/1D_BVP_1.py}
+\pythonexternal[label=1d_bvp_1_code, caption={FEniCS solution to BVP \cref{1d_example_1_ode,1d_example_1_bcs}.}]{scripts/fenics_intro/1D_BVP_1.py}
   
   \begin{figure}
     \centering
@@ -111,12 +111,12 @@ To develop an understanding of finite elements further, we investigate several c
   \section{Neumann-Dirichlet problem}
 
 \index{Linear differential equations!1D}
-  It may also be of interest to solve a problem possessing a Neumann boundary condition.  For example, boundary conditions (\ref{1d_example_1_bcs}) for differential equation (\ref{1d_example_1_ode}) may be altered to 
+  It may also be of interest to solve a problem possessing a Neumann boundary condition.  For example, boundary conditions \cref{1d_example_1_bcs} for differential equation \cref{1d_example_1_ode} may be altered to 
   \begin{align}
     \label{1d_example_2_bcs}
     u(0) = 0, \hspace{10mm} \dot{u}(1) = u_r = -10.
   \end{align}
-  In this case the weak form is derived similarly to \S \ref{ssn_intro_sing_perp_one}, and consists of finding $u \in \trialspace$ such that
+  In this case the weak form is derived similarly to \cref{ssn_intro_sing_perp_one}, and consists of finding $u \in \trialspace$ such that
   \begin{align*}
     0 = &+\epsilon \int_{\Gamma} \left( \totder{u}{t} \phi \right) n \d{\Gamma} - \epsilon \int_{\Omega} \totder{u}{t} \totder{\phi}{t} \d{\Omega} \\
     &- \int_{\Omega} (2t + 1) \totder{u}{t} \phi \d{\Omega} + 2\int_{\Omega} u \phi \d{\Omega} \\
@@ -125,9 +125,9 @@ To develop an understanding of finite elements further, we investigate several c
   \end{align*}
   for all $\phi \in \testspace$, where the fact that $n = 1$ on the right boundary $\Gamma_r$.
     
-    The weak solution using linear Lagrange shape functions (\ref{linear_lagrange_functions}) is shown in Figure \ref{1d_bvp_2_image}, and was generated from Code Listing \ref{1d_bvp_2_code}.
+    The weak solution using linear Lagrange shape functions \cref{linear_lagrange_functions} is shown in \cref{1d_bvp_2_image}, and was generated from \cref{1d_bvp_2_code}.
 
-\pythonexternal[label=1d_bvp_2_code, caption={FEniCS solution to BVP (\ref{1d_example_1_ode}, \ref{1d_example_2_bcs}).}]{scripts/fenics_intro/1D_BVP_2.py}
+\pythonexternal[label=1d_bvp_2_code, caption={FEniCS solution to BVP \cref{1d_example_1_ode,1d_example_2_bcs}.}]{scripts/fenics_intro/1D_BVP_2.py}
 
   \begin{figure}
     \centering
@@ -150,7 +150,7 @@ To develop an understanding of finite elements further, we investigate several c
   \begin{align*}
     \totder{U}{x} = u(x).
   \end{align*}
-  Because the integral is from $a$ to $x$, $U(a) = 0$; hence $v(x) = U(x)$ and the equivalent problem to (\ref{numerical_integration_example}) is the first-order boundary-value problem
+  Because the integral is from $a$ to $x$, $U(a) = 0$; hence $v(x) = U(x)$ and the equivalent problem to \cref{numerical_integration_example} is the first-order boundary-value problem
   \begin{align}
     \label{1d_example_4}
     \totder{v}{x} = u(x), \hspace{5mm} v(a) = 0.
@@ -162,9 +162,9 @@ To develop an understanding of finite elements further, we investigate several c
   \end{align*}
   for all $\phi \in \testspace$.
   
-  The linear-Lagrange-element-basis-weak solution to this problem with $u(x) = \cos(x)$ over the domain $\Omega = [0,2\pi]$ is shown in Figure \ref{1d_bvp_4_image}, and was generated from Code Listing \ref{1d_bvp_4_code}. 
+  The linear-Lagrange-element-basis-weak solution to this problem with $u(x) = \cos(x)$ over the domain $\Omega = [0,2\pi]$ is shown in \cref{1d_bvp_4_image}, and was generated from \cref{1d_bvp_4_code}. 
 
-\pythonexternal[label=1d_bvp_4_code, caption={FEniCS solution to BVP (\ref{1d_example_4})}]{scripts/fenics_intro/1D_BVP_4.py}
+\pythonexternal[label=1d_bvp_4_code, caption={FEniCS solution to BVP \cref{1d_example_4}}]{scripts/fenics_intro/1D_BVP_4.py}
   
   \begin{figure}
     \centering
@@ -184,7 +184,7 @@ To develop an understanding of finite elements further, we investigate several c
     \label{1d_example_5}
     w(x) = \totder{u}{v} = \totder{u}{x} \totder{x}{v} = \totder{u}{x} \left( \totder{v}{x} \right)^{-1},
   \end{align}
-  for continuous functions $u(x)$ and $v(x)$ defined over the interval $\Omega = [a,b]$.  The variational form for this problem with trial function $w \in \ltwospace$ (see $L^2$ space (\ref{l2_space})), test function $\phi \in \testspace$, is simply the inner product
+  for continuous functions $u(x)$ and $v(x)$ defined over the interval $\Omega = [a,b]$.  The variational form for this problem with trial function $w \in \ltwospace$ (see $L^2$ space \cref{l2_space}), test function $\phi \in \testspace$, is simply the inner product
    \begin{align*}
      \int_{\Omega} w \phi \d{\Omega} &= \int_{\Omega} \totder{u}{x} \left( \totder{v}{x} \right)^{-1} \phi \d{\Omega}, \hspace{5mm} \forall \phi \in \testspace,
    \end{align*}
@@ -192,9 +192,9 @@ To develop an understanding of finite elements further, we investigate several c
    
    Solving problems of this type are referred to in the literature as \index{Projection} \emph{projections}, due to the fact that they simply project a known solution onto a finite element basis.
    
-   An example solution with $u(x) = \sin(x)$, $v(x) = \cos(x)$ is generated using linear-Lagrange elements from Code Listing \ref{1d_dir_dir_1_code} and depicted in Figure \ref{1d_dir_dir_1_image},  and another with $u(x) = 3x^4$, $v(x) = x^6$ generated from Code Listing \ref{1d_dir_dir_2_code} and depicted in Figure \ref{1d_dir_dir_2_image}.
+   An example solution with $u(x) = \sin(x)$, $v(x) = \cos(x)$ is generated using linear-Lagrange elements from \cref{1d_dir_dir_1_code} and depicted in \cref{1d_dir_dir_1_image},  and another with $u(x) = 3x^4$, $v(x) = x^6$ generated from \cref{1d_dir_dir_2_code} and depicted in \cref{1d_dir_dir_2_image}.
 
-\pythonexternal[label=1d_dir_dir_1_code, caption={FEniCS solution to BVP (\ref{1d_example_5}) with $u(x) = \sin(x)$, $v(x) = \cos(x)$.}]{scripts/fenics_intro/1D_dir_dir_1.py}
+\pythonexternal[label=1d_dir_dir_1_code, caption={FEniCS solution to BVP \cref{1d_example_5} with $u(x) = \sin(x)$, $v(x) = \cos(x)$.}]{scripts/fenics_intro/1D_dir_dir_1.py}
   
   \begin{figure}
     \centering
@@ -203,7 +203,7 @@ To develop an understanding of finite elements further, we investigate several c
     \label{1d_dir_dir_1_image}
   \end{figure}
 
-\pythonexternal[label=1d_dir_dir_2_code, caption={FEniCS solution to BVP (\ref{1d_example_5}) with $u(x) = 3x^4$, $v(x) = x^6$.}]{scripts/fenics_intro/1D_dir_dir_2.py}
+\pythonexternal[label=1d_dir_dir_2_code, caption={FEniCS solution to BVP \cref{1d_example_5} with $u(x) = 3x^4$, $v(x) = x^6$.}]{scripts/fenics_intro/1D_dir_dir_2.py}
   
   \begin{figure}
     \centering
@@ -232,7 +232,7 @@ We examine this problem in the context of exact and approximate Eigenvalues and 
 \subsection{Fourier series approximation}
 
 \index{Fourier series method}
-The solution of system (\ref{intro_eigen_pde} -- \ref{intro_eigen_ic}) can be approximated by the method of separation of variables, developed by Joseph Fourier in 1822 \citep{davis_2013}.  Using this method, the partial derivative equation is transformed into a system of two ordinary differential equations.  First, assume a solution of the form $u(x,t) = X(x)T(t)$ so that equation (\ref{intro_eigen_pde}) reads
+The solution of system \cref{intro_eigen_pde,intro_eigen_bcs,intro_eigen_ic} can be approximated by the method of separation of variables, developed by Joseph Fourier in 1822 \citep{davis_2013}.  Using this method, the partial derivative equation is transformed into a system of two ordinary differential equations.  First, assume a solution of the form $u(x,t) = X(x)T(t)$ so that equation \cref{intro_eigen_pde} reads
 \begin{align*}
   X(x)\totder{T(t)}{t}  &= \totder{}{x} \left[ k \totder{X(x)}{x} \right] T(t) \\ 
   \frac{1}{k T(t)}\totder{T(t)}{t}  &= \frac{1}{X(x)} \totder{}{x} \left[ \totder{X(x)}{x} \right].
@@ -255,7 +255,7 @@ while the solution to the second-order $X$ equation is
 \begin{align*}
   X(x) = B_1 \sin\left( \sqrt{\lambda} x \right) + B_2 \cos\left( \sqrt{\lambda} x \right),
 \end{align*}
-for some coefficients $A$, $B_1$, and $B_2$ where $B_1$ and $B_2$ cannot both be zero since then only the trivial solution exists.  Applying boundary conditions (\ref{intro_eigen_bcs}), $X(0) = X(\ell) = 0$,
+for some coefficients $A$, $B_1$, and $B_2$ where $B_1$ and $B_2$ cannot both be zero since then only the trivial solution exists.  Applying boundary conditions \cref{intro_eigen_bcs}, $X(0) = X(\ell) = 0$,
 \begin{align*}
   X(0) &= B_2 = 0, \\
   X(\ell) &= B_1 \sin\left( \sqrt{\lambda} \ell \right) = 0 &&\\
@@ -274,7 +274,7 @@ By the Superposition Principle, any linear combination of solutions is again a s
   \label{intro_eigen_fourier_soln}
          &= \sum_{n=1}^{\infty} c_n \sin\left( \sqrt{\lambda_n} x \right) e^{-\lambda_n k t},
 \end{align}
-where $c_n = A B_1$ and (\ref{intro_eigen_t}) has been used with $\lambda_n = \left( \frac{n \pi}{\ell} \right)^2$.  The coefficient $c_n$ may be discovered by inspecting initial condition (\ref{intro_eigen_ic})
+where $c_n = A B_1$ and \cref{intro_eigen_t} has been used with $\lambda_n = \left( \frac{n \pi}{\ell} \right)^2$.  The coefficient $c_n$ may be discovered by inspecting initial condition \cref{intro_eigen_ic}
 \begin{align*}
   u(x,0) &= \sum_{n=1}^{\infty} c_n \sin\left( \sqrt{\lambda_n} x \right) = f(x).
 \end{align*}
@@ -301,11 +301,11 @@ Finally, replacing the dummy variable $m$ with $n$,
   c_n = \frac{2}{\ell} \int_{0}^{\ell} f(x) \sin\left( \frac{n\pi x}{\ell} \right) \d{x}.
 \end{align}
 
-Therefore, the Fourier series approximation to (\ref{intro_eigen_pde} -- \ref{intro_eigen_ic}) is (\ref{intro_eigen_fourier_soln}) with coefficients given by (\ref{intro_eigen_fourier_coef}).
+Therefore, the Fourier series approximation to \cref{intro_eigen_pde,intro_eigen_bcs,intro_eigen_ic} is \cref{intro_eigen_fourier_soln} with coefficients given by \cref{intro_eigen_fourier_coef}.
 
 \subsection{Finite element approximation}
 
-Investigating the Eigenvalue problem of separated equations (\ref{intro_eigen_separated}) for $X$,
+Investigating the Eigenvalue problem of separated equations \cref{intro_eigen_separated} for $X$,
 \begin{align*}
   \totder[2]{X(x)}{x} + \lambda X(x) = 0, \hspace{5mm} X(0) = X(\ell) = 0,
 \end{align*}
@@ -322,7 +322,7 @@ Substituting the Galerkin approximation
 \begin{align*}
   X_e = \sum_{j=1}^n u_j^e \psi_j^e(x),
 \end{align*}
-where $u_j^e$ is the $j$th nodal value of $X$ at element $e$ and $\psi_j^e(x)$ is the element's associated interpolation function, into Equation (\ref{intro_eigen_weak_form}) results in the Galerkin system
+where $u_j^e$ is the $j$th nodal value of $X$ at element $e$ and $\psi_j^e(x)$ is the element's associated interpolation function, into Equation \cref{intro_eigen_weak_form} results in the Galerkin system
 \begin{align*}
   \left[ \lambda M_{ij}^e - K_{ij}^e \right] \cdot \mathbf{u}^e = \mathbf{0},
 \end{align*}
@@ -330,7 +330,7 @@ with stiffness tensor $K$ and \index{Mass matrix} \emph{mass tensor} $M$
 \begin{align*}
   K_{ij}^e = \int_0^{\ell} \totder{\psi_i^e}{x} \totder{\psi_j^e}{x} \d{x}, \hspace{10mm} M_{ij}^e = \int_0^{\ell} \psi_i^e \psi_j^e \d{x}.
 \end{align*}
-Expanding the element equation tensors as in \S \ref{ssn_local_galerkin_assembly} results in
+Expanding the element equation tensors as in \cref{ssn_local_galerkin_assembly} results in
 \begin{align*}
   \left( \frac{\lambda h_e}{6} \begin{bmatrix}[r]
                                  2 & 1 \\
@@ -351,7 +351,7 @@ Expanding the element equation tensors as in \S \ref{ssn_local_galerkin_assembly
   \end{bmatrix}.
 \end{align*}
 
-For a concrete example, we assemble this local system over an equally-space $n=3$-element function space, implying that $h_e = 1/3$ and (see \S \ref{ssn_global_galerkin_assembly})
+For a concrete example, we assemble this local system over an equally-space $n=3$-element function space, implying that $h_e = 1/3$ and (see \cref{ssn_global_galerkin_assembly})
 {\footnotesize
 \begin{align*}
   \left( \frac{\lambda}{18} \begin{bmatrix}[r]
@@ -472,15 +472,16 @@ providing the two Eigenvalue approximations $\widetilde{\lambda}_1 = 54/5 = 10.8
 \end{align*}
 providing $X^1 = \begin{bmatrix} 1 & 1 \end{bmatrix}\T$ and $X^2 = \begin{bmatrix} 1 & -1 \end{bmatrix}\T$.
 
-Similar to the derivation of Fourier series solution (\ref{intro_eigen_fourier_soln}), these approximate Eigenvectors and Eigenvalues are used to create the approximate three-element transient solution
+Similar to the derivation of Fourier series solution \cref{intro_eigen_fourier_soln}, these approximate Eigenvectors and Eigenvalues are used to create the approximate three-element transient solution
 \begin{align}
   u(x,t) \approx \widetilde{u}(x,t) &= \sum_{e=1}^n X^e(x) T^e(t, \widetilde{\lambda}_e) \notag \\
   \label{intro_eigen_fem_soln}
   &= \sum_{e=1}^3 \left[ \sum_{j=1}^2 X^e_j \psi_j^e(x) \right] c_e e^{-\widetilde{\lambda}_e k t},
 \end{align}
-where $c_e = c_n$ are the same coefficients of orthogonality as (\ref{intro_eigen_fourier_coef}) from the Fourier series approximation at element $e = n$, $n=1,2,3$, and $X^e$ is the Eigenvector associated with Eigenvalue $\widetilde{\lambda}_e$.
+where $c_e = c_n$ are the same coefficients of orthogonality as \cref{intro_eigen_fourier_coef} from the Fourier series approximation at element $e = n$, $n=1,2,3$, and $X^e$ is the Eigenvector associated with Eigenvalue $\widetilde{\lambda}_e$.
 
-Results derived using initial condition $f(x) = 1$ in (\ref{intro_eigen_ic}) for an eight-term Fourier series approximation (\ref{intro_eigen_fourier_soln}, \ref{intro_eigen_fourier_coef}) and an 8-element finite element approximation analogous to (\ref{intro_eigen_fem_soln} -- \ref{intro_eigen_fourier_coef}) are generated with Code Listing \ref{eigenvalue_code}.  The resulting Eigenfunctions are plotted in Figure \ref{1d_example_eigenvectors} and resulting approximations in Figure \ref{1d_example_eigensolution}.
+Results derived using initial condition $f(x) = 1$ in \cref{intro_eigen_ic} for an eight-term Fourier series approximation \cref{intro_eigen_fourier_soln,intro_eigen_fourier_coef} and an 8-element finite element approximation analogous to \cref{intro_eigen_fem_soln,intro_eigen_fourier_coef} are generated with \cref{eigenvalue_code}.
+The resulting Eigenfunctions are plotted in \cref{1d_example_eigenvectors} and resulting approximations in \cref{1d_example_eigensolution}.
 
 \pythonexternal[label=eigenvalue_code, caption={FEniCS code for solution of the Eigenvalue problem.}]{scripts/fenics_intro/eigenvalues.py}
 
@@ -494,6 +495,6 @@ Results derived using initial condition $f(x) = 1$ in (\ref{intro_eigen_ic}) for
 \begin{figure*}
   \centering
     \includegraphics[width=0.7\linewidth]{images/fenics_intro/eigen_solution.pdf}
-  \caption[Comparison of FEM with Fourier series solution]{Eight-term Fourier series approximation (dashed) and eight-element finite element approximation (solid) to transient problem (\ref{intro_eigen_pde} -- \ref{intro_eigen_ic}) with $\ell = 1$ with $f(x)=1$ at $t=0$.}
+  \caption[Comparison of FEM with Fourier series solution]{Eight-term Fourier series approximation (dashed) and eight-element finite element approximation (solid) to transient problem \cref{intro_eigen_pde,intro_eigen_bc,intro_eigen_ic} with $\ell = 1$ with $f(x)=1$ at $t=0$.}
   \label{1d_example_eigensolution}
 \end{figure*}

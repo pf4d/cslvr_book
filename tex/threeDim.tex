@@ -1,14 +1,14 @@
 
 \chapter{Problems in three dimensions}
 
-For three dimensional equations, the domain of the system $\Omega \in \R^3$ and Sobolev space (\ref{sobolev_space}) becomes
+For three dimensional equations, the domain of the system $\Omega \in \R^3$ and Sobolev space \cref{sobolev_space} becomes
 \begin{align}
   \label{3d_sobolev_space}
   \mathcal{H}^1(\Omega) &= \left\{ u\ :\ \Omega \rightarrow \R\ \Bigg|\ u, \parder{u}{x}, \parder{u}{y}, \parder{u}{z} \in L^2(\Omega) \right\},
 \end{align}
-and the domain is discretized into either tetrahedral or brick elements, with new interpolation functions that satisfy 3D interpolation properties analogous to (\ref{interpolation_properties}).  For an excellent explanation of the resulting 3D Galerkin system analogous to (\ref{intro_galerkin_system}), see \citet{elman_2005}.
+and the domain is discretized into either tetrahedral or brick elements, with new interpolation functions that satisfy 3D interpolation properties analogous to \cref{interpolation_properties}.  For an excellent explanation of the resulting 3D Galerkin system analogous to \cref{intro_galerkin_system}, see \citet{elman_2005}.
 
-In this chapter, we solve the three-dimensional variant of heat equation (\ref{intro_ode}) and the Stokes equations.
+In this chapter, we solve the three-dimensional variant of heat equation \cref{intro_ode} and the Stokes equations.
 
 %===============================================================================
 
@@ -17,6 +17,8 @@ In this chapter, we solve the three-dimensional variant of heat equation (\ref{i
 \index{Linear differential equations!3D}
 \index{Poisson equation}
 The Poisson equation to be solved over the domain $\Omega = [-\pi,\pi] \times [-\pi,\pi] \times [-\pi,\pi]$ is
+\begin{subequations}
+\label{3d_poisson}
 \begin{align}
   \label{3d_poisson_start}
   -\nabla^2 u &= f &&\text{ in } \Omega \\
@@ -26,39 +28,40 @@ The Poisson equation to be solved over the domain $\Omega = [-\pi,\pi] \times [-
   \label{3d_poisson_end}
   u &= g_D = 0 &&\text{ on } \Gamma_T, \Gamma_B,
 \end{align}
+\end{subequations}
 where $\Gamma_N$, $\Gamma_S$, $\Gamma_E$, and $\Gamma_W$ are the North, South, East and West boundaries, $\Gamma_T$ and $\Gamma_B$ are the top and bottom boundaries, and $\normal$ is the outward unit normal to the boundary $\Gamma$.
 
-The associated Galerkin weak form with test function $\phi \in \testspace$ defined by (\ref{test_space}) is
+The associated Galerkin weak form with test function $\phi \in \testspace$ defined by \cref{test_space} is
 {\footnotesize
 \begin{align*}
   -\int_{\Omega} \nabla^2 u \phi \d{\Omega} &= \int_{\Omega} f \phi \d{\Omega} \\
   \int_{\Omega} \nabla u \cdot \nabla \phi \d{\Omega} - \int_{\Gamma} \phi \nabla u \cdot \normal \d{\Gamma} &= \int_{\Omega} f \phi \d{\Omega} \\
   \int_{\Omega} \nabla u \cdot \nabla \phi \d{\Omega} - \int_{\Gamma_N} \phi g_{N_y} \d{\Gamma_N} - \int_{\Gamma_S} \phi g_{N_y} \d{\Gamma_S} &= \int_{\Omega} f \phi \d{\Omega},
 \end{align*}}
-and so the discrete variational problem consists of finding $u \in \trialspace$ given by (\ref{trial_space}) such that
+and so the discrete variational problem consists of finding $u \in \trialspace$ given by \cref{trial_space} such that
 \begin{align*}
   a(u,\phi) &= l(\phi) && \forall \phi \in S_0^h \subset \mathcal{H}_{E_0}^1(\Omega),
 \end{align*}
-subject to Dirichlet condition (\ref{3d_poisson_end}), where
+subject to Dirichlet condition \cref{3d_poisson_end}, where
 \begin{align*}
   l(\phi) &= \int_{\Gamma_N} \phi g_{N_y} \d{\Gamma_N} + \int_{\Gamma_S} \phi g_{N_y} \d{\Gamma_S} + \int_{\Omega} f \phi \d{\Omega}, \\
   a(u,\phi) &= \int_{\Omega} \nabla u \cdot \nabla \phi \d{\Omega}.
 \end{align*}
-This is as far as is needed to proceed in order to solve this simple problem with FEniCS, as demonstrated by Code Listing \ref{3d_poisson_code} and Figures \ref{3d_poisson_image_1} and \ref{3d_poisson_image_2}.
+This is as far as is needed to proceed in order to solve this simple problem with FEniCS, as demonstrated by \cref{3d_poisson_code} and Figures \cref{3d_poisson_image_1} and \cref{3d_poisson_image_2}.
 
-\pythonexternal[label=3d_poisson_code, caption={FEniCS code used to solve 3D-Poisson problem (\ref{3d_poisson_start} -- \ref{3d_poisson_end}).}]{scripts/fenics_intro/3D_poisson.py}
+\pythonexternal[label=3d_poisson_code, caption={FEniCS code used to solve 3D-Poisson problem \cref{3d_poisson}.}]{scripts/fenics_intro/3D_poisson.py}
   
 \begin{figure}
   \centering
     \includegraphics[width=\linewidth]{images/fenics_intro/3Dpoisson_new.png}
-  \caption[Three-dimensional Poisson solution]{Poisson equation solution to (\ref{3d_poisson_start} -- \ref{3d_poisson_end}) defined over a $30 \times 30 \times 30$ element mesh.}
+  \caption[Three-dimensional Poisson solution]{Poisson equation solution to \cref{3d_poisson} defined over a $30 \times 30 \times 30$ element mesh.}
   \label{3d_poisson_image_1}
 \end{figure}
 
 \begin{figure}
   \centering
     \includegraphics[width=\linewidth]{images/fenics_intro/3Dpoisson_new_split.png}
-  \caption[Inside the three-dimensional Poisson solution]{Inside the Poisson solution represented by Figure \ref{3d_poisson_image_1}.}
+  \caption[Inside the three-dimensional Poisson solution]{Inside the Poisson solution represented by \cref{3d_poisson_image_1}.}
   \label{3d_poisson_image_2}
 \end{figure}
 
@@ -68,7 +71,7 @@ This is as far as is needed to proceed in order to solve this simple problem wit
 
 \index{Linear differential equations!3D}
 \index{Stokes equations!No-slip}
-Recall from \S \ref{ssn_intro_stokes_2d} that the Stokes equations for an incompressible fluid are
+Recall from \cref{ssn_intro_stokes_2d} that the Stokes equations for an incompressible fluid are
 \begin{align}
   \label{intro_stokes_3d_momentum}
   -\nabla \cdot \ranktwo{\sigma} &= \rankone{f} &&\text{ in } \Omega &&\leftarrow \text{ conservation of momentum} \\
@@ -110,19 +113,23 @@ so that we have three equations,
 {\tiny
 \begin{subequations}
   \label{3d_stokes_expanded}
-  \begin{eqnarray}
-  \parder{}{x} \left[2\eta \parder{u}{x} \right]  - \parder{p}{x} + \parder{}{y} \left[\eta \left( \parder{u}{x} + \parder{v}{y} \right) \right] + \parder{}{z} \left[\eta \left( \parder{u}{x} + \parder{w}{z} \right) \right] &= 0 \\ 
-  \parder{}{x} \left[\eta \left( \parder{v}{y} + \parder{u}{x} \right) \right]  + \parder{}{y} \left[2\eta \parder{v}{y} \right] - \parder{p}{y} + \parder{}{z} \left[\eta \left( \parder{v}{y} + \parder{w}{z} \right) \right] &= 0 \\ 
-  \parder{}{x} \left[\eta \left( \parder{w}{z} + \parder{u}{x} \right) \right]  + \parder{}{y} \left[\eta \left( \parder{w}{z} + \parder{v}{y} \right) \right] + \parder{}{z} \left[2\eta \parder{w}{z} \right] - \parder{p}{z} &= \rho g,
-  \end{eqnarray}
+  \begin{align} 
+    \label{3d_stokes_expanded_one}
+    \parder{}{x} \left[2\eta \parder{u}{x} \right]  - \parder{p}{x} + \parder{}{y} \left[\eta \left( \parder{u}{x} + \parder{v}{y} \right) \right] + \parder{}{z} \left[\eta \left( \parder{u}{x} + \parder{w}{z} \right) \right] &= 0 \\ 
+    \label{3d_stokes_expanded_two} 
+    \parder{}{x} \left[\eta \left( \parder{v}{y} + \parder{u}{x} \right) \right]  + \parder{}{y} \left[2\eta \parder{v}{y} \right] - \parder{p}{y} + \parder{}{z} \left[\eta \left( \parder{v}{y} + \parder{w}{z} \right) \right] &= 0 \\ 
+    \label{3d_stokes_expanded_three}
+    \parder{}{x} \left[\eta \left( \parder{w}{z} + \parder{u}{x} \right) \right]  + \parder{}{y} \left[\eta \left( \parder{w}{z} + \parder{v}{y} \right) \right] + \parder{}{z} \left[2\eta \parder{w}{z} \right] - \parder{p}{z} &= \rho g,
+  \end{align}
 \end{subequations}}
-which when combined with conservation-of-mass (\ref{intro_stokes_3d_mass}),
-\begin{align*}
-  \nabla \cdot \rankone{u} &= \parder{u}{x} + \parder{v}{y} + \parder{w}{z} = 0, 
-\end{align*}
+which when combined with conservation-of-mass \cref{intro_stokes_3d_mass},
+\begin{align}
+  \label{3d_stokes_expanded_four}
+  \nabla \cdot \rankone{u} &= \parder{u}{x} + \parder{v}{y} + \parder{w}{z} = 0,
+\end{align}
 gives four equations and four unknowns $u$, $v$, $w$, and $p$.
 
-The weak form for this problem is formed by taking the inner product of both sides of conservation of momentum equation (\ref{intro_stokes_3d_momentum}) with the vector test function $\rankone{\Phi} = [\phi\ \psi\ \chi]\T \in \rankone{S_0^h} \subset \left( \mathcal{H}_{E_0}^1(\Omega) \right)^3$ (see test space (\ref{test_space})) integrating over the domain $\Omega$,
+The weak form for this problem is formed by taking the inner product of both sides of conservation of momentum equation \cref{intro_stokes_3d_momentum} with the vector test function $\rankone{\Phi} = [\phi\ \psi\ \chi]\T \in \rankone{S_0^h} \subset \left( \mathcal{H}_{E_0}^1(\Omega) \right)^3$ (see test space \cref{test_space}) integrating over the domain $\Omega$,
 \begin{align*}
   -\int_{\Omega} \nabla \cdot \ranktwo{\sigma} \cdot \rankone{\Phi} \d{\Omega} &= \int_{\Omega} \rankone{f} \cdot \rankone{\Phi} \d{\Omega},
 \end{align*}
@@ -131,26 +138,26 @@ then integrate by parts to get
   \int_{\Omega} \ranktwo{\sigma} : \nabla \rankone{\Phi} \d{\Omega} - \int_{\Gamma} \ranktwo{\sigma} \cdot \normal \cdot \rankone{\Phi} \d{\Gamma} &= \int_{\Omega} \rankone{f} \cdot \rankone{\Phi} \d{\Omega} \\
   \int_{\Omega} \ranktwo{\sigma} : \nabla \rankone{\Phi} \d{\Omega} &= \int_{\Omega} \rankone{f} \cdot \rankone{\Phi} \d{\Omega},
 \end{align*}
-where the fact that all boundaries are either homogeneous Neumann or Dirichlet has been used to eliminate boundary integrals.  Next, multiplying incompressibility (conservation of mass) equation (\ref{intro_stokes_3d_mass}) by the test function $\xi \in M^h \subset L^2(\Omega)$ (see $L^2$ space (\ref{l2_space})) also integrating over $\Omega$,
+where the fact that all boundaries are either homogeneous Neumann or Dirichlet has been used to eliminate boundary integrals.  Next, multiplying incompressibility (conservation of mass) equation \cref{intro_stokes_3d_mass} by the test function $\xi \in M^h \subset L^2(\Omega)$ (see $L^2$ space \cref{l2_space}) also integrating over $\Omega$,
 \begin{align*}
   \int_{\Omega} \left( \nabla \cdot \rankone{u} \right) \xi \d{\Omega} &= 0.
 \end{align*}
 
-Finally, using the fact that the right-hand side of incompressibility equation (\ref{intro_stokes_3d_mass}) is zero, the mixed formulation \index{Mixed methods} consists of finding mixed approximation $\rankone{u} \in \rankone{S_E^h} \subset \left( \mathcal{H}_E^1(\Omega) \right)^3$ (see trial space (\ref{trial_space})) and $p \in M^h \subset L^2(\Omega)$ such that
+Finally, using the fact that the right-hand side of incompressibility equation \cref{intro_stokes_3d_mass} is zero, the mixed formulation \index{Mixed methods} consists of finding mixed approximation $\rankone{u} \in \rankone{S_E^h} \subset \left( \mathcal{H}_E^1(\Omega) \right)^3$ (see trial space \cref{trial_space}) and $p \in M^h \subset L^2(\Omega)$ such that
 {\footnotesize
 \begin{align}
   \label{intro_stokes_3d_mixed_problem}
   a(\rankone{u},p,\rankone{\Phi},\xi) &= L(\rankone{\Phi}) && \forall \rankone{\phi} \in \rankone{S_0^h} \subset \left( \mathcal{H}_{E_0}^1(\Omega) \right)^3,\ \xi \in M^h \subset L^2(\Omega),
 \end{align}}
-subject to Dirichlet condition (\ref{intro_stokes_3d_bc_d}) and
+subject to Dirichlet condition \cref{intro_stokes_3d_bc_d} and
 \begin{align*}
   a(\rankone{u},p,\rankone{\Phi},\xi) &= \int_{\Omega} \ranktwo{\sigma} : \nabla \rankone{\Phi} \d{\Omega} + \int_{\Omega} \left( \nabla \cdot \rankone{u} \right) \xi \d{\Omega}, \\
   L(\rankone{\Phi}) &= \int_{\Omega} \rankone{f} \cdot \rankone{\Phi} \d{\Omega}.
 \end{align*}
 
-For our solution satisfying inf-sup condition (\ref{inf_sup_condition}), we enrich the finite element space with bubble functions (see Chapter \ref{ssn_subgrid_scale_effects}), thus creating MINI elements \citep{arnold_1984}.  The solution is generated with Code Listing \ref{intro_3d_stokes_code} and depicted in Figure \ref{intro_3d_stokes_image}.
+For our solution satisfying inf-sup condition \cref{inf_sup_condition}, we enrich the finite element space with bubble functions (see Chapter \cref{ssn_subgrid_scale_effects}), thus creating MINI elements \citep{arnold_1984}.  The solution is generated with \cref{intro_3d_stokes_code} and depicted in \cref{intro_3d_stokes_image}.
 
-\pythonexternal[label=intro_3d_stokes_code, caption={FEniCS solution to 3D-Stokes-no-slip problem (\ref{intro_stokes_3d_mixed_problem}).}]{scripts/fenics_intro/3D_stokes.py}
+\pythonexternal[label=intro_3d_stokes_code, caption={FEniCS solution to 3D-Stokes-no-slip problem \cref{intro_stokes_3d_mixed_problem}.}]{scripts/fenics_intro/3D_stokes.py}
 
 \begin{figure*}
   \centering

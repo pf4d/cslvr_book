@@ -5,13 +5,13 @@
 \index{Impenetrability}
 \index{Incompressibility|seealso{Balance equations!Mass}}
 
-In order to better understand the balance of mass for an ice-sheet, it is instructive to begin from the integral form of the continuity equation (\ref{integral_continuity_equation}) for a domain $\Omega(\rankone{x},t)$ with boundary $\partial \Omega = \Gamma(\rankone{x},t)$ using density $\phi = \rho$, mass flux $\rankone{j} = \rho \rankone{u}$, and zero production or supply $f = 0$:
+In order to better understand the balance of mass for an ice-sheet, it is instructive to begin from the integral form of the continuity equation \cref{integral_continuity_equation} for a domain $\Omega(\rankone{x},t)$ with boundary $\partial \Omega = \Gamma(\rankone{x},t)$ using density $\phi = \rho$, mass flux $\rankone{j} = \rho \rankone{u}$, and zero production or supply $f = 0$:
 \begin{align*}
   \totder{}{t} \int_{\Omega} \rho \d{\Omega} = - \int_{\Gamma} \rho \rankone{u} \cdot \normal \d{\Gamma},
 \end{align*}
 with and outward-pointing unit-normal-vector $\normal$.
 Using the fact that the ice is incompressible, meaning that density is constant and thus $\dot{\rho} = 0$, the left-hand side of this relation zero.
-Applying divergence theorem (\ref{divergence_theorem}) \index{Divergence theorem!Regarding continuity equations} to the remaining surface integral results in
+Applying divergence \cref{divergence_theorem} \index{Divergence theorem!Regarding continuity equations} to the remaining surface integral results in
 \begin{align*}
   \int_{\Omega} \nabla \cdot \rankone{u} \d{\Omega} = 0,
 \end{align*}

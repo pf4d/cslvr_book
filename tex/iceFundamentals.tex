@@ -1,7 +1,7 @@
 
 \chapter{Fundamentals of flowing ice}
 
-Large bodies of ice behave as a highly viscous and thermally-dependent system.  The primary variables associated with an ice-sheet or glacier defined over a domain $\Omega$ with boundary $\Gamma$ (see Figure \ref{ice_profile_domain}) are velocity $\rankone{u}$ with components $u$, $v$, and $w$ in the $x$, $y$, and $z$ directions; pressure $p$; and internal energy $\theta$.  These variables are inextricably linked by the fundamental conservation equations 
+Large bodies of ice behave as a highly viscous and thermally-dependent system.  The primary variables associated with an ice-sheet or glacier defined over a domain $\Omega$ with boundary $\Gamma$ (see Figure \cref{ice_profile_domain}) are velocity $\rankone{u}$ with components $u$, $v$, and $w$ in the $x$, $y$, and $z$ directions; pressure $p$; and internal energy $\theta$.  These variables are inextricably linked by the fundamental conservation equations 
 \begin{align}
   \label{cons_momentum}
   \partial_t \left(\rho \rankone{u} \right) + \nabla \cdot \ranktwo{\sigma} &= -\rho\rankone{g} &&\text{ in } \Omega &&\leftarrow \text{ momentum} \\
@@ -15,7 +15,7 @@ These relations are in turn defined with gravitational acceleration vector $\ran
   \label{stress_tensor}
   \ranktwo{\sigma} &= \ranktwo{\tau} - p \ranktwo{I}, \hspace{10mm} \ranktwo{\tau} = 2\eta\ranktwo{\dot{\epsilon}}
 \end{align}
-further defined with rank-two identity tensor $I$, effective viscosity $\eta$, and \index{Tensor!Strain-rate} strain-rate tensor (see \ref{intro_strain_rate_tensor} for expansion),
+further defined with rank-two identity tensor $I$, effective viscosity $\eta$, and \index{Tensor!Strain-rate} strain-rate tensor (see \cref{intro_strain_rate_tensor} for expansion),
 \begin{align}
   \label{strain_rate_tensor}
   \ranktwo{\dot{\epsilon}} 
@@ -27,35 +27,35 @@ Shear viscosity $\eta$ is derived from \index{Constitutive ice-flow relation} \e
   \label{nye}
   \ranktwo{\dot{\epsilon}} = A(\theta) \tau_e^{n-1} \ranktwo{\tau},
 \end{align}
-defined with Glen's flow parameter $n$, the deviatoric part of Cauchy-stress tensor (\ref{stress_tensor}) $\ranktwo{\tau} = 2\eta \ranktwo{\dot{\epsilon}}$, and Arrhenius-type energy-dependent flow-rate factor $A(\theta)$.
+defined with Glen's flow parameter $n$, the deviatoric part of Cauchy-stress tensor \cref{stress_tensor} $\ranktwo{\tau} = 2\eta \ranktwo{\dot{\epsilon}}$, and Arrhenius-type energy-dependent flow-rate factor $A(\theta)$.
 
-The second invariant of full-stress-tensor (\ref{stress_tensor}) -- referred to as the \index{Tensor!Effective stress} \emph{effective stress} -- is given by
+The second invariant of full-stress-tensor \cref{stress_tensor}---referred to as the \index{Tensor!Effective stress} \emph{effective stress}---is given by
 \begin{align}
   \tau_e^2 = & \frac{1}{2} \mathrm{tr}\left( \ranktwo{\tau}^2 \right) = \frac{1}{2} \left[ \tau_{ij} \tau_{ij} \right] \notag \\
   \label{effectivstress}
   = &\frac{1}{2} \left[ \tau_{xx}^2 + \tau_{yy}^2 + \tau_{zz}^2 + 2\tau_{xy}^2 + 2\tau_{xz}^2 + 2\tau_{yz}^2 \right].
 \end{align}
-Likewise, the second invariant of strain-rate tensor (\ref{strain_rate_tensor}) -- known as the \index{Tensor!Effective strain-rate} \emph{effective strain-rate} -- is given by
+Likewise, the second invariant of strain-rate tensor \cref{strain_rate_tensor}---known as the \index{Tensor!Effective strain-rate} \emph{effective strain-rate}---is given by
 \begin{align}
   \dot{\varepsilon}_e^2 = & \frac{1}{2} \tr\left( \ranktwo{\dot{\epsilon}}^2 \right) = \frac{1}{2} \Bigg[ \dot{\epsilon}_{ij} \dot{\epsilon}_{ij} \Bigg] \notag \\
   \label{effective_strain_rate}
   = &\frac{1}{2} \Bigg[ \dot{\epsilon}_{xx}^2 + \dot{\epsilon}_{yy}^2 + \dot{\epsilon}_{zz}^2 + 2\dot{\epsilon}_{xy}^2 + 2\dot{\epsilon}_{xz}^2 + 2\dot{\epsilon}_{yz}^2 \Bigg].
 \end{align}
 
-Due to the fact that the viscosity of ice $\eta$ is a scalar field, the strain-rate and stress-deviator tensors in (\ref{nye}) may be set equal to their invariants.  Their relationship with \index{Viscosity} viscosity $\eta$ is then evaluated,
+Due to the fact that the viscosity of ice $\eta$ is a scalar field, the strain-rate and stress-deviator tensors in \cref{nye} may be set equal to their invariants.  Their relationship with \index{Viscosity} viscosity $\eta$ is then evaluated,
 \begin{align}
   \label{tau_e_con}
   \dot{\varepsilon}_e = A \tau_e^{n-1} \tau_e = A \tau_e^n \hspace{5mm}
   \implies \hspace{5mm} \tau_e = A^{-\frac{1}{n}} \dot{\varepsilon}_e^{\frac{1}{n}}.
 \end{align}
-Inserting (\ref{tau_e_con}) into (\ref{nye}) and solving for $\ranktwo{\tau}$ results in
+Inserting \cref{tau_e_con} into \cref{nye} and solving for $\ranktwo{\tau}$ results in
 \begin{align*}
   \ranktwo{\tau} &= A^{-1} \tau_e^{1-n} \ranktwo{\dot{\epsilon}} 
        = A^{-1} \left( A^{-\frac{1}{n}} \dot{\varepsilon}_e^{\frac{1}{n}} \right)^{1-n} \ranktwo{\dot{\epsilon}} \\
        &= A^{-1} A^{\frac{n - 1}{n}} \dot{\varepsilon}_e^{\frac{1-n}{n}} \ranktwo{\dot{\epsilon}} 
        = A^{-\frac{1}{n}} \dot{\varepsilon}_e^{\frac{1-n}{n}} \ranktwo{\dot{\epsilon}}.
 \end{align*}
-Next, using deviatoric-stress-tensor definition (\ref{stress_tensor}),
+Next, using deviatoric-stress-tensor definition \cref{stress_tensor},
 \begin{align*}
   \eta = \frac{1}{2} \ranktwo{\tau} \ranktwo{\dot{\epsilon}}^{-1} 
        = \frac{1}{2} \left( A^{-\frac{1}{n}} \dot{\varepsilon}_e^{\frac{1-n}{n}} \ranktwo{\dot{\epsilon}} \right) \ranktwo{\dot{\epsilon}}^{-1} 
@@ -67,72 +67,73 @@ When solving discrete systems, a strain-regularization term $\dot{\varepsilon}_0
   \eta(\theta, \rankone{u}) &= \frac{1}{2}A(\theta)^{-\nicefrac{1}{n}} (\dot{\varepsilon}_e(\rankone{u}) + \dot{\varepsilon}_0)^{\frac{1-n}{n}}.
 \end{align} 
 
-Finally, the strain-heating \index{Strain heat} term $Q$ in (\ref{cons_energy}) is defined as the third invariant (the trace) of the tensor product of strain-rate tensor (\ref{strain_rate_tensor}) and the deviatoric component of Cauchy-stress tensor (\ref{stress_tensor}), $\ranktwo{\tau} = 2\eta \ranktwo{\dot{\epsilon}}$ \citep{greve_2009}
+Finally, the strain-heating \index{Strain heat} term $Q$ in \cref{cons_energy} is defined as the third invariant (the trace) of the tensor product of strain-rate tensor \cref{strain_rate_tensor} and the deviatoric component of Cauchy-stress tensor \cref{stress_tensor}, $\ranktwo{\tau} = 2\eta \ranktwo{\dot{\epsilon}}$ \citep{greve_2009}
 \begin{align}
   \label{strain_heat}
   Q(\theta, \rankone{u}) &= \mathrm{tr}\left( \ranktwo{\dot{\epsilon}} \cdot \ranktwo{\tau} \right) = \ 2 \eta \mathrm{tr}\left(\ranktwo{\dot{\epsilon}}^2\right) = 4 \eta \dot{\varepsilon}_e^2.
 \end{align}
 
-Equations (\ref{cons_momentum} -- \ref{cons_energy}) and corresponding boundary conditions are described in the following chapters.  FEniCS source code will be provided whenever possible, and are available through the open-source software \emph{Cryospheric Problem Solver} (\CSLVR), an expansion of the FEniCS software \emph{Variational Glacier Simulator} (VarGlaS) developed by \citet{brinkerhoff_2013}.
+Equations \cref{cons_momentum,cons_mass,cons_energy} and corresponding boundary conditions are described in the following chapters.
+FEniCS source code will be provided whenever possible, and are available through the open-source software \emph{Cryospheric Problem Solver} (\CSLVR), an expansion of the FEniCS software \emph{Variational Glacier Simulator} (VarGlaS) developed by \citet{brinkerhoff_2013}.
 
 %===============================================================================
 
 \section{List of symbols}
 
 \begin{tabular}{lll}
-$\theta$ & J kg\sups{-1} & internal energy (\ref{energy}) \\
-$\theta_m$ & J kg\sups{-1} & pressure-melting energy (\ref{energy_melting}) \\
-$\theta_c$ & J kg\sups{-1} & maximum energy (\ref{energy_objective}) \\
-$\tilde{\theta}$ & J kg\sups{-1} & enthalpy (\ref{enthalpy}) \\
-$T$ & K & temperature (\ref{temperature}) \\
-$T_m$ & K & pressure-melting temp.~(\ref{temperature_melting}) \\
-$T_S$ & K & 2-meter depth surface temp.~(\ref{surface_temperature}) \\
-$W$ & -- & water content (\ref{water_content}) \\ 
-$W_c$ & -- & maximum water content (\ref{water_demand}) \\
-$W_S$ & -- & surface water content (\ref{surface_water}) \\
-$\rankone{q}$ & kg s\sups{-3} & energy flux (\ref{flux}, \ref{individual_flux}, \ref{enthalpy_grad}) \\
-$\rankone{q}_s$ & kg s\sups{-3} & sensible heat flux (\ref{individual_flux}) \\
-$\rankone{q}_l$ & kg s\sups{-3} & latent heat flux (\ref{individual_flux}) \\
-$\rho$ & kg m\sups{-3} & density (\ref{mixture_density}) \\
-$k$  & J s\sups{-1}m\sups{-1}K\sups{-1} & mixture thermal conductivity (\ref{mixture_thermal_conductivity}) \\
-$k_i$  & J s\sups{-1}m\sups{-1}K\sups{-1} & thermal conductivity of ice (\ref{thermal_conductivity}) \\
-$k_0$  & -- & non-advective transport coef.~(\ref{enthalpy_grad}) \\
-$c$  & J kg\sups{-1}K\sups{-1} & mixture heat capacity (\ref{mixture_heat_capacity}) \\
-$c_i$  & J kg\sups{-1}K\sups{-1} & heat capacity of ice (\ref{heat_capacity}) \\
-$\kappa$ & J s\sups{-1}m\sups{-1}K\sups{-1} & enthalpy-gradient cond'v'ty (\ref{enthalpy_grad}) \\
-$\nu$ & J m\sups{-1}s\sups{-1} & non-advective water-flux coef.~(\ref{individual_flux}) \\
-$p$ & Pa & pressure (\ref{stress_tensor}) \\
-$\rankone{f}$ & Pa m\sups{-1} & volumetric body forces (\ref{cons_momentum}) \\
+$\theta$ & J kg\sups{-1} & internal energy \cref{energy} \\
+$\theta_m$ & J kg\sups{-1} & pressure-melting energy \cref{energy_melting} \\
+$\theta_c$ & J kg\sups{-1} & maximum energy \cref{energy_objective} \\
+$\tilde{\theta}$ & J kg\sups{-1} & enthalpy \cref{enthalpy} \\
+$T$ & K & temperature \cref{temperature} \\
+$T_m$ & K & pressure-melting temp.~\cref{temperature_melting} \\
+$T_S$ & K & 2-meter depth surface temp.~\cref{surface_temperature} \\
+$W$ & -- & water content \cref{water_content} \\ 
+$W_c$ & -- & maximum water content \cref{water_demand} \\
+$W_S$ & -- & surface water content \cref{surface_water} \\
+$\rankone{q}$ & kg s\sups{-3} & energy flux \cref{flux,individual_flux,enthalpy_grad} \\
+$\rankone{q}_s$ & kg s\sups{-3} & sensible heat flux \cref{individual_flux} \\
+$\rankone{q}_l$ & kg s\sups{-3} & latent heat flux \cref{individual_flux} \\
+$\rho$ & kg m\sups{-3} & density \cref{mixture_density} \\
+$k$  & J s\sups{-1}m\sups{-1}K\sups{-1} & mixture thermal conductivity \cref{mixture_thermal_conductivity} \\
+$k_i$  & J s\sups{-1}m\sups{-1}K\sups{-1} & thermal conductivity of ice \cref{thermal_conductivity} \\
+$k_0$  & -- & non-advective transport coef.~\cref{enthalpy_grad} \\
+$c$  & J kg\sups{-1}K\sups{-1} & mixture heat capacity \cref{mixture_heat_capacity} \\
+$c_i$  & J kg\sups{-1}K\sups{-1} & heat capacity of ice \cref{heat_capacity} \\
+$\kappa$ & J s\sups{-1}m\sups{-1}K\sups{-1} & enthalpy-gradient cond'v'ty \cref{enthalpy_grad} \\
+$\nu$ & J m\sups{-1}s\sups{-1} & non-advective water-flux coef.~\cref{individual_flux} \\
+$p$ & Pa & pressure \cref{stress_tensor} \\
+$\rankone{f}$ & Pa m\sups{-1} & volumetric body forces \cref{cons_momentum} \\
 $\rankone{g}$ & m s\sups{-2} & gravitational acceleration vector \\
 $\rankone{u}$ & m s\sups{-1} & velocity vector \\
 $\normal$ & -- & outward-normal vector \\
-$Q$ & J m\sups{-3}s\sups{-1} & internal friction (\ref{strain_heat}) \\
-$\Xi$ & m\sups{2}s\sups{-1} & mixture diffusivity (\ref{diffusivity}) \\
-$\ranktwo{\sigma}$ & Pa & Cauchy-stress tensor (\ref{stress_tensor}) \\
-$\ranktwo{\sigma}_{BP}$ & Pa & first-order stress tensor (\ref{bp_stress_tensor}) \\
-$\ranktwo{\sigma}_{PS}$ & Pa & plane-strain stress tensor (\ref{ps_tensors}) \\
-$\ranktwo{\sigma}_{RS}$ & Pa & reform.-Stokes stress tensor (\ref{rs_stress_tensor}) \\
-$\ranktwo{\tau}$ & Pa & deviatoric-stress tensor (\ref{stress_tensor}) \\
-$\ranktwo{\dot{\epsilon}}$ & s\sups{-1} & rate-of-strain tensor (\ref{strain_rate_tensor}) \\
-$\dot{\varepsilon}_e$ & s\sups{-1} & effective strain-rate (\ref{effective_strain_rate}) \\
-$\dot{\varepsilon}_{\text{BP}}$ & s\sups{-1} & first-order eff.~strain-rate (\ref{bp_effective_strain_rate}) \\
-$\dot{\varepsilon}_{\text{PS}}$ & s\sups{-1} & plane-strain eff.~strain-rate (\ref{ps_effective_strain_rate}) \\
-$\dot{\varepsilon}_{\text{RS}}$ & s\sups{-1} & reform.-Stokes eff.~strain-rate (\ref{rs_effective_strain_rate}) \\
-$\eta$ & Pa s & shear viscosity (\ref{viscosity}) \\
-$\eta_{\text{BP}}$ & Pa s & first-order shear viscosity (\ref{bp_viscosity}) \\
-%$\eta^L_{\text{BP}}$ & Pa s & linear first-order shear visc.~(\ref{linear_bp_viscosity}) \\
-$\eta_{\text{PS}}$ & Pa s & plane-strain shear viscosity (\ref{ps_viscosity}) \\
-$\eta_{\text{RS}}$ & Pa s & reform.-Stokes shear viscosity (\ref{rs_viscosity}) \\
-$f_w$ & Pa & hydrostatic pressure (\ref{water_pressure}) \\
-$f_e$ & Pa & exterior pressure (\ref{exterior_pressure}) \\
-$f_c$ & Pa & cryostatic pressure (\ref{exterior_pressure}) \\
-$\beta$ & kg m\sups{-2}s\sups{-1} & basal-sliding coefficient (\ref{basal_drag}) \\
-$A$ & Pa\sups{-3}s\sups{-1} & flow-rate factor with $n=3$ (\ref{rate_factor}) \\ 
+$Q$ & J m\sups{-3}s\sups{-1} & internal friction \cref{strain_heat} \\
+$\Xi$ & m\sups{2}s\sups{-1} & mixture diffusivity \cref{diffusivity} \\
+$\ranktwo{\sigma}$ & Pa & Cauchy-stress tensor \cref{stress_tensor} \\
+$\ranktwo{\sigma}_{BP}$ & Pa & first-order stress tensor \cref{bp_stress_tensor} \\
+$\ranktwo{\sigma}_{PS}$ & Pa & plane-strain stress tensor \cref{ps_tensors} \\
+$\ranktwo{\sigma}_{RS}$ & Pa & reform.-Stokes stress tensor \cref{rs_stress_tensor} \\
+$\ranktwo{\tau}$ & Pa & deviatoric-stress tensor \cref{stress_tensor} \\
+$\ranktwo{\dot{\epsilon}}$ & s\sups{-1} & rate-of-strain tensor \cref{strain_rate_tensor} \\
+$\dot{\varepsilon}_e$ & s\sups{-1} & effective strain-rate \cref{effective_strain_rate} \\
+$\dot{\varepsilon}_{\text{BP}}$ & s\sups{-1} & first-order eff.~strain-rate \cref{bp_effective_strain_rate} \\
+$\dot{\varepsilon}_{\text{PS}}$ & s\sups{-1} & plane-strain eff.~strain-rate \cref{ps_effective_strain_rate} \\
+$\dot{\varepsilon}_{\text{RS}}$ & s\sups{-1} & reform.-Stokes eff.~strain-rate \cref{rs_effective_strain_rate} \\
+$\eta$ & Pa s & shear viscosity \cref{viscosity} \\
+$\eta_{\text{BP}}$ & Pa s & first-order shear viscosity \cref{bp_viscosity} \\
+%$\eta^L_{\text{BP}}$ & Pa s & linear first-order shear visc.~\cref{linear_bp_viscosity} \\
+$\eta_{\text{PS}}$ & Pa s & plane-strain shear viscosity \cref{ps_viscosity} \\
+$\eta_{\text{RS}}$ & Pa s & reform.-Stokes shear viscosity \cref{rs_viscosity} \\
+$f_w$ & Pa & hydrostatic pressure \cref{water_pressure} \\
+$f_e$ & Pa & exterior pressure \cref{exterior_pressure} \\
+$f_c$ & Pa & cryostatic pressure \cref{exterior_pressure} \\
+$\beta$ & kg m\sups{-2}s\sups{-1} & external friction \cref{atmosphere_shear_stress,water_shear_stress,bedrock_shear_stress} \\
+$A$ & Pa\sups{-n}s\sups{-1} & flow-rate factor \cref{rate_factor} \\ 
 $q_{geo}$ & J s\sups{-1}m\sups{-2} & geothermal heat flux \\
-$q_{fric}$ & J s\sups{-1}m\sups{-2} & frictional heating (\ref{basal_friction_heat}) \\
-$g_N$ & J s\sups{-1}m\sups{-2} & basal energy source (\ref{basal_energy_source}) \\
-$M_b$ & m s\sups{-1} & basal melting rate (\ref{basal_melt_rate}) \\
-$F_b$ & m s\sups{-1} & basal water discharge (\ref{basal_water_discharge}) \\
+$q_{fric}$ & J s\sups{-1}m\sups{-2} & frictional heating \cref{basal_friction_heat} \\
+$g_N$ & J s\sups{-1}m\sups{-2} & basal energy source \cref{basal_energy_source} \\
+$M_b$ & m s\sups{-1} & basal melting rate \cref{basal_melt_rate} \\
+$F_b$ & m s\sups{-1} & basal water discharge \cref{basal_water_discharge} \\
 $S$ & m & atmospheric surface height \\
 $B$ & m & basal surface height \\
 $H$ & m & ice thickness \\
@@ -140,20 +141,20 @@ $H$ & m & ice thickness \\
 
 \begin{tabular}{lll}
 $h$ & m & element diameter \\
-$\ranktwo{\tau}_{\text{IE}}$ & s m\sups{3} kg\sups{-3} & energy intr'sic-time par.~(\ref{tau_ie}) \\
-$\ranktwo{\tau}_{\text{BV}}$ & -- & balance vel.~intr'sic-time par.~(\ref{tau_bv}) \\
-$\ranktwo{\tau}_{\text{age}}$ & s & age intrinsic-time parameter (\ref{tau_age}) \\
-$P_{\'e}$ & -- & element P\'{e}clet number (\ref{tau_ie}) \\
-$\xi$ & -- & energy in'sic-time coef.~(\ref{intrinsic_time_ftn}, \ref{intrinsic_time_ftn_quad}) \\
-$\alpha$ & -- & temperate zone coefficient (\ref{temperate_marker}) \\
-$\rankone{r}$ & J s\sups{-1} & energy residual vector (\ref{component_var_form}) \\
-$\ranktwo{\mathcal{C}}$ & J s\sups{-1} & energy advection matrix (\ref{advective_form}) \\
-$\ranktwo{\mathcal{K}}$ & J s\sups{-1} & conducive gradient matrix (\ref{conductive_gradient_form}) \\
-$\ranktwo{\mathcal{D}}$ & J s\sups{-1} & energy diffusion matrix (\ref{diffusion_form}) \\
-$\ranktwo{\mathcal{S}}$ & J s\sups{-1} & energy stabilization matrix (\ref{stabilization_form_a}) \\
-$\rankone{f}^{\text{ext}}$ & J s\sups{-1} & ext.~basal energy flux vec.~(\ref{basal_energy_gradient_form}) \\
-$\rankone{f}^{\text{int}}$ & J s\sups{-1} & internal strain heat vector (\ref{internal_friction_form}) \\
-$\rankone{f}^{\text{stz}}$ & J s\sups{-1} & stabilization vector (\ref{stabilization_form_l}) \\
+$\ranktwo{\tau}_{\text{IE}}$ & s m\sups{3} kg\sups{-3} & energy intr'sic-time par.~\cref{tau_ie} \\
+$\ranktwo{\tau}_{\text{BV}}$ & -- & balance vel.~intr'sic-time par.~\cref{tau_bv} \\
+$\ranktwo{\tau}_{\text{age}}$ & s & age intrinsic-time parameter \cref{tau_age} \\
+$P_{\'e}$ & -- & element P\'{e}clet number \cref{tau_ie} \\
+$\xi$ & -- & energy in'sic-time coef.~\cref{intrinsic_time_ftn,intrinsic_time_ftn_quad} \\
+$\alpha$ & -- & temperate zone coefficient \cref{temperate_marker} \\
+$\rankone{r}$ & J s\sups{-1} & energy residual vector \cref{component_var_form} \\
+$\ranktwo{\mathcal{C}}$ & J s\sups{-1} & energy advection matrix \cref{advective_form} \\
+$\ranktwo{\mathcal{K}}$ & J s\sups{-1} & conducive gradient matrix \cref{conductive_gradient_form} \\
+$\ranktwo{\mathcal{D}}$ & J s\sups{-1} & energy diffusion matrix \cref{diffusion_form} \\
+$\ranktwo{\mathcal{S}}$ & J s\sups{-1} & energy stabilization matrix \cref{stabilization_form_a} \\
+$\rankone{f}^{\text{ext}}$ & J s\sups{-1} & ext.~basal energy flux vec.~\cref{basal_energy_gradient_form} \\
+$\rankone{f}^{\text{int}}$ & J s\sups{-1} & internal strain heat vector \cref{internal_friction_form} \\
+$\rankone{f}^{\text{stz}}$ & J s\sups{-1} & stabilization vector \cref{stabilization_form_l} \\
 $\Omega$ & m\sups{3} & domain volume \\
 $\Gamma$ & m\sups{2} & domain outer surface \\
 $\Gamma_A$ & m\sups{2} & atmospheric surface \\
@@ -164,39 +165,39 @@ $\Gamma_G$ & m\sups{2} & complete grounded basal surface \\
 $\Gamma_W$ & m\sups{2} & surface in contact with ocean \\
 $\Gamma_E$ & m\sups{2} & non-grounded surface \\
 $\Gamma_D$ & m\sups{2} & interior lateral surface \\
-$\mathcal{A}$ & J s\sups{-1} & momentum variational princ. (\ref{action}) \\
-$\mathcal{A}_{\text{BP}}$ & J s\sups{-1} & first-order momentum prin'ple (\ref{bp_action}) \\
-$\mathcal{A}_{\text{PS}}$ & J s\sups{-1} & plane-strain mom'tum pr'c'p.~(\ref{ps_action}) \\
-$\mathcal{A}_{\text{RS}}$ & J s\sups{-1} & ref.-Stokes momentum princ.~(\ref{rs_action}) \\
-$\Lambda$ & Pa  & impen'bil'ty Lagrange mult. (\ref{dukowicz_lambda}) \\
-$\Lambda_{\text{BP}}$ & Pa  & BP impen'bil'ty Lag'nge mult.~(\ref{bp_dukowicz_lambda}) \\
-$\Lambda_{\text{PS}}$ & Pa  & PS impen'bil'ty Lag'nge mult.~(\ref{ps_dukowicz_lambda}) \\
-$V$ & Pa  & viscous dissipation (\ref{viscous_dissipation}) \\
-$V_{\text{BP}}$ & Pa  & first-order viscous dissipation (\ref{bp_viscous_dissipation}) \\
-%$V^L_{\text{BP}}$ & Pa  & linear first-order visc.~dis'pat'n (\ref{linear_viscous_dissipation}) \\
-$V_{\text{PS}}$ & Pa  & plane-strain viscous diss.~(\ref{ps_viscous_dissipation}) \\
-$V_{\text{RS}}$ & Pa  & reform.-Stokes viscous diss.~(\ref{rs_viscous_dissipation}) \\
-$\mathscr{R}$ & Pa s\sups{-1} & energy balance residual (\ref{energy_forward_model}) \\
-$\mathscr{J}$ & m\sups{6}s\sups{-4} & energy objective functional (\ref{energy_objective}) \\
-$\mathscr{L}$ & m\sups{6}s\sups{-4} & energy Lagrangian fun'al (\ref{energy_lagrangian}) \\
+$\mathcal{A}$ & J s\sups{-1} & momentum variational princ. \cref{action} \\
+$\mathcal{A}_{\text{BP}}$ & J s\sups{-1} & first-order momentum prin'ple \cref{bp_action} \\
+$\mathcal{A}_{\text{PS}}$ & J s\sups{-1} & plane-strain mom'tum pr'c'p.~\cref{ps_action} \\
+$\mathcal{A}_{\text{RS}}$ & J s\sups{-1} & ref.-Stokes momentum princ.~\cref{rs_action} \\
+$\Lambda$ & Pa  & impen'bil'ty Lagrange mult. \cref{dukowicz_lambda} \\
+$\Lambda_{\text{BP}}$ & Pa  & BP impen'bil'ty Lag'nge mult.~\cref{bp_dukowicz_lambda} \\
+$\Lambda_{\text{PS}}$ & Pa  & PS impen'bil'ty Lag'nge mult.~\cref{ps_dukowicz_lambda} \\
+$V$ & Pa  & viscous dissipation \cref{viscous_dissipation} \\
+$V_{\text{BP}}$ & Pa  & first-order viscous dissipation \cref{bp_viscous_dissipation} \\
+%$V^L_{\text{BP}}$ & Pa  & linear first-order visc.~dis'pat'n \cref{linear_viscous_dissipation} \\
+$V_{\text{PS}}$ & Pa  & plane-strain viscous diss.~\cref{ps_viscous_dissipation} \\
+$V_{\text{RS}}$ & Pa  & reform.-Stokes viscous diss.~\cref{rs_viscous_dissipation} \\
+$\mathscr{R}$ & Pa s\sups{-1} & energy balance residual \cref{energy_forward_model} \\
+$\mathscr{J}$ & m\sups{6}s\sups{-4} & energy objective functional \cref{energy_objective} \\
+$\mathscr{L}$ & m\sups{6}s\sups{-4} & energy Lagrangian fun'al \cref{energy_lagrangian} \\
 $\lambda_b$ & m\sups{5}s\sups{-1} & $F_b$ inequality const. Lagrange mult. \\
 $\mathscr{D}$ & J kg\sups{-1} & optimal water energy discrepancy \\
-$\lambda$ & m\sups{4}kg\sups{-1}s\sups{-1} & energy adjoint variable (\ref{energy_adjoint}) \\
-$\mathscr{H}$ & J s\sups{-1} & momentum Lagr'ian (\ref{momentum_lagrangian}, \ref{momentum_expanded_lagrangian}) \\
-$\rankone{\lambda}$ & m s\sups{-1} & momentum adjoint variable (\ref{momentum_lagrangian}) \\
-$\mathscr{I}$ & J s\sups{-1} & momentum objective fun'al (\ref{momentum_objective}) \\
-$\gamma_1$ & kg m\sups{-2}s\sups{-1} & $L^2$ cost coefficient (\ref{momentum_objective}) \\
-$\gamma_2$ & J s\sups{-1} & logarithmic cost coefficient (\ref{momentum_objective}) \\
-$\gamma_3$ & m\sups{6}kg\sups{-1}s\sups{-1} & Tikhonov regularization coef. (\ref{momentum_objective}) \\
-$\gamma_4$ & m\sups{6}kg\sups{-1}s\sups{-1} & TV regularization coeff. (\ref{momentum_objective}) \\
-$\varphi_{\mu}$ & m\sups{6}s\sups{-4} & energy barrier problem (\ref{energy_barrier}) \\
-$\varphi_{\omega}$ & J s\sups{-1} & momentum barrier problem (\ref{momentum_barrier}) \\
-$\rankone{d}$ & -- & imposed dir.~of bal.~velocity (\ref{balance_velocity_direction}) \\
-$\bar{\rankone{u}}$ & m s\sups{-1} & balance velocity (\ref{balance_velocity}) \\
-$\bar{u}$ & m s\sups{-1} & balance velocity magnitude (\ref{balance_velocity_dir_and_mag}) \\
-$\hat{\rankone{u}}$ & -- & balance velocity direction (\ref{balance_velocity_dir_and_mag}) \\
-$N$   & Pa m & membrane-stress tensor (\ref{membrane_stress_tensor}) \\
-$M$   & Pa & membrane-stress bal.~tensor (\ref{membrane_stress_balance_tensor}) \\
+$\lambda$ & m\sups{4}kg\sups{-1}s\sups{-1} & energy adjoint variable \cref{energy_adjoint} \\
+$\mathscr{H}$ & J s\sups{-1} & momentum Lagr'ian \cref{momentum_lagrangian,momentum_expanded_lagrangian} \\
+$\rankone{\lambda}$ & m s\sups{-1} & momentum adjoint variable \cref{momentum_lagrangian} \\
+$\mathscr{I}$ & J s\sups{-1} & momentum objective fun'al \cref{momentum_objective} \\
+$\gamma_1$ & kg m\sups{-2}s\sups{-1} & $L^2$ cost coefficient \cref{momentum_objective} \\
+$\gamma_2$ & J s\sups{-1} & logarithmic cost coefficient \cref{momentum_objective} \\
+$\gamma_3$ & m\sups{6}kg\sups{-1}s\sups{-1} & Tikhonov regularization coef. \cref{momentum_objective} \\
+$\gamma_4$ & m\sups{6}kg\sups{-1}s\sups{-1} & TV regularization coeff. \cref{momentum_objective} \\
+$\varphi_{\mu}$ & m\sups{6}s\sups{-4} & energy barrier problem \cref{energy_barrier} \\
+$\varphi_{\omega}$ & J s\sups{-1} & momentum barrier problem \cref{momentum_barrier} \\
+$\rankone{d}$ & -- & imposed dir.~of bal.~velocity \cref{balance_velocity_direction} \\
+$\bar{\rankone{u}}$ & m s\sups{-1} & balance velocity \cref{balance_velocity} \\
+$\bar{u}$ & m s\sups{-1} & balance velocity magnitude \cref{balance_velocity_dir_and_mag} \\
+$\hat{\rankone{u}}$ & -- & balance velocity direction \cref{balance_velocity_dir_and_mag} \\
+$N$   & Pa m & membrane-stress tensor \cref{membrane_stress_tensor} \\
+$M$   & Pa & membrane-stress bal.~tensor \cref{membrane_stress_balance_tensor} \\
 %$N_e$ & -- & number of elements in mesh \\
 %$N_n$ & -- & number of vertices in mesh \\
 \end{tabular}
@@ -205,7 +206,7 @@ $M$   & Pa & membrane-stress bal.~tensor (\ref{membrane_stress_balance_tensor}) 
   \centering
     \def\svgwidth{\linewidth}
     \input{images/ice_profile_alt.pdf_tex}
-	\caption[Ice-sheet diagram]{Illustration of thermo-dynamic processes for an ice-sheet with surface of height $S$ on boundary $\Gamma_A$, grounded bed of height $B$ with cold boundary $\Gamma_C$ and temperate boundary $\Gamma_T$, ocean boundary $\Gamma_W$ with ocean height $D$, interior ice lateral boundary $\Gamma_D$, interior volume $\Omega$, outward-pointing normal vector $\normal$, interior ice pressure normal to the boundary $f_c \normal$, and water pressure exerted on the ice $f_w \normal$.  Both the 2-meter depth average temperature $T_S$ and water input $W_S$ are used as surface boundary conditions, while the basal boundary is dependent upon energy-fluxes from geothermal sources {\color[rgb]{1,0.4745098,0}$q_{geo}$} and friction heat {\color[rgb]{0.56862745,0.47058824,0}$q_{fric}$}.  The velocity profiles ({\color[rgb]{1,0,0}dashed red}) depend heavily on basal traction; for example, the basal traction associated with velocity profile $\rankone{u}_1$ is very high.  However, because the surface ice speed is small in regions far from the periphery of the ice-sheet, the gradient in velocity near the bed -- and hence strain-heat {\color{red}$Q_1$} -- is very low.  Moreover, strain-heating may also be low if the basal traction is low, as is the case for strain heat {\color{red}$Q_2$} associated with velocity profile $\rankone{u}_2$ flowing over a lake.  Finally, observe that profile $\rankone{u}_3$ flows over a temperate region formed from both increased friction and strain-heat {\color{red}$Q_3$}.}
+	\caption[Ice-sheet diagram]{Illustration of thermo-dynamic processes for an ice-sheet with surface of height $S$ on boundary $\Gamma_A$, grounded bed of height $B$ with cold boundary $\Gamma_C$ and temperate boundary $\Gamma_T$, ocean boundary $\Gamma_W$ with ocean height $D$, interior ice lateral boundary $\Gamma_D$, interior volume $\Omega$, outward-pointing normal vector $\normal$, interior ice pressure normal to the boundary $f_c \normal$, and water pressure exerted on the ice $f_w \normal$.  Both the 2-meter depth average temperature $T_S$ and water input $W_S$ are used as surface boundary conditions, while the basal boundary is dependent upon energy-fluxes from geothermal sources {\color[rgb]{1,0.4745098,0}$q_{geo}$} and friction heat {\color[rgb]{0.56862745,0.47058824,0}$q_{fric}$}.  The velocity profiles ({\color[rgb]{1,0,0}dashed red}) depend heavily on basal traction; for example, the basal traction associated with velocity profile $\rankone{u}_1$ is very high.  However, because the surface ice speed is small in regions far from the periphery of the ice-sheet, the gradient in velocity near the bed---and hence strain-heat {\color{red}$Q_1$}---is very low.  Moreover, strain-heating may also be low if the basal traction is low, as is the case for strain heat {\color{red}$Q_2$} associated with velocity profile $\rankone{u}_2$ flowing over a lake.  Finally, observe that profile $\rankone{u}_3$ flows over a temperate region formed from both increased friction and strain-heat {\color{red}$Q_3$}.}
   \label{ice_profile_domain}
 \end{figure*}
 

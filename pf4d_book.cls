@@ -36,14 +36,18 @@
 \usepackage[scaled=0.90]{beramono}
 \usepackage[10pt]{moresize}
 \usepackage{makecell}
-%\usepackage[nameinlink, capitalize, noabbrev]{cleveref}
-%\crefformat{equation}{(#2#1#3)}
-%\crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
-%\crefmultiformat{equation}{(#2#1#3)}%
-%{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
 
 % url links :
 \usepackage{hyperref}
+
+% NOTE: cleverref has to be loaded after hyperref!
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\crefformat{equation}{(#2#1#3)}
+\crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
+\crefmultiformat{equation}{(#2#1#3)}%
+{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+\crefname{lstlisting}{Code Listing}{Code Listings}
+\Crefname{lstlisting}{Code Listing}{Code Listings}
 
 \hypersetup{
   final,
@@ -193,8 +197,8 @@
 \newcommand{\Rset}{\ensuremath{\mathbb{R}}}
 \newcommand{\inner}[2]{\langle #1, #2 \rangle}
 \newcommand{\renni}[2]{\langle #2, #1 \rangle}
-\newcommand{\totder}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1} }}
-\newcommand{\parder}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1} }}
+\newcommand{\totder}[3][]{\frac{\mathrm{d}{^{#1}} #2}{\mathrm{d} #3{^{#1}} }}
+\newcommand{\parder}[3][]{\frac{\partial{^{#1}} #2}{\partial #3{^{#1}} }}
 \newcommand{\delder}[3][]{\frac{\delta{^{#1}} #2}{\delta #3{^{#1}} }}
 \newcommand{\deltat}{\Delta t}
 %\newcommand{\bm}[1]{#1}

@@ -12,16 +12,16 @@ When the solution space for a problem is restricted by equality or inequality co
 \end{align}
 with parameter vector $\vartheta = [u\ x]^\intercal$.  The real-valued functions $\mathscr{F}(\vartheta)$, $\mathscr{R}(\vartheta)$, and $c(x)$ are all smooth and defined on a subset of $\mathbb{R}^n$ created from a finite-element discretization in one, two, or three dimensions.  The function to be minimized, $\mathscr{F}(\vartheta)$, is referred to as the \index{Constrained optimization!Objective function} \emph{objective} function with dependent \index{Constrained optimization!State parameter} \emph{state} parameter $u \in \R^n$ and dependent \emph{control} parameter $x \in \R^n$.
 
-One method of solving problems of form (\ref{canonical_opt}) is through the use of a bounded version of Algorithm \ref{BFGS_alg} referred to as L\_BFGS\_B \citep{byrd_1995}; however, a more modern and efficient class of constrained optimization algorithms known as \index{Constrained optimization!Interior point methods} \emph{interior point} (IP) methods have been shown to perform quite well for problems of this type \citep{nocedal_2000}.  Because \CSLVR utilizes an IP method implemented by the FEniCS optimization software Dolfin-Adjoint \citep{farrell_2013}, this is the method described here.
+One method of solving problems of form \cref{canonical_opt} is through the use of a bounded version of \cref{BFGS_alg} referred to as L\_BFGS\_B \citep{byrd_1995}; however, a more modern and efficient class of constrained optimization algorithms known as \index{Constrained optimization!Interior point methods} \emph{interior point} (IP) methods have been shown to perform quite well for problems of this type \citep{nocedal_2000}.  Because \CSLVR utilizes an IP method implemented by the FEniCS optimization software Dolfin-Adjoint \citep{farrell_2013}, this is the method described here.
 
-For the applications presented in Part II of this manuscript, objective $\mathscr{F}(\vartheta)$ and constraint $\mathscr{R}(\vartheta)$ are \index{Functionals} \emph{functionals}: the mapping from the space of functions to the space of real numbers, and so the following theory will be presented in this context. For examples of functionals, examine Chapters \ref{ssn_subgrid_scale_effects} and \ref{ssn_nonlinear_solution_process}.
+For the applications presented in Part II of this manuscript, objective $\mathscr{F}(\vartheta)$ and constraint $\mathscr{R}(\vartheta)$ are \index{Functionals} \emph{functionals}: the mapping from the space of functions to the space of real numbers, and so the following theory will be presented in this context. For examples of functionals, examine \cref{ssn_subgrid_scale_effects,ssn_nonlinear_solution_process}.
 
 %===============================================================================
 
 \section{The control method}
 
 \index{Control theory}
-A stationary point for $\vartheta$-optimization problem (\ref{canonical_opt}) is defined as one where an arbitrary change $\delta \mathscr{F}$ of objective $\mathscr{F}$ caused by perturbations $\delta u$ or $\delta x$ in state and control parameter, respectively, lead to an increase in $\mathscr{F}$ \citep{bryson_1975}.  Thus it is necessary that 
+A stationary point for $\vartheta$-optimization problem \cref{canonical_opt} is defined as one where an arbitrary change $\delta \mathscr{F}$ of objective $\mathscr{F}$ caused by perturbations $\delta u$ or $\delta x$ in state and control parameter, respectively, lead to an increase in $\mathscr{F}$ \citep{bryson_1975}.  Thus it is necessary that 
 \begin{align}
   \label{objective_perturbations}
   \frac{\delta \mathscr{F}}{\delta u} = 0, \hspace{5mm} \text{and} \hspace{5mm}
@@ -35,12 +35,12 @@ Using the chain rule of variations, the perturbations of $\mathscr{F}$ and $\mat
   \label{delta_R}
   \delta \mathscr{R} &= \parder{\mathscr{R}}{u} \delta u + \parder{\mathscr{R}}{x} \delta x.
 \end{align}
-Because it is desired that $\delta \mathscr{R} = 0$, and with non-singular $\partial_{u} \mathscr{R}$, we can solve for $\delta u$ in (\ref{delta_R}),
+Because it is desired that $\delta \mathscr{R} = 0$, and with non-singular $\partial_{u} \mathscr{R}$, we can solve for $\delta u$ in \cref{delta_R},
 \begin{align}
   \label{delta_u}
   \delta u = - \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} \delta x.
 \end{align}
-We then insert (\ref{delta_u}) into (\ref{delta_F}),
+We then insert \cref{delta_u} into \cref{delta_F},
 \begin{align}
   \delta \mathscr{F} &= - \parder{\mathscr{F}}{u} \left( \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} \delta x \right) + \parder{\mathscr{F}}{x} \delta x \notag \\
   &= \left(\parder{\mathscr{F}}{x}  - \parder{\mathscr{F}}{u} \parder{u}{\mathscr{R}} \parder{\mathscr{R}}{x} \right) \delta x,
@@ -62,16 +62,16 @@ It is now convenient to define the \index{Constrained optimization!Lagrangian} \
   \label{lagrangian}
   \mathscr{L}(u, x, \lambda) &= \mathscr{F}(u, x) + \big( \lambda, \mathscr{R}(u, x) \big),
 \end{align}
-where the notation $(f,g) = \int_{\Omega} f g \d{\Omega}$ is the inner product.  Using Lagrangian (\ref{lagrangian}), the first necessary condition in (\ref{objective_perturbations}) is satisfied when $\lambda$ is chosen -- say $\lambda = \lambda^*$ -- such that for a given state $u$ and control parameter $x$, 
+where the notation $(f,g) = \int_{\Omega} f g \d{\Omega}$ is the inner product.  Using Lagrangian \cref{lagrangian}, the first necessary condition in \cref{objective_perturbations} is satisfied when $\lambda$ is chosen -- say $\lambda = \lambda^*$ -- such that for a given state $u$ and control parameter $x$, 
 \begin{align}
   \label{adjoint}
   \lambda^* = \argminl_{\lambda} \left\Vert \delder{}{u} \mathscr{L} \left( u, x; \lambda \right) \right\Vert.
 \end{align}
-This $\lambda^*$ may then be used in condition (\ref{condition_two}) to calculate the direction of decent of Lagrangian (\ref{lagrangian}) with respect to the control variable $x$ for a given state $u$ and adjoint variable $\lambda^*$,
+This $\lambda^*$ may then be used in condition \cref{condition_two} to calculate the direction of decent of Lagrangian \cref{lagrangian} with respect to the control variable $x$ for a given state $u$ and adjoint variable $\lambda^*$,
 \begin{align}
   G = \delder{}{x} \mathscr{L} (u, x, \lambda^*).
 \end{align}
-This \emph{G\^{a}teaux derivative}, or first variation of Lagrangian $\mathscr{L}$ with respect to $x$ (see \S \ref{ssn_gateaux}), provides a direction which control parameter $x$ may follow in order to satisfy the second condition in (\ref{objective_perturbations}) and thus minimize objective functional $\mathscr{F}$.
+This \emph{G\^{a}teaux derivative}, or first variation of Lagrangian $\mathscr{L}$ with respect to $x$ (see \cref{ssn_gateaux}), provides a direction which control parameter $x$ may follow in order to satisfy the second condition in \cref{objective_perturbations} and thus minimize objective functional $\mathscr{F}$.
 
 %===============================================================================
 
@@ -86,7 +86,7 @@ To determine a locally optimal value of $u$, a variation of a primal-dual-interi
 \end{aligned}
 \label{barrier}
 \end{align}
-for a decreasing sequence of barrier parameters $\mu$ converging to zero, and $n$ is the number of degrees of freedom of the mesh.  Neglecting equality constraints on the control variables, the first-order \index{Constrained optimization!Necessary conditions} \emph{necessary} conditions -- known as the Karush-Kuhn-Tucker (KKT) conditions --  for barrier problem (\ref{barrier}) are
+for a decreasing sequence of barrier parameters $\mu$ converging to zero, and $n$ is the number of degrees of freedom of the mesh.  Neglecting equality constraints on the control variables, the first-order \index{Constrained optimization!Necessary conditions} \emph{necessary} conditions -- known as the Karush-Kuhn-Tucker (KKT) conditions --  for barrier problem \cref{barrier} are
 \begin{align}
 \begin{aligned}
   G(\vartheta,\lambda) - \lambda_b &= 0, \\
@@ -96,7 +96,7 @@ for a decreasing sequence of barrier parameters $\mu$ converging to zero, and $n
 \end{aligned}
 \label{barrier_kkt}
 \end{align}
-where $G(\vartheta,\lambda) = \delta_x \mathscr{L}$, $\lambda_b$ is the Lagrange multiplier for the bound constraint $c(\vartheta) \geq 0$ in (\ref{canonical_opt}), $\varTheta = \mathrm{diag}(c(\vartheta))$, $Z = \mathrm{diag}(\lambda_b)$, and $e = \mathrm{ones}(n)$.  The so-called `optimality error' for barrier problem (\ref{barrier}) is
+where $G(\vartheta,\lambda) = \delta_x \mathscr{L}$, $\lambda_b$ is the Lagrange multiplier for the bound constraint $c(\vartheta) \geq 0$ in \cref{canonical_opt}, $\varTheta = \mathrm{diag}(c(\vartheta))$, $Z = \mathrm{diag}(\lambda_b)$, and $e = \mathrm{ones}(n)$.  The so-called `optimality error' for barrier problem \cref{barrier} is
 \begin{align*}
   E_{\mu}(\vartheta, \lambda_b) = \max
   \left\{
@@ -111,7 +111,7 @@ with scaling parameters $s_d,s_c \geq 1$.  This error defines the algorithm term
 \end{align}
 for approximate solution $(\vartheta^*, \lambda_b^*)$ and user-provided error tolerance $\epsilon_{\mathrm{tol}}$.
 
-The solution to (\ref{barrier_kkt}) for a given $\mu$ is attained by applying a damped version of \index{Newton-Raphson method} Newton's method, whereby the sequence of iterates $(\vartheta^k, \lambda_b^k)$ for iterate $k \leq k_{max}$ solves the system
+The solution to \cref{barrier_kkt} for a given $\mu$ is attained by applying a damped version of \index{Newton-Raphson method} Newton's method, whereby the sequence of iterates $(\vartheta^k, \lambda_b^k)$ for iterate $k \leq k_{max}$ solves the system
 \begin{align}
   \begin{bmatrix}
    W^k   & - I \\
@@ -136,7 +136,7 @@ Once search directions $(d_{x}^k, d_{\lambda_b}^k)$ have been found, the subsequ
   x^{k+1} &= x^k + \ell^k d_{x}^k \\
   \lambda_b^{k+1} &= \lambda_b^k + \ell_z^k d_{\lambda_b}^k,
 \end{align}
-with step sizes $\ell$ determined by a backtracking-line-search procedure similar to Algorithm \ref{qn_bls_alg} to enforce an analogous set of Wolfe conditions as (\ref{armijo_condition}, \ref{curvature_condition}), while also requiring that a sufficient decrease in $\varphi_{\mu}$ in (\ref{barrier}) be attained.
+with step sizes $\ell$ determined by a backtracking-line-search procedure similar to \cref{qn_bls_alg} to enforce an analogous set of Wolfe conditions as \cref{armijo_condition,curvature_condition}, while also requiring that a sufficient decrease in $\varphi_{\mu}$ in \cref{barrier} be attained.
 
-Finally, because $\varphi_{\mu}$ is dependent on objective $\mathscr{F}$, objective $\mathscr{F}(u^{k+1},x^{k+1})$ must be evaluated for a series of potential control parameter $x^{k+1}$ values in (\ref{subsequent_LB_iterate}).  Hence multiple solutions of constraint relation $\mathscr{R}(u^{k+1},x^{k+1}) = 0$ in (\ref{canonical_opt}) are required, one for each potential state parameter $u^{k+1}$ for a given $x^{k+1}$.  Finally, at the end of each iteration, adjoint variable $\lambda$ is determined by solving (\ref{adjoint}) and used to compute the next iteration's G\^{a}teaux derivative $G(x^{k+1}, \lambda)$.  For further details, examine \citet{waechter_2006}.
+Finally, because $\varphi_{\mu}$ is dependent on objective $\mathscr{F}$, objective $\mathscr{F}(u^{k+1},x^{k+1})$ must be evaluated for a series of potential control parameter $x^{k+1}$ values in \cref{subsequent_LB_iterate}.  Hence multiple solutions of constraint relation $\mathscr{R}(u^{k+1},x^{k+1}) = 0$ in \cref{canonical_opt} are required, one for each potential state parameter $u^{k+1}$ for a given $x^{k+1}$.  Finally, at the end of each iteration, adjoint variable $\lambda$ is determined by solving \cref{adjoint} and used to compute the next iteration's G\^{a}teaux derivative $G(x^{k+1}, \lambda)$.  For further details, examine \citet{waechter_2006}.
 
