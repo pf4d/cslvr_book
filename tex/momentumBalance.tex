@@ -294,7 +294,7 @@ allowing the simplification of \cref{3d_stokes_expanded_one} to
 {\tiny
 \begin{align}
   \parder{}{x} \left[2\eta \parder{u}{x} \right]  - \parder{p}{x} + \parder{}{y} \left[\eta \left( \parder{u}{y} + \parder{v}{x} \right) \right] + \parder{}{z} \left[\eta \left( \parder{u}{z} + \parder{w}{x} \right) \right] &= 0 \notag \\ 
-  \parder{}{x} \left[2\eta \parder{u}{x} \right]  - \rho g\parder{S}{x} + \parder{}{x} \left[ 2\eta \parder{w}{z} \right] + \parder{}{y} \left[\eta \left( \parder{u}{y} + \parder{v}{x} \right) \right] & \notag \\
+  \parder{}{x} \left[2\eta \parder{u}{x} \right]  - \rho g\parder{S}{x} - \parder{}{x} \left[ 2\eta \parder{w}{z} \right] + \parder{}{y} \left[\eta \left( \parder{u}{y} + \parder{v}{x} \right) \right] & \notag \\
   + \parder{}{z} \left[\eta \left( \parder{u}{z} + \parder{w}{x} \right) \right] &= 0 \notag \\ 
   \label{first_stokes_exp_stress_simp}
   \parder{}{x} \left[2\eta \left( \parder{u}{x} - \parder{w}{z} \right) \right]  + \parder{}{y} \left[\eta \left( \parder{u}{y} + \parder{v}{x} \right) \right] + \parder{}{z} \left[\eta \left( \parder{u}{z} + \parder{w}{x} \right) \right] &= \rho g\parder{S}{x},
@@ -303,7 +303,7 @@ and \cref{3d_stokes_expanded_two} to
 {\tiny
 \begin{align}
   \parder{}{x} \left[\eta \left( \parder{v}{x} + \parder{u}{y} \right) \right]  + \parder{}{y} \left[2\eta \parder{v}{y} \right] - \parder{p}{y} + \parder{}{z} \left[\eta \left( \parder{v}{z} + \parder{w}{y} \right) \right] &= 0 \notag \\ 
-  \parder{}{x} \left[\eta \left( \parder{v}{x} + \parder{u}{y} \right) \right]  + \parder{}{y} \left[2\eta \parder{v}{y} \right] - \rho g\parder{S}{y} + \parder{}{y} \left[ 2\eta \parder{w}{z} \right] &\notag \\
+  \parder{}{x} \left[\eta \left( \parder{v}{x} + \parder{u}{y} \right) \right]  + \parder{}{y} \left[2\eta \parder{v}{y} \right] - \rho g\parder{S}{y} - \parder{}{y} \left[ 2\eta \parder{w}{z} \right] &\notag \\
   + \parder{}{z} \left[\eta \left( \parder{v}{z} + \parder{w}{y} \right) \right] &= 0 \notag \\ 
   \label{second_stokes_exp_stress_simp}
   \parder{}{x} \left[\eta \left( \parder{v}{x} + \parder{u}{y} \right) \right]  + \parder{}{y} \left[2\eta \left( \parder{v}{y} - \parder{w}{z} \right) \right] + \parder{}{z} \left[\eta \left( \parder{v}{z} + \parder{w}{y} \right) \right] &= \rho g \parder{S}{y},
