@@ -62,7 +62,8 @@ Additional computational energy is saved by using a linearization of rate-factor
 and first-order-viscous-dissipation term (\ref{bp_viscous_dissipation}) in (\ref{bp_action}) into 
 \begin{align}
   \label{linear_viscous_dissipation}
-  V^L\left( \dot{\varepsilon}_{\text{BP}}^2 \right) &= \int_0^{\dot{\varepsilon}_{\text{BP}}^2} \eta_{\text{BP}}^L(s) \d{s} = \eta_{\text{BP}}^L\left(\theta, \rankone{u}_h^{i-1} \right) \dot{\varepsilon}_{\text{BP}}^2.
+  V^L\left( \dot{\varepsilon}_{\text{BP}}^2 \right) &= 2 \int_0^{\dot{\varepsilon}_{\text{BP}}^2} \eta_{\text{BP}}^L(s) \d{s} 
+  = 2 \eta_{\text{BP}}^L\left(\theta, \rankone{u}_h^{i-1} \right) \dot{\varepsilon}_{\text{BP}}^2.
 \end{align}
   
 Finally, $\delta_{\rankone{u}_h} \mathcal{A}_{\text{BP}}(\rankone{\lambda})$ in Lagrangian (\ref{momentum_lagrangian}) is as derived by \citet{dukowicz_2010},

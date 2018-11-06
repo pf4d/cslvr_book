@@ -84,9 +84,15 @@ with viscous-dissipation term
   &= \frac{2n}{n+1} \left( A^{-\nicefrac{1}{n}} \left( \dot{\varepsilon}_e^2 \right)^{\frac{1-n}{2n}} \right) \dot{\varepsilon}_e^2 \notag \\
   &= \frac{4n}{n+1} \eta\left(\theta, \rankone{u} \right) \dot{\varepsilon}_e^2,
 \end{align}
-where shear viscosity $\eta$ is given by \cref{viscosity}.  Lagrange multiplier $\Lambda$ enforces basal-surface impenetrability condition \cref{impenetrability}, while pressure $p$ -- defined as the mean compressive stress $p = -\sigma_{kk} / 3$ -- also takes on the role of a Lagrange multiplier to enforce incompressibility condition \cref{cons_mass}.
+where shear viscosity $\eta$ is given by \cref{viscosity}.
+Note that \cref{viscous_dissipation} can also be written
+\begin{align*}
+  V\left( \dot{\varepsilon}_e^2 \right) = \frac{2n}{n+1} A^{-\nicefrac{1}{n}} \left( \dot{\varepsilon}_e^2 \right)^{\frac{n+1}{2n}}.
+\end{align*}
 
-This extremum is defined as the solution to 
+The Lagrange multiplier $\Lambda$ in \cref{action} enforces basal-surface impenetrability condition \cref{impenetrability} while pressure $p$---defined as the mean compressive stress $p = -\sigma_{kk} / 3$---is a Lagrange multiplier to enforce incompressibility condition \cref{cons_mass}.
+
+This extremum of \cref{action} is defined as the solution to
 \begin{align}
   \label{extremum_intermediate}
   \frac{\delta \pazocal{A}}{\delta \rankone{u}} = 0, \hspace{5mm} \frac{\delta \pazocal{A}}{\delta p} = 0, \hspace{5mm} \frac{\delta \pazocal{A}}{\delta \Lambda} = 0,
